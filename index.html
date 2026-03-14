@@ -7,7 +7,8 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" href="/icon-192.png">
     
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://raw.githubusercontent.com https://www.google-analytics.com; frame-src https://googleads.g.doubleclick.net https://platform.twitter.com; object-src 'none'; base-uri 'self'; form-action 'self'; child-src 'none'; upgrade-insecure-requests;">
+    <!-- CSPに忍者AdMaxのドメイン(adm.shinobi.jp)を追加 -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.googletagmanager.com https://adm.shinobi.jp; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://raw.githubusercontent.com https://www.google-analytics.com https://region1.google-analytics.com; frame-src https://googleads.g.doubleclick.net https://platform.twitter.com https://adm.shinobi.jp; object-src 'none'; base-uri 'self'; form-action 'self'; child-src 'none'; upgrade-insecure-requests;">
     
     <title>フリーランス源泉徴収・手取り計算ツール【インボイス対応】 | フリカル</title>
     <meta name="description" content="フリーランス専用の源泉徴収・消費税・手取りを一瞬で計算できる無料ツール。インボイス制度の要件を満たした請求書PDFも登録不要で作成可能です。データは端末に保存され安全です。">
@@ -200,8 +201,9 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
     <!-- 広告枠 (上部) -->
     <div class="ad-space" aria-label="広告">
         <span class="ad-label">スポンサーリンク</span>
-        <!-- ここに忍者AdMaxのタグを貼り付けます -->
-        <div style="height: 60px; display: flex; align-items: center; justify-content: center;">広告エリア</div>
+        <!-- admax -->
+        <script src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
+        <!-- admax -->
     </div>
 
     <!-- 計算カード -->
@@ -322,8 +324,9 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
     <!-- 広告枠 (中間) -->
     <div class="ad-space" aria-label="広告">
         <span class="ad-label">スポンサーリンク</span>
-        <!-- ここに忍者AdMaxのタグを貼り付けます -->
-        <div style="height: 60px; display: flex; align-items: center; justify-content: center;">広告エリア</div>
+        <!-- admax -->
+        <script src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
+        <!-- admax -->
     </div>
 
     <!-- 履歴カード -->
@@ -406,8 +409,8 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
         <a href="javascript:void(0)" onclick="UI.openModal('terms-modal')">利用規約・免責事項</a>
         <a href="javascript:void(0)" onclick="UI.openModal('privacy-modal')">プライバシーポリシー</a>
         <!-- Xの仕様上、DMを直接開くにはユーザー名(@AppLab_K)ではなく「数値ID」が必要です。 -->
-        <!-- 外部ツール(例: https://idtwi.com/)で @AppLab_K の数値IDを調べ、以下の 2032694737069838336 の部分を書き換えてください -->
-        <a href="https://x.com/messages/compose?recipient_id=2032694737069838336&text=%E3%80%90%E3%83%95%E3%83%AA%E3%82%AB%E3%83%AB%20%E3%81%94%E6%84%8F%E8%A6%8B%E3%83%BB%E3%81%94%E8%A6%81%E6%9C%9B%E3%80%91%0A%E3%83%BB%E8%A6%81%E6%9C%9B%E5%86%85%E5%AE%B9%EF%BC%9A%0A%0A%E3%83%BB%E3%81%9D%E3%81%AE%E4%BB%96%EF%BC%9A%0A" target="_blank" rel="noopener">ご意見・ご要望 (XのDMへ)</a>
+        <!-- 外部ツール(例: https://idtwi.com/)で @AppLab_K の数値IDを調べ、以下の YOUR_NUMERIC_ID の部分を書き換えてください -->
+        <a href="https://x.com/messages/compose?recipient_id=YOUR_NUMERIC_ID&text=%E3%80%90%E3%83%95%E3%83%AA%E3%82%AB%E3%83%AB%20%E3%81%94%E6%84%8F%E8%A6%8B%E3%83%BB%E3%81%94%E8%A6%81%E6%9C%9B%E3%80%91%0A%E3%83%BB%E8%A6%81%E6%9C%9B%E5%86%85%E5%AE%B9%EF%BC%9A%0A%0A%E3%83%BB%E3%81%9D%E3%81%AE%E4%BB%96%EF%BC%9A%0A" target="_blank" rel="noopener">ご意見・ご要望 (XのDMへ)</a>
     </div>
     <div>&copy; 2026 フリカル All Rights Reserved.</div>
 </footer>
@@ -963,29 +966,55 @@ const Tracker = {
         const clientTotals = {};
         filteredRecords.forEach(r => {
             const c = r.client || '未入力';
-            clientTotals[c] = (clientTotals[c] || 0) + r.amount;
+            if (!clientTotals[c]) clientTotals[c] = 0;
+            clientTotals[c] += r.amount;
         });
         
-        const clientHtml = Object.keys(clientTotals).length ? Object.keys(clientTotals).sort((a,b)=>clientTotals[b]-clientTotals[a]).map(c => `
-            <div class="client-summary-item">
-                <span>${UI.sanitize(c)}</span>
-                <strong>¥${clientTotals[c].toLocaleString()}</strong>
-            </div>
-        `).join('') : '<div style="text-align:center;color:var(--text-muted);">データなし</div>';
-        document.getElementById('client-summary').innerHTML = clientHtml;
+        const clientBox = document.getElementById('client-summary');
+        clientBox.innerHTML = '';
+
+        if (Object.keys(clientTotals).length === 0) {
+            clientBox.innerHTML = '<div style="text-align:center;color:var(--text-muted);">データなし</div>';
+        } else {
+            Object.entries(clientTotals)
+            .sort((a,b)=>b[1]-a[1])
+            .forEach(([client,total])=>{
+                const div=document.createElement('div');
+                div.className='client-summary-item';
+                div.innerHTML=`
+                    <span>${UI.sanitize(client)}</span>
+                    <strong>¥${total.toLocaleString()}</strong>
+                `;
+                clientBox.appendChild(div);
+            });
+        }
         
-        document.getElementById('history-list').innerHTML = filteredRecords.length ? filteredRecords.map(h => `
-            <div class="history-item">
-                <div>
-                    <span style="font-weight:bold;">${UI.sanitize(h.client)}</span>
-                    <span style="font-size:11px; color:var(--text-muted); margin-left:8px;">${UI.sanitize(h.date)}</span>
-                </div>
-                <div>
-                    <strong>¥${h.total.toLocaleString()}</strong>
-                    <button onclick="Tracker.del('${h.id}')" class="history-delete" style="margin-left:12px;" aria-label="履歴を削除">削除</button>
-                </div>
-            </div>
-        `).join('') : '<div style="text-align:center;color:var(--text-muted);font-size:13px;">履歴はありません</div>';
+        const list = document.getElementById('history-list');
+        list.innerHTML = '';
+
+        if (filteredRecords.length === 0) {
+            list.innerHTML = '<div style="text-align:center;color:var(--text-muted);font-size:13px;">履歴はありません</div>';
+        } else {
+            filteredRecords.forEach(r=>{
+                const div=document.createElement('div');
+                div.className='history-item';
+
+                const date=new Date(r.timestamp).toLocaleDateString('ja-JP');
+
+                div.innerHTML=`
+                    <div>
+                        <span style="font-weight:bold;">${UI.sanitize(r.client)}</span>
+                        <span style="font-size:11px; color:var(--text-muted); margin-left:8px;">${date}</span>
+                    </div>
+                    <div>
+                        <strong>¥${r.total.toLocaleString()}</strong>
+                        <button class="history-delete" style="margin-left:12px;" aria-label="履歴を削除" onclick="Tracker.del('${r.id}')">削除</button>
+                    </div>
+                `;
+
+                list.appendChild(div);
+            });
+        }
         
         const years =[...new Set(allRecords.map(r => new Date(r.timestamp).getFullYear().toString()))];
         const yearSelect = document.getElementById('history-filter-year');
