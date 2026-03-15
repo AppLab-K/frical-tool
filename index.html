@@ -13,8 +13,8 @@
     <!-- SEO強化: robots meta -->
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
     
-    <!-- セキュリティ強化: CSPの最適化 (connect-src に fonts.gstatic.com を追加) -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://adm.shinobi.jp; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; frame-src https:;">
+    <!-- セキュリティ強化: CSPの最適化 ('unsafe-eval'を削除し安全性を向上) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://adm.shinobi.jp; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; frame-src https:;">
     
     <title>フリーランス源泉徴収・手取り計算ツール【インボイス対応】 | フリカル</title>
     <meta name="description" content="フリーランス専用の源泉徴収・消費税・手取りを一瞬で計算できる無料ツール。インボイス制度の要件を満たした請求書PDFも登録不要で作成可能です。データは端末に保存され安全です。">
@@ -80,7 +80,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap" media="print" onload="this.media='all'">
     
-    <!-- スクリプト読み込み順の最適化 (PDFライブラリはdeferを外し確実に読み込む) -->
+    <!-- スクリプト読み込み順の最適化 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js" integrity="sha512-H9yKwOjqNdF8q/8wF40sFj50/B0R0zZJzM8y0zZ1BqEw1s1A1e1z1e1z1e1z1e1z1e1z1e1z1g==" crossorigin="anonymous" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
@@ -1019,25 +1019,44 @@ const PDF = {
             // autoTableの呼び出しを堅牢な形式に変更 (列幅計算エラーを防止)
             doc.autoTable({
                 startY: 80,
-                head: [['取引内容', '金額']],
-                body:[
-                    [itemName, `¥ ${r.ex.toLocaleString()}`],[`${taxRateStr}対象`, `¥ ${r.ex.toLocaleString()}`],[`消費税 (${taxRateStr})`, `¥ ${r.tax.toLocaleString()}`],['源泉徴収税', `¥ -${r.wh.toLocaleString()}`],
-                    ['合計金額', `¥ ${r.net.toLocaleString()}`]
+                head: [['内容', '数量', '単価', '金額']],
+                body: [[
+                        itemName,
+                        '1',
+                        `¥${r.ex.toLocaleString()}`,
+                        `¥${r.ex.toLocaleString()}`
+                    ]
                 ],
                 theme: 'grid',
-                headStyles: { fillColor:[37, 99, 235], font: 'mplus', fontStyle: 'normal' },
-                styles: { font: 'mplus', fontStyle: 'normal' }
+                styles: { font: 'mplus', fontSize: 10 },
+                headStyles: { fillColor: [37, 99, 235] }
             });
 
-            // 安全な finalY の取得と振込先情報の描画
-            const finalY = doc.lastAutoTable ? doc.lastAutoTable.finalY : 80;
-            
+            // 安全な finalY の取得
+            const finalY = doc.lastAutoTable ? doc.lastAutoTable.finalY : 100;
+
             doc.setFontSize(11);
-            doc.text("【振込先情報】", 20, finalY + 20);
-            
-            const bankLines = bankInfoText.split('\n');
+
+            doc.text(`小計: ¥${r.ex.toLocaleString()}`, 140, finalY + 10);
+            doc.text(`消費税 (${taxRateStr}): ¥${r.tax.toLocaleString()}`, 140, finalY + 16);
+
+            doc.setFontSize(14);
+            doc.text(`合計: ¥${r.total.toLocaleString()}`, 140, finalY + 26);
+
+            doc.setFontSize(10);
+
+            if (AppState.withholding) {
+                doc.text(`源泉徴収額: ¥${r.wh.toLocaleString()}`, 140, finalY + 34);
+                doc.text(`差引支払額: ¥${r.net.toLocaleString()}`, 140, finalY + 40);
+            }
+
+            doc.setFontSize(10);
+
+            const bankLines = bankInfoText.split("\n");
+            doc.text("振込先:", 20, finalY + 50);
+
             bankLines.forEach((line, i) => {
-                doc.text(line, 20, finalY + 28 + (i * 6));
+                doc.text(line, 20, finalY + 56 + (i * 6));
             });
 
             const d = new Date();
@@ -1046,10 +1065,11 @@ const PDF = {
             const fileName = invoiceNo !== '-' ? `invoice-${invoiceNo}.pdf` : `invoice_${dateStr}_${safeClientName}.pdf`;
 
             doc.save(fileName);
-            UI.showToast("✅ PDFを作成しました");
-        } catch (e) {
-            console.error("PDF Generation Error:", e);
-            const errorMsg = e.message ? e.message : String(e);
+            UI.showToast("📄 PDFをダウンロードしました");
+
+        } catch (err) {
+            console.error("PDF Generation Error:", err);
+            const errorMsg = err.message ? err.message : String(err);
             UI.showToast(`❌ PDF作成失敗: ${errorMsg}`);
         } finally {
             btn.disabled = false;
