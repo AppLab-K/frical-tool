@@ -13,8 +13,8 @@
     <!-- SEO強化: robots meta -->
     <meta name="robots" content="index,follow,max-image-preview:large">
     
-    <!-- CSP設定: 広告配信を妨げないよう、shinobi.jpとadmax.ninjaを許可 -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://*.shinobi.jp https://*.admax.ninja; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https: http:; connect-src 'self' https://raw.githubusercontent.com https://www.google-analytics.com https://region1.google-analytics.com; frame-src https://googleads.g.doubleclick.net https://platform.twitter.com https://*.shinobi.jp https://*.admax.ninja; object-src 'none'; base-uri 'self'; form-action 'self'; child-src 'none'; upgrade-insecure-requests;">
+    <!-- 【重要】審査用：CSPを最大限に緩めて広告ブロックを回避 -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; img-src * data:; frame-src *; connect-src *;">
     
     <title>フリーランス源泉徴収・手取り計算ツール【インボイス対応】 | フリカル</title>
     <meta name="description" content="フリーランス専用の源泉徴収・消費税・手取りを一瞬で計算できる無料ツール。インボイス制度の要件を満たした請求書PDFも登録不要で作成可能です。データは端末に保存され安全です。">
@@ -78,7 +78,7 @@ header { background: var(--bg-header); border-bottom: 1px solid var(--border-mai
 .alert-box { background: var(--warning); color: #fff; padding: 12px; text-align: center; font-size: 13px; font-weight: bold; margin-bottom: 24px; border-radius: 8px; box-shadow: var(--shadow-sm); }
 .info-box { background: var(--primary-light); color: var(--primary-dark); padding: 12px; font-size: 13px; margin-bottom: 24px; border-radius: 8px; border: 1px solid var(--primary); }
 
-.ad-space { background: var(--bg-btn-sec); border: 1px dashed var(--border-input); border-radius: 8px; padding: 20px; text-align: center; margin-bottom: 24px; color: var(--text-muted); font-size: 12px; min-height: 250px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.ad-space { background: var(--bg-btn-sec); border: 1px dashed var(--border-input); border-radius: 8px; padding: 20px; text-align: center; margin-bottom: 24px; color: var(--text-muted); font-size: 12px; min-height: 250px; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; }
 .ad-label { display: block; font-size: 10px; margin-bottom: 8px; opacity: 0.7; }
 
 .card { background: var(--bg-card); border-radius: 12px; padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow-md); border: 1px solid var(--border-main); }
@@ -708,7 +708,6 @@ const PDF = {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             
-            // 日本語フォント対応（標準フォントは日本語不可のため、簡易的に描画）
             doc.setFontSize(20);
             doc.text("INVOICE", 105, 20, { align: 'center' });
             
