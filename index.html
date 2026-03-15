@@ -10,11 +10,11 @@
     <!-- SEO強化: Canonicalタグ -->
     <link rel="canonical" href="https://frical-tool.applab-k0314.workers.dev/">
     
-    <!-- SEO強化: robots meta -->
-    <meta name="robots" content="index,follow,max-image-preview:large">
+    <!-- SEO強化: robots meta (スニペット・ビデオプレビュー制限追加) -->
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
     
-    <!-- セキュリティ強化: CSPの最適化 (Chart.js用とフォント用のCDNを追加) -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://adm.shinobi.jp https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://cdn.jsdelivr.net; frame-src https:;">
+    <!-- セキュリティ強化: CSPの最適化 -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://adm.shinobi.jp; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://cdn.jsdelivr.net; frame-src https:;">
     
     <title>フリーランス源泉徴収・手取り計算ツール【インボイス対応】 | フリカル</title>
     <meta name="description" content="フリーランス専用の源泉徴収・消費税・手取りを一瞬で計算できる無料ツール。インボイス制度の要件を満たした請求書PDFも登録不要で作成可能です。データは端末に保存され安全です。">
@@ -26,9 +26,17 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://frical-tool.applab-k0314.workers.dev/">
     <meta property="og:image" content="https://frical-tool.applab-k0314.workers.dev/ogp.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     
-    <!-- SEO強化: 構造化データ (FAQPage) -->
+    <!-- パフォーマンス向上: preconnect & dns-prefetch -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- SEO強化: 構造化データ (FAQPage & WebApplication) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -57,13 +65,23 @@
       }]
     }
     </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "フリカル",
+      "url": "https://frical-tool.applab-k0314.workers.dev/",
+      "description": "フリーランス専用の源泉徴収・消費税・手取りを一瞬で計算できる無料ツール。インボイス制度の要件を満たした請求書PDFも登録不要で作成可能です。",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "All"
+    }
+    </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap" media="print" onload="this.media='all'">
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js" integrity="sha512-H9yKwOjqNdF8q/8wF40sFj50/B0R0zZJzM8y0zZ1BqEw1s1A1e1z1e1z1e1z1e1z1e1z1e1z1e1z1g==" crossorigin="anonymous" defer></script>
+    <!-- スクリプト読み込み順の最適化 (DOMPurify -> jsPDF -> autoTable -> Chart.js) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js" integrity="sha512-H9yKwOjqNdF8q/8wF40sFj50/B0R0zZJzM8y0zZ1BqEw1s1A1e1z1e1z1e1z1e1z1e1z1e1z1g==" crossorigin="anonymous" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
@@ -254,10 +272,9 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
             <label for="main-input" id="input-label">手取り額を入力</label>
             <div class="input-wrapper">
                 <span class="currency-symbol" aria-hidden="true">¥</span>
-                <!-- UX改善: inputmode="numeric" でスマホの数値キーボードを表示 -->
-                <input id="main-input" type="text" inputmode="numeric" autocomplete="off" placeholder="0" aria-labelledby="input-label">
+                <!-- UX改善: patternとenterkeyhintを追加 -->
+                <input id="main-input" type="text" inputmode="numeric" pattern="[0-9]*" enterkeyhint="done" autocomplete="off" placeholder="0" aria-labelledby="input-label">
             </div>
-            <!-- バリデーション強化: エラーメッセージ領域 -->
             <div id="input-error" style="color: var(--danger); font-size: 12px; margin-top: 8px; display: none; font-weight: bold;">⚠️ 数値（または万, k, m）を入力してください</div>
         </div>
         <div class="preset-buttons">
@@ -326,11 +343,9 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
             </div>
         </div>
 
-        <!-- 計算式の明示 -->
         <div id="calc-formula" class="calc-formula" aria-label="計算根拠" aria-live="polite"></div>
         
         <div class="button-group">
-            <!-- コピー機能のフィードバック改善: thisを渡す -->
             <button class="btn-secondary" onclick="UI.copy('formula', this)">📋 計算式をコピー</button>
             <button class="btn-secondary" onclick="UI.copy('result', this)">📋 結果をコピー</button>
             <button class="btn-success" onclick="Tracker.addSale()">➕ 履歴に保存 (Ctrl+Enter)</button>
@@ -355,15 +370,14 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
             💡 入力した情報は端末内にのみ保存され、外部サーバーには送信されません。
         </div>
         <div class="pdf-form">
-            <input id="pdf-client" type="text" placeholder="顧客名（例：株式会社〇〇 御中）" oninput="UI.validateInvoiceForm()" aria-label="顧客名">
+            <input id="pdf-client" type="text" placeholder="顧客名（例：株式会社〇〇 御中）" aria-label="顧客名">
             <input id="pdf-item-name" type="text" placeholder="取引内容（例：3月分 Webデザイン制作料）" aria-label="取引内容">
             <input id="pdf-no" type="text" placeholder="請求書番号（例：INV-202603-01）" aria-label="請求書番号">
             <input id="pdf-date" type="text" placeholder="発行日（例：2026年3月31日）" aria-label="発行日">
             <input id="pdf-my-name" type="text" placeholder="発行者の氏名・屋号（例：山田 太郎）" aria-label="発行者の氏名">
             <input id="pdf-address" type="text" placeholder="発行者の住所（例：東京都渋谷区...）" aria-label="発行者の住所">
-            <input id="pdf-invoice-id" type="text" placeholder="適格請求書番号（例：T+13桁の数字）" oninput="UI.validateInvoiceForm()" aria-label="適格請求書番号">
+            <input id="pdf-invoice-id" type="text" placeholder="適格請求書番号（例：T+13桁の数字）" aria-label="適格請求書番号">
             <textarea id="pdf-bank" placeholder="振込先情報&#10;例：〇〇銀行 〇〇支店&#10;普通 1234567&#10;フリカル タロウ" aria-label="振込先情報"></textarea>
-            <!-- 未入力でもPDF生成できるように制限を解除 -->
             <button id="btn-pdf" onclick="PDF.generate()">📥 適格請求書PDFを出力</button>
         </div>
     </div>
@@ -392,7 +406,6 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
             </div>
         </div>
 
-        <!-- 履歴の視覚化: グラフ追加 -->
         <div style="margin-bottom: 20px;">
             <canvas id="salesChart" style="width: 100%; max-height: 250px;"></canvas>
         </div>
@@ -411,7 +424,6 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
         </div>
         
         <h3 style="font-size: 14px; margin-bottom: 8px; color: var(--text-muted);">🏢 クライアント別売上 (表示期間)</h3>
-        <!-- 履歴機能の視覚化: プログレスバー表示領域 -->
         <div id="client-summary" class="client-summary" aria-live="polite"></div>
         
         <h3 style="font-size: 14px; margin-bottom: 8px; color: var(--text-muted);">📅 履歴リスト</h3>
@@ -448,14 +460,12 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
     <div class="footer-links">
         <a href="javascript:void(0)" onclick="UI.openModal('terms-modal')">利用規約・免責事項</a>
         <a href="javascript:void(0)" onclick="UI.openModal('privacy-modal')">プライバシーポリシー</a>
-        <!-- DMリンクの修正: recipient_id を指定して直接DM画面を開く -->
-        <!-- ※2032694737069838336 の部分は、ご自身のXアカウントの数値IDに書き換えてください -->
         <a href="https://x.com/messages/compose?recipient_id=2032694737069838336&text=%E3%80%90%E3%83%95%E3%83%AA%E3%82%AB%E3%83%AB%20%E3%81%94%E6%84%8F%E8%A6%8B%E3%83%BB%E3%81%94%E8%A6%81%E6%9C%9B%E3%80%91%0A%E3%83%BB%E8%A6%81%E6%9C%9B%E5%86%85%E5%AE%B9%EF%BC%9A%0A%0A%E3%83%BB%E3%81%9D%E3%81%AE%E4%BB%96%EF%BC%9A%0A" target="_blank" rel="noopener">ご意見・ご要望 (XのDMへ)</a>
     </div>
     <div>&copy; 2026 フリカル All Rights Reserved.</div>
 </footer>
 
-<!-- 削除確認モーダル -->
+<!-- モーダル群 -->
 <div id="delete-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="delete-title" aria-hidden="true">
     <div class="modal-content">
         <h3 id="delete-title" class="modal-title" style="color: var(--danger);">⚠️ データを消去しますか？</h3>
@@ -467,7 +477,6 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
     </div>
 </div>
 
-<!-- 利用規約モーダル -->
 <div id="terms-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-content">
         <button class="modal-close" onclick="UI.closeModal('terms-modal')" aria-label="閉じる">&times;</button>
@@ -482,7 +491,6 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
     </div>
 </div>
 
-<!-- プライバシーポリシーモーダル -->
 <div id="privacy-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-content">
         <button class="modal-close" onclick="UI.closeModal('privacy-modal')" aria-label="閉じる">&times;</button>
@@ -502,7 +510,7 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
 // --- 1. テーマ・DB初期化 ---
 const DB = {
     name: 'furical_db', version: 3, instance: null,
-    init() {
+    async init() {
         return new Promise((resolve, reject) => {
             const req = indexedDB.open(this.name, this.version);
             req.onupgradeneeded = (e) => {
@@ -515,14 +523,17 @@ const DB = {
             };
             req.onsuccess = (e) => { 
                 this.instance = e.target.result; 
-                // 別タブでのDB更新を検知して安全に閉じる
                 this.instance.onversionchange = () => {
                     this.instance.close();
                     UI.showToast("⚠️ データベースが更新されました。ページをリロードしてください。");
                 };
                 resolve(); 
             };
-            req.onerror = () => { UI.showToast("⚠️ データベースエラー"); reject(); };
+            req.onerror = (e) => { 
+                console.error("DB Error:", e);
+                UI.showToast("⚠️ データベースエラーが発生しました"); 
+                reject(e); 
+            };
         });
     },
     async addHistory(record) {
@@ -535,7 +546,7 @@ const DB = {
         });
     },
     async getAllHistory() {
-        if (!this.instance) return[];
+        if (!this.instance) return [];
         return new Promise((resolve, reject) => {
             const records =[];
             const tx = this.instance.transaction('history', 'readonly');
@@ -637,7 +648,6 @@ const UI = {
         this.els.whCheck.addEventListener('change', (e) => { AppState.withholding = e.target.checked; this.els.whOptions.style.display = e.target.checked ? 'grid' : 'none'; this.update(); });
         this.els.whCategory.addEventListener('change', (e) => { AppState.whCategory = e.target.value; this.update(); });
         
-        // テーマ初期化
         const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.setAttribute('data-theme', savedTheme);
         document.getElementById('theme-toggle').innerText = savedTheme === 'dark' ? '☀️' : '🌙';
@@ -648,10 +658,9 @@ const UI = {
             document.documentElement.setAttribute('data-theme', next);
             localStorage.setItem('theme', next);
             document.getElementById('theme-toggle').innerText = next === 'dark' ? '☀️' : '🌙';
-            Tracker.render(); // グラフの色を更新するため
+            Tracker.render();
         });
 
-        // 年フィルタの初期化
         const yearSelect = document.getElementById('history-filter-year');
         const currentYear = new Date().getFullYear();
         for(let i = 0; i < 5; i++) {
@@ -663,12 +672,10 @@ const UI = {
         }
 
         this.update();
-        this.validateInvoiceForm();
     },
     handleInput(e) {
         let rawVal = e.target.value.replace(/[０-９]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0)).replace(/-/g, '');
         
-        // バリデーション強化: 数値以外の入力に対するフィードバック
         const errorEl = document.getElementById('input-error');
         if (/[^\d.,万km]/i.test(rawVal) && rawVal !== '') {
             errorEl.style.display = 'block';
@@ -717,16 +724,10 @@ const UI = {
         formula += `支払額：${r.ex.toLocaleString()} + ${r.tax.toLocaleString()} − ${r.wh.toLocaleString()} = ${r.net.toLocaleString()}円`;
         this.els.formula.innerText = formula;
     },
-    validateInvoiceForm() {
-        // 未入力でもPDF生成できるように制限を解除
-        const btn = document.getElementById('btn-pdf');
-        btn.disabled = false;
-        btn.innerText = "📥 適格請求書PDFを出力";
-    },
     sanitize(str) { return window.DOMPurify ? DOMPurify.sanitize(str) : String(str).replace(/[<>"']/g, ""); },
     showToast(msg) {
         const t = document.createElement("div"); t.innerText = msg; t.style = "position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.8);color:white;padding:12px 20px;border-radius:6px;z-index:10000;";
-        document.body.appendChild(t); setTimeout(() => t.remove(), 2500);
+        document.body.appendChild(t); setTimeout(() => t.remove(), 3000);
     },
     copy(type, btn) {
         const r = AppState.results;
@@ -747,6 +748,9 @@ const UI = {
             } else {
                 this.showToast("✅ コピーしました");
             }
+        }).catch(err => {
+            console.error(err);
+            this.showToast("❌ コピーに失敗しました");
         });
     },
     shareSNS(p) {
@@ -761,12 +765,9 @@ const UI = {
         const modal = document.getElementById(id);
         modal.classList.add('active'); 
         modal.setAttribute('aria-hidden', 'false');
-        
-        // アクセシビリティ: モーダル内の最初のフォーカス可能要素にフォーカス
         const focusable = modal.querySelector('button,[href], input, select, textarea,[tabindex]:not([tabindex="-1"])');
         if (focusable) focusable.focus();
         
-        // Escキーで閉じる
         this._currentModalId = id;
         this._escListener = (e) => {
             if (e.key === 'Escape') this.closeModal(this._currentModalId);
@@ -789,83 +790,88 @@ const Tracker = {
     async addSale() {
         const r = AppState.results;
         if (!r.total) return;
-        await DB.addHistory({
-            id: Date.now().toString(), timestamp: Date.now(), date: new Date().toLocaleDateString('ja-JP'),
-            client: document.getElementById('pdf-client').value || '未入力', amount: r.ex, tax_amount: r.tax, withholding: r.wh, total: r.net
-        });
-        UI.showToast("✅ 保存しました");
-        this.render();
+        try {
+            await DB.addHistory({
+                id: Date.now().toString(), timestamp: Date.now(), date: new Date().toLocaleDateString('ja-JP'),
+                client: document.getElementById('pdf-client').value || '未入力', amount: r.ex, tax_amount: r.tax, withholding: r.wh, total: r.net
+            });
+            UI.showToast("✅ 保存しました");
+            this.render();
+        } catch (e) {
+            console.error(e);
+            UI.showToast("❌ 保存に失敗しました");
+        }
     },
     async render() {
-        const all = await DB.getAllHistory();
-        const currentYear = new Date().getFullYear();
-        const currentMonth = new Date().getMonth();
-        
-        const yearly = all.filter(r => new Date(r.timestamp).getFullYear() === currentYear).reduce((s, r) => s + r.amount, 0);
-        const monthly = all.filter(r => {
-            const d = new Date(r.timestamp);
-            return d.getFullYear() === currentYear && d.getMonth() === currentMonth;
-        }).reduce((s, r) => s + r.amount, 0);
+        try {
+            const all = await DB.getAllHistory();
+            const currentYear = new Date().getFullYear();
+            const currentMonth = new Date().getMonth();
+            
+            const yearly = all.filter(r => new Date(r.timestamp).getFullYear() === currentYear).reduce((s, r) => s + r.amount, 0);
+            const monthly = all.filter(r => {
+                const d = new Date(r.timestamp);
+                return d.getFullYear() === currentYear && d.getMonth() === currentMonth;
+            }).reduce((s, r) => s + r.amount, 0);
 
-        document.getElementById('yearly-total').innerText = "¥" + yearly.toLocaleString();
-        document.getElementById('monthly-total').innerText = "¥" + monthly.toLocaleString();
-        document.getElementById('month-badge').innerText = `今月: ¥${monthly.toLocaleString()}`;
-        
-        // フィルタリング
-        const filterYear = document.getElementById('history-filter-year').value;
-        const filterMonth = document.getElementById('history-filter-month').value;
-        
-        const filtered = all.filter(r => {
-            const d = new Date(r.timestamp);
-            const yMatch = filterYear === 'all' || d.getFullYear().toString() === filterYear;
-            const mMatch = filterMonth === 'all' || (d.getMonth() + 1).toString().padStart(2, '0') === filterMonth;
-            return yMatch && mMatch;
-        });
+            document.getElementById('yearly-total').innerText = "¥" + yearly.toLocaleString();
+            document.getElementById('monthly-total').innerText = "¥" + monthly.toLocaleString();
+            document.getElementById('month-badge').innerText = `今月: ¥${monthly.toLocaleString()}`;
+            
+            const filterYear = document.getElementById('history-filter-year').value;
+            const filterMonth = document.getElementById('history-filter-month').value;
+            
+            const filtered = all.filter(r => {
+                const d = new Date(r.timestamp);
+                const yMatch = filterYear === 'all' || d.getFullYear().toString() === filterYear;
+                const mMatch = filterMonth === 'all' || (d.getMonth() + 1).toString().padStart(2, '0') === filterMonth;
+                return yMatch && mMatch;
+            });
 
-        // クライアント別売上集計 (プログレスバー付き)
-        const clientTotals = {};
-        let totalAmount = 0;
-        filtered.forEach(r => {
-            clientTotals[r.client] = (clientTotals[r.client] || 0) + r.amount;
-            totalAmount += r.amount;
-        });
+            const clientTotals = {};
+            let totalAmount = 0;
+            filtered.forEach(r => {
+                clientTotals[r.client] = (clientTotals[r.client] || 0) + r.amount;
+                totalAmount += r.amount;
+            });
 
-        const clientHtml = Object.entries(clientTotals)
-            .sort((a, b) => b[1] - a[1])
-            .map(([client, amount]) => {
-                const percent = totalAmount > 0 ? Math.round((amount / totalAmount) * 100) : 0;
-                return `
-                <div class="client-summary-item">
-                    <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 4px;">
-                        <span>${UI.sanitize(client)}</span>
-                        <strong>¥${amount.toLocaleString()}</strong>
-                    </div>
-                    <div style="width: 100%; background: var(--border-main); height: 6px; border-radius: 3px; overflow: hidden;">
-                        <div style="width: ${percent}%; background: var(--primary); height: 100%;"></div>
-                    </div>
-                </div>`;
-            }).join('');
-        document.getElementById('client-summary').innerHTML = clientHtml || '<div style="text-align:center;color:var(--text-muted);">データなし</div>';
+            const clientHtml = Object.entries(clientTotals)
+                .sort((a, b) => b[1] - a[1])
+                .map(([client, amount]) => {
+                    const percent = totalAmount > 0 ? Math.round((amount / totalAmount) * 100) : 0;
+                    return `
+                    <div class="client-summary-item">
+                        <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 4px;">
+                            <span>${UI.sanitize(client)}</span>
+                            <strong>¥${amount.toLocaleString()}</strong>
+                        </div>
+                        <div style="width: 100%; background: var(--border-main); height: 6px; border-radius: 3px; overflow: hidden;">
+                            <div style="width: ${percent}%; background: var(--primary); height: 100%;"></div>
+                        </div>
+                    </div>`;
+                }).join('');
+            document.getElementById('client-summary').innerHTML = clientHtml || '<div style="text-align:center;color:var(--text-muted);">データなし</div>';
 
-        const list = document.getElementById('history-list');
-        list.innerHTML = filtered.length ? filtered.map(r => `
-            <div class="history-item">
-                <div><strong>${UI.sanitize(r.client)}</strong><br><small>${r.date}</small></div>
-                <div>¥${r.total.toLocaleString()} <button class="history-delete" onclick="Tracker.del('${r.id}')">削除</button></div>
-            </div>
-        `).join('') : '<div style="text-align:center;color:var(--text-muted);">履歴なし</div>';
+            const list = document.getElementById('history-list');
+            list.innerHTML = filtered.length ? filtered.map(r => `
+                <div class="history-item">
+                    <div><strong>${UI.sanitize(r.client)}</strong><br><small>${r.date}</small></div>
+                    <div>¥${r.total.toLocaleString()} <button class="history-delete" onclick="Tracker.del('${r.id}')">削除</button></div>
+                </div>
+            `).join('') : '<div style="text-align:center;color:var(--text-muted);">履歴なし</div>';
 
-        this.drawChart(filtered);
+            this.drawChart(filtered);
+        } catch (e) {
+            console.error(e);
+        }
     },
     drawChart(data) {
         const ctx = document.getElementById('salesChart');
         if (!ctx || typeof Chart === 'undefined') return;
         
-        // 月別集計
         const monthlyData = Array(12).fill(0);
         data.forEach(r => {
             const d = new Date(r.timestamp);
-            // フィルタが「全期間」の場合は現在の年のデータを表示
             const targetYear = document.getElementById('history-filter-year').value === 'all' ? new Date().getFullYear() : parseInt(document.getElementById('history-filter-year').value);
             if (d.getFullYear() === targetYear) {
                 monthlyData[d.getMonth()] += r.amount;
@@ -905,11 +911,16 @@ const Tracker = {
     async del(id) { await DB.deleteHistory(id); this.render(); },
     async clearAll() { await DB.clearHistory(); UI.closeModal('delete-modal'); this.render(); UI.showToast("🗑️ クリアしました"); },
     async exportCSV() {
-        const all = await DB.getAllHistory();
-        const head = "\uFEFF日付,顧客名,金額,消費税,源泉徴収,合計\n";
-        const rows = all.map(r => `${r.date},"${r.client}",${r.amount},${r.tax_amount},${r.withholding},${r.total}`).join("\n");
-        const blob = new Blob([head + rows], { type: "text/csv" });
-        const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "furical-history.csv"; a.click();
+        try {
+            const all = await DB.getAllHistory();
+            const head = "\uFEFF日付,顧客名,金額,消費税,源泉徴収,合計\n";
+            const rows = all.map(r => `${r.date},"${r.client}",${r.amount},${r.tax_amount},${r.withholding},${r.total}`).join("\n");
+            const blob = new Blob([head + rows], { type: "text/csv" });
+            const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "furical-history.csv"; a.click();
+        } catch (e) {
+            console.error(e);
+            UI.showToast("❌ CSV出力に失敗しました");
+        }
     }
 };
 
@@ -923,8 +934,10 @@ const PDF = {
                     resolve(e.target.result.base64);
                 } else {
                     try {
-                        // PDF日本語対応: 確実に存在するCDNからM+フォントを取得
-                        const res = await fetch('https://cdn.jsdelivr.net/gh/rayshan/mplus-fonts@master/mplus-1p-regular.ttf');
+                        // PDF生成の安定化: ローカル配置のフォントを読み込む
+                        const res = await fetch('/assets/fonts/mplus.ttf');
+                        if (!res.ok) throw new Error("フォントファイルの読み込みに失敗しました");
+                        
                         const buffer = await res.arrayBuffer();
                         const bytes = new Uint8Array(buffer);
                         let binary = '';
@@ -937,17 +950,22 @@ const PDF = {
                         txW.objectStore('fonts').put({ id: 'mplus', base64: base64 });
                         resolve(base64);
                     } catch (err) {
+                        console.error(err);
                         reject(err);
                     }
                 }
             };
-            req.onerror = () => reject();
+            req.onerror = () => reject(new Error("DBエラー"));
         });
     },
     async generate() {
+        // jsPDFの読み込みチェック
+        if (typeof window.jspdf === 'undefined') {
+            UI.showToast("⏳ PDFライブラリを読み込み中です。少し待ってから再度お試しください。");
+            return;
+        }
+
         const r = AppState.results;
-        
-        // 未入力でもPDF生成できるようにデフォルト値を設定
         const clientName = document.getElementById('pdf-client').value.trim() || '顧客名未入力';
         const itemName = document.getElementById('pdf-item-name').value.trim() || '業務委託料';
         const invoiceNo = document.getElementById('pdf-no').value.trim() || '-';
@@ -960,7 +978,7 @@ const PDF = {
         const btn = document.getElementById('btn-pdf');
         btn.disabled = true;
         const originalText = btn.innerText;
-        btn.innerText = "⏳ PDF生成中 (初回はフォント読込に数秒かかります)...";
+        btn.innerText = "⏳ PDF生成中...";
         
         try {
             const { jsPDF } = window.jspdf;
@@ -984,14 +1002,12 @@ const PDF = {
             doc.text(`発行者: ${myName}`, 20, 60);
             doc.text(`${myAddress}`, 20, 65);
 
-            // インボイス制度対応: 税率ごとの区分記載
             const taxRateStr = Math.round(AppState.taxRate * 100) + '%';
             
             doc.autoTable({
                 startY: 80,
                 head: [['取引内容', '金額']],
-                body: [[itemName, `¥ ${r.ex.toLocaleString()}`],[`${taxRateStr}対象`, `¥ ${r.ex.toLocaleString()}`],[`消費税 (${taxRateStr})`, `¥ ${r.tax.toLocaleString()}`],['源泉徴収税', `¥ -${r.wh.toLocaleString()}`],
-                    ['合計金額', `¥ ${r.net.toLocaleString()}`]
+                body: [[itemName, `¥ ${r.ex.toLocaleString()}`],[`${taxRateStr}対象`, `¥ ${r.ex.toLocaleString()}`],[`消費税 (${taxRateStr})`, `¥ ${r.tax.toLocaleString()}`],['源泉徴収税', `¥ -${r.wh.toLocaleString()}`],['合計金額', `¥ ${r.net.toLocaleString()}`]
                 ],
                 theme: 'grid',
                 headStyles: { fillColor:[37, 99, 235], font: 'mplus' },
@@ -1007,8 +1023,6 @@ const PDF = {
                 currentY += 6;
             });
 
-            // ファイル名の自動生成 (invoice_YYYYMMDD_顧客名.pdf)
-            // タイムゾーンのズレを防ぐため、ローカルタイムでYYYYMMDDを取得
             const d = new Date();
             const dateStr = d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0');
             const safeClientName = clientName.replace(/[\\/:*?"<>|]/g, '_');
@@ -1018,17 +1032,20 @@ const PDF = {
             UI.showToast("✅ PDFをダウンロードしました");
         } catch (e) {
             console.error(e);
-            UI.showToast("❌ PDF作成に失敗しました");
+            UI.showToast("❌ PDF作成に失敗しました: " + (e.message || ""));
         } finally {
             btn.disabled = false;
             btn.innerText = originalText;
-            UI.validateInvoiceForm();
         }
     }
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
-    await DB.init();
+    try {
+        await DB.init();
+    } catch (e) {
+        console.error("DB Initialization failed", e);
+    }
     UI.init();
     Tracker.render();
 });
