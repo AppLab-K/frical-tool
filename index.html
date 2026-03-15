@@ -78,7 +78,6 @@ header { background: var(--bg-header); border-bottom: 1px solid var(--border-mai
 .alert-box { background: var(--warning); color: #fff; padding: 12px; text-align: center; font-size: 13px; font-weight: bold; margin-bottom: 24px; border-radius: 8px; box-shadow: var(--shadow-sm); }
 .info-box { background: var(--primary-light); color: var(--primary-dark); padding: 12px; font-size: 13px; margin-bottom: 24px; border-radius: 8px; border: 1px solid var(--primary); }
 
-/* 広告枠のスタイル修正：審査用に高さを確保 */
 .ad-space { background: var(--bg-btn-sec); border: 1px dashed var(--border-input); border-radius: 8px; padding: 20px; text-align: center; margin-bottom: 24px; color: var(--text-muted); font-size: 12px; min-height: 250px; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; }
 .ad-label { display: block; font-size: 10px; margin-bottom: 8px; opacity: 0.7; }
 
@@ -406,7 +405,7 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
     <div class="footer-links">
         <a href="javascript:void(0)" onclick="UI.openModal('terms-modal')">利用規約・免責事項</a>
         <a href="javascript:void(0)" onclick="UI.openModal('privacy-modal')">プライバシーポリシー</a>
-        <a href="https://x.com/messages/compose?recipient_id=YOUR_NUMERIC_ID&text=%E3%80%90%E3%83%95%E3%83%AA%E3%82%AB%E3%83%AB%20%E3%81%94%E6%84%8F%E8%A6%8B%E3%83%BB%E3%81%94%E8%A6%81%E6%9C%9B%E3%80%91%0A%E3%83%BB%E8%A6%81%E6%9C%9B%E5%86%85%E5%AE%B9%EF%BC%9A%0A%0A%E3%83%BB%E3%81%9D%E3%81%AE%E4%BB%96%EF%BC%9A%0A" target="_blank" rel="noopener">ご意見・ご要望 (XのDMへ)</a>
+        <a href="https://x.com/AppLab_K" target="_blank" rel="noopener">ご意見・ご要望 (@AppLab_Kへ)</a>
     </div>
     <div>&copy; 2026 フリカル All Rights Reserved.</div>
 </footer>
@@ -479,9 +478,9 @@ const DB = {
         tx.objectStore('history').put(record);
     },
     async getAllHistory() {
-        if (!this.instance) return [];
+        if (!this.instance) return[];
         return new Promise((resolve) => {
-            const records = [];
+            const records =[];
             const index = this.instance.transaction('history', 'readonly').objectStore('history').index('timestamp');
             const req = index.openCursor(null, 'prev');
             req.onsuccess = (e) => {
@@ -698,42 +697,85 @@ const Tracker = {
 };
 
 const PDF = {
+    async getFont() {
+        return new Promise((resolve, reject) => {
+            const tx = DB.instance.transaction('fonts', 'readonly');
+            const req = tx.objectStore('fonts').get('mplus');
+            req.onsuccess = async (e) => {
+                if (e.target.result) {
+                    resolve(e.target.result.base64);
+                } else {
+                    try {
+                        // CDNから日本語フォント(M+フォント)をフェッチ
+                        const res = await fetch('https://cdn.jsdelivr.net/npm/font-source-mplus@1.0.0/fonts/mplus-1p-regular.ttf');
+                        const buffer = await res.arrayBuffer();
+                        const bytes = new Uint8Array(buffer);
+                        let binary = '';
+                        for (let i = 0; i < bytes.byteLength; i++) {
+                            binary += String.fromCharCode(bytes[i]);
+                        }
+                        const base64 = window.btoa(binary);
+                        
+                        // IndexedDBにキャッシュして次回以降高速化
+                        const txW = DB.instance.transaction('fonts', 'readwrite');
+                        txW.objectStore('fonts').put({ id: 'mplus', base64: base64 });
+                        resolve(base64);
+                    } catch (err) {
+                        reject(err);
+                    }
+                }
+            };
+            req.onerror = () => reject();
+        });
+    },
     async generate() {
         const r = AppState.results;
         const btn = document.getElementById('btn-pdf');
         btn.disabled = true;
+        const originalText = btn.innerText;
+        btn.innerText = "⏳ PDF生成中 (初回はフォント読込に数秒かかります)...";
+        
         try {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             
+            // 日本語フォントの読み込みと適用
+            const fontBase64 = await this.getFont();
+            doc.addFileToVFS('mplus.ttf', fontBase64);
+            doc.addFont('mplus.ttf', 'mplus', 'normal');
+            doc.setFont('mplus');
+            
             doc.setFontSize(20);
-            doc.text("INVOICE", 105, 20, { align: 'center' });
+            doc.text("請求書 (INVOICE)", 105, 20, { align: 'center' });
             
             doc.setFontSize(10);
-            doc.text(`To: ${document.getElementById('pdf-client').value}`, 20, 40);
-            doc.text(`Date: ${document.getElementById('pdf-date').value || new Date().toLocaleDateString()}`, 140, 40);
-            doc.text(`Invoice No: ${document.getElementById('pdf-no').value || '-'}`, 140, 45);
-            doc.text(`Registration No: ${document.getElementById('pdf-invoice-id').value}`, 140, 50);
+            doc.text(`宛先: ${document.getElementById('pdf-client').value}`, 20, 40);
+            doc.text(`発行日: ${document.getElementById('pdf-date').value || new Date().toLocaleDateString('ja-JP')}`, 140, 40);
+            doc.text(`請求書番号: ${document.getElementById('pdf-no').value || '-'}`, 140, 45);
+            doc.text(`登録番号: ${document.getElementById('pdf-invoice-id').value}`, 140, 50);
             
-            doc.text(`From: ${document.getElementById('pdf-my-name').value}`, 20, 60);
+            doc.text(`発行者: ${document.getElementById('pdf-my-name').value}`, 20, 60);
             doc.text(`${document.getElementById('pdf-address').value}`, 20, 65);
 
             doc.autoTable({
                 startY: 80,
-                head: [['Description', 'Amount']],
-                body: [
-                    [document.getElementById('pdf-item-name').value || 'Service Fee', `JPY ${r.ex.toLocaleString()}`],
-                    ['Consumption Tax', `JPY ${r.tax.toLocaleString()}`],
-                    ['Withholding Tax', `JPY -${r.wh.toLocaleString()}`],
-                    ['Total Amount', `JPY ${r.net.toLocaleString()}`]
+                head: [['取引内容', '金額']],
+                body: [[document.getElementById('pdf-item-name').value || '業務委託料', `¥ ${r.ex.toLocaleString()}`],['消費税', `¥ ${r.tax.toLocaleString()}`],['源泉徴収税', `¥ -${r.wh.toLocaleString()}`],
+                    ['合計金額', `¥ ${r.net.toLocaleString()}`]
                 ],
                 theme: 'grid',
-                headStyles: { fillColor: [37, 99, 235] }
+                headStyles: { fillColor:[37, 99, 235], font: 'mplus' },
+                styles: { font: 'mplus' }
             });
 
             const finalY = doc.lastAutoTable.finalY || 120;
-            doc.text("Bank Details:", 20, finalY + 20);
-            doc.text(document.getElementById('pdf-bank').value, 20, finalY + 30);
+            doc.text("【振込先情報】", 20, finalY + 20);
+            const bankInfo = document.getElementById('pdf-bank').value.split('\n');
+            let currentY = finalY + 30;
+            bankInfo.forEach(line => {
+                doc.text(line, 20, currentY);
+                currentY += 6;
+            });
 
             doc.save(`invoice_${Date.now()}.pdf`);
             UI.showToast("✅ PDFをダウンロードしました");
@@ -742,6 +784,8 @@ const PDF = {
             UI.showToast("❌ PDF作成に失敗しました");
         } finally {
             btn.disabled = false;
+            btn.innerText = originalText;
+            UI.validateInvoiceForm();
         }
     }
 };
