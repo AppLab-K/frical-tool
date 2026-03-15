@@ -355,15 +355,15 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
             💡 入力した情報は端末内にのみ保存され、外部サーバーには送信されません。
         </div>
         <div class="pdf-form">
-            <input id="pdf-client" type="text" placeholder="顧客名（必須・例：株式会社〇〇 御中）" oninput="UI.validateInvoiceForm()" aria-label="顧客名">
+            <input id="pdf-client" type="text" placeholder="顧客名（例：株式会社〇〇 御中）" oninput="UI.validateInvoiceForm()" aria-label="顧客名">
             <input id="pdf-item-name" type="text" placeholder="取引内容（例：3月分 Webデザイン制作料）" aria-label="取引内容">
             <input id="pdf-no" type="text" placeholder="請求書番号（例：INV-202603-01）" aria-label="請求書番号">
             <input id="pdf-date" type="text" placeholder="発行日（例：2026年3月31日）" aria-label="発行日">
             <input id="pdf-my-name" type="text" placeholder="発行者の氏名・屋号（例：山田 太郎）" aria-label="発行者の氏名">
             <input id="pdf-address" type="text" placeholder="発行者の住所（例：東京都渋谷区...）" aria-label="発行者の住所">
-            <input id="pdf-invoice-id" type="text" placeholder="適格請求書番号（必須・T+13桁の数字）" oninput="UI.validateInvoiceForm()" aria-label="適格請求書番号">
+            <input id="pdf-invoice-id" type="text" placeholder="適格請求書番号（例：T+13桁の数字）" oninput="UI.validateInvoiceForm()" aria-label="適格請求書番号">
             <textarea id="pdf-bank" placeholder="振込先情報&#10;例：〇〇銀行 〇〇支店&#10;普通 1234567&#10;フリカル タロウ" aria-label="振込先情報"></textarea>
-            <button id="btn-pdf" onclick="PDF.generate()" disabled>⚠️ 顧客名と適格請求書番号を入力してください</button>
+            <button id="btn-pdf" onclick="PDF.generate()">📥 適格請求書PDFを出力</button>
         </div>
     </div>
 
@@ -447,7 +447,9 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
     <div class="footer-links">
         <a href="javascript:void(0)" onclick="UI.openModal('terms-modal')">利用規約・免責事項</a>
         <a href="javascript:void(0)" onclick="UI.openModal('privacy-modal')">プライバシーポリシー</a>
-        <a href="https://x.com/AppLab_K" target="_blank" rel="noopener">ご意見・ご要望 (@AppLab_Kへ)</a>
+        <!-- DMリンクの修正: recipient_id を指定して直接DM画面を開く -->
+        <a href="https://x.com/messages/compose?recipient_id=YOUR_NUMERIC_ID&text=%E3%80%90%E3%83%95%E3%83%AA%E3%82%AB%E3%83%AB%20%E3%81%94%E6%84%8F%E8%A6%8B%E3%83%BB%E3%81%94%E8%A6%81%E6%9C%9B%E3%80%91%0A%E3%83%BB%E8%A6%81%E6%9C%9B%E5%86%85%E5%AE%B9%EF%BC%9A%0A%0A%E3%83%BB%E3%81%9D%E3%81%AE%E4%BB%96%EF%BC%9A%0A" target="_blank" rel="noopener">ご意見・ご要望 (XのDMへ)</a>
+        <!-- ※YOUR_NUMERIC_ID の部分は、ご自身のXアカウントの数値IDに書き換えてください -->
     </div>
     <div>&copy; 2026 フリカル All Rights Reserved.</div>
 </footer>
@@ -715,12 +717,10 @@ const UI = {
         this.els.formula.innerText = formula;
     },
     validateInvoiceForm() {
-        const tNum = document.getElementById('pdf-invoice-id').value.trim();
-        const client = document.getElementById('pdf-client').value.trim();
+        // 未入力でもPDF生成できるように制限を解除
         const btn = document.getElementById('btn-pdf');
-        const isValid = /^T\d{13}$/.test(tNum) && client !== '';
-        btn.disabled = !isValid;
-        btn.innerText = isValid ? "📥 適格請求書PDFを出力" : "⚠️ 顧客名と登録番号を入力してください";
+        btn.disabled = false;
+        btn.innerText = "📥 適格請求書PDFを出力";
     },
     sanitize(str) { return window.DOMPurify ? DOMPurify.sanitize(str) : String(str).replace(/[<>"']/g, ""); },
     showToast(msg) {
@@ -762,7 +762,7 @@ const UI = {
         modal.setAttribute('aria-hidden', 'false');
         
         // アクセシビリティ: モーダル内の最初のフォーカス可能要素にフォーカス
-        const focusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        const focusable = modal.querySelector('button, [href], input, select, textarea,[tabindex]:not([tabindex="-1"])');
         if (focusable) focusable.focus();
         
         // Escキーで閉じる
@@ -922,7 +922,8 @@ const PDF = {
                     resolve(e.target.result.base64);
                 } else {
                     try {
-                        const res = await fetch('https://cdn.jsdelivr.net/npm/font-source-mplus@1.0.0/fonts/mplus-1p-regular.ttf');
+                        // PDF日本語対応: 確実に存在するCDNからM+フォントを取得
+                        const res = await fetch('https://cdn.jsdelivr.net/gh/rayshan/mplus-fonts@master/mplus-1p-regular.ttf');
                         const buffer = await res.arrayBuffer();
                         const bytes = new Uint8Array(buffer);
                         let binary = '';
@@ -944,7 +945,17 @@ const PDF = {
     },
     async generate() {
         const r = AppState.results;
-        const clientName = document.getElementById('pdf-client').value.trim();
+        
+        // 未入力でもPDF生成できるようにデフォルト値を設定
+        const clientName = document.getElementById('pdf-client').value.trim() || '顧客名未入力';
+        const itemName = document.getElementById('pdf-item-name').value.trim() || '業務委託料';
+        const invoiceNo = document.getElementById('pdf-no').value.trim() || '-';
+        const issueDate = document.getElementById('pdf-date').value.trim() || new Date().toLocaleDateString('ja-JP');
+        const myName = document.getElementById('pdf-my-name').value.trim() || '発行者未入力';
+        const myAddress = document.getElementById('pdf-address').value.trim() || '';
+        const invoiceId = document.getElementById('pdf-invoice-id').value.trim() || '-';
+        const bankInfoText = document.getElementById('pdf-bank').value.trim() || '振込先未入力';
+
         const btn = document.getElementById('btn-pdf');
         btn.disabled = true;
         const originalText = btn.innerText;
@@ -965,13 +976,12 @@ const PDF = {
             doc.setFontSize(10);
             doc.text(`宛先: ${clientName}`, 20, 40);
             
-            const issueDate = document.getElementById('pdf-date').value || new Date().toLocaleDateString('ja-JP');
             doc.text(`発行日: ${issueDate}`, 140, 40);
-            doc.text(`請求書番号: ${document.getElementById('pdf-no').value || '-'}`, 140, 45);
-            doc.text(`登録番号: ${document.getElementById('pdf-invoice-id').value}`, 140, 50);
+            doc.text(`請求書番号: ${invoiceNo}`, 140, 45);
+            doc.text(`登録番号: ${invoiceId}`, 140, 50);
             
-            doc.text(`発行者: ${document.getElementById('pdf-my-name').value}`, 20, 60);
-            doc.text(`${document.getElementById('pdf-address').value}`, 20, 65);
+            doc.text(`発行者: ${myName}`, 20, 60);
+            doc.text(`${myAddress}`, 20, 65);
 
             // インボイス制度対応: 税率ごとの区分記載
             const taxRateStr = Math.round(AppState.taxRate * 100) + '%';
@@ -979,9 +989,8 @@ const PDF = {
             doc.autoTable({
                 startY: 80,
                 head: [['取引内容', '金額']],
-                body: [[document.getElementById('pdf-item-name').value || '業務委託料', `¥ ${r.ex.toLocaleString()}`],
-                    [`${taxRateStr}対象`, `¥ ${r.ex.toLocaleString()}`],
-                    [`消費税 (${taxRateStr})`, `¥ ${r.tax.toLocaleString()}`],['源泉徴収税', `¥ -${r.wh.toLocaleString()}`],['合計金額', `¥ ${r.net.toLocaleString()}`]
+                body: [[itemName, `¥ ${r.ex.toLocaleString()}`],[`${taxRateStr}対象`, `¥ ${r.ex.toLocaleString()}`],[`消費税 (${taxRateStr})`, `¥ ${r.tax.toLocaleString()}`],['源泉徴収税', `¥ -${r.wh.toLocaleString()}`],
+                    ['合計金額', `¥ ${r.net.toLocaleString()}`]
                 ],
                 theme: 'grid',
                 headStyles: { fillColor:[37, 99, 235], font: 'mplus' },
@@ -990,7 +999,7 @@ const PDF = {
 
             const finalY = doc.lastAutoTable.finalY || 120;
             doc.text("【振込先情報】", 20, finalY + 20);
-            const bankInfo = document.getElementById('pdf-bank').value.split('\n');
+            const bankInfo = bankInfoText.split('\n');
             let currentY = finalY + 30;
             bankInfo.forEach(line => {
                 doc.text(line, 20, currentY);
@@ -998,7 +1007,9 @@ const PDF = {
             });
 
             // ファイル名の自動生成 (invoice_YYYYMMDD_顧客名.pdf)
-            const dateStr = new Date().toISOString().slice(0,10).replace(/-/g, '');
+            // タイムゾーンのズレを防ぐため、ローカルタイムでYYYYMMDDを取得
+            const d = new Date();
+            const dateStr = d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0');
             const safeClientName = clientName.replace(/[\\/:*?"<>|]/g, '_');
             const fileName = `invoice_${dateStr}_${safeClientName}.pdf`;
 
