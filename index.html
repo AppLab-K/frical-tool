@@ -13,7 +13,7 @@
     <!-- SEO強化: robots meta -->
     <meta name="robots" content="index,follow,max-image-preview:large">
     
-    <!-- CSP設定: 広告配信を妨げないよう、shinobi.jpとadmax.ninjaを広めに許可 -->
+    <!-- CSP設定: 広告配信を妨げないよう、shinobi.jpとadmax.ninjaを許可 -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://*.shinobi.jp https://*.admax.ninja; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https: http:; connect-src 'self' https://raw.githubusercontent.com https://www.google-analytics.com https://region1.google-analytics.com; frame-src https://googleads.g.doubleclick.net https://platform.twitter.com https://*.shinobi.jp https://*.admax.ninja; object-src 'none'; base-uri 'self'; form-action 'self'; child-src 'none'; upgrade-insecure-requests;">
     
     <title>フリーランス源泉徴収・手取り計算ツール【インボイス対応】 | フリカル</title>
@@ -78,7 +78,7 @@ header { background: var(--bg-header); border-bottom: 1px solid var(--border-mai
 .alert-box { background: var(--warning); color: #fff; padding: 12px; text-align: center; font-size: 13px; font-weight: bold; margin-bottom: 24px; border-radius: 8px; box-shadow: var(--shadow-sm); }
 .info-box { background: var(--primary-light); color: var(--primary-dark); padding: 12px; font-size: 13px; margin-bottom: 24px; border-radius: 8px; border: 1px solid var(--primary); }
 
-.ad-space { background: var(--bg-btn-sec); border: 1px dashed var(--border-input); border-radius: 8px; padding: 20px; text-align: center; margin-bottom: 24px; color: var(--text-muted); font-size: 12px; }
+.ad-space { background: var(--bg-btn-sec); border: 1px dashed var(--border-input); border-radius: 8px; padding: 20px; text-align: center; margin-bottom: 24px; color: var(--text-muted); font-size: 12px; min-height: 250px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
 .ad-label { display: block; font-size: 10px; margin-bottom: 8px; opacity: 0.7; }
 
 .card { background: var(--bg-card); border-radius: 12px; padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow-md); border: 1px solid var(--border-main); }
@@ -208,7 +208,9 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
     <!-- 広告枠 (上部) -->
     <div class="ad-space" aria-label="広告">
         <span class="ad-label">スポンサーリンク</span>
+        <!-- admax -->
         <script src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
+        <!-- admax -->
     </div>
 
     <!-- 計算カード -->
@@ -309,7 +311,9 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
         <!-- 収益最大化: 結果カードの直下に広告配置 -->
         <div class="ad-space" aria-label="広告" style="margin-top: 24px; margin-bottom: 0;">
             <span class="ad-label">スポンサーリンク</span>
+            <!-- admax -->
             <script src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
+            <!-- admax -->
         </div>
     </div>
 
@@ -335,7 +339,9 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
     <!-- 広告枠 (中間) -->
     <div class="ad-space" aria-label="広告">
         <span class="ad-label">スポンサーリンク</span>
+        <!-- admax -->
         <script src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
+        <!-- admax -->
     </div>
 
     <!-- 履歴カード -->
@@ -381,7 +387,9 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
     <!-- 広告枠 (履歴下) -->
     <div class="ad-space" aria-label="広告">
         <span class="ad-label">スポンサーリンク</span>
+        <!-- admax -->
         <script src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
+        <!-- admax -->
     </div>
 
     <!-- FAQセクション (SEO対策兼ヘルプ) -->
@@ -419,7 +427,34 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
     </div>
 </div>
 
-<!-- モーダル（規約・プライバシー）省略（前回と同じ） -->
+<!-- 利用規約モーダル -->
+<div id="terms-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-content">
+        <button class="modal-close" onclick="UI.closeModal('terms-modal')">&times;</button>
+        <h3 class="modal-title">利用規約・免責事項</h3>
+        <div class="modal-body">
+            <p>本ツール「フリカル」をご利用いただく際は、以下の事項に同意したものとみなします。</p>
+            <h3>1. 免責事項</h3>
+            <p>本ツールで提供される計算結果は、あくまで概算であり、その正確性、完全性、有用性を保証するものではありません。実際の税額計算や確定申告に際しては、必ず税理士等の専門家にご相談いただくか、所轄の税務署へご確認ください。本ツールの利用により生じたいかなる損害についても、運営者は一切の責任を負いません。</p>
+            <h3>2. データの取り扱い</h3>
+            <p>入力されたデータは、ブラウザのIndexedDB（ローカルストレージ）にのみ保存され、外部サーバーへ送信されることはありません。ブラウザのキャッシュ削除等によりデータが消失する可能性があるため、重要なデータは各自でバックアップ（CSV出力等）を行ってください。</p>
+        </div>
+    </div>
+</div>
+
+<!-- プライバシーポリシーモーダル -->
+<div id="privacy-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-content">
+        <button class="modal-close" onclick="UI.closeModal('privacy-modal')">&times;</button>
+        <h3 class="modal-title">プライバシーポリシー</h3>
+        <div class="modal-body">
+            <h3>1. 広告の配信について</h3>
+            <p>当サイトでは、第三者配信の広告サービス（忍者AdMax）を利用しています。広告配信事業者は、ユーザーの興味に応じた商品やサービスの広告を表示するため、クッキー（Cookie）を使用することがあります。</p>
+            <h3>2. アクセス解析について</h3>
+            <p>当サイトでは、Googleによるアクセス解析ツール「Googleアナリティクス」を利用しています。このGoogleアナリティクスはトラフィックデータの収集のためにクッキー（Cookie）を使用しています。このトラフィックデータは匿名で収集されており、個人を特定するものではありません。</p>
+        </div>
+    </div>
+</div>
 
 <script>
 "use strict";
@@ -441,19 +476,6 @@ const DB = {
             req.onsuccess = async (e) => { this.instance = e.target.result; resolve(); };
             req.onerror = () => { UI.showToast("⚠️ データベースエラー"); resolve(); };
         });
-    },
-    async getFont() {
-        if (!this.instance) return null;
-        return new Promise(res => {
-            const req = this.instance.transaction('fonts', 'readonly').objectStore('fonts').get('bizud');
-            req.onsuccess = () => res(req.result ? req.result.base64 : null);
-            req.onerror = () => res(null);
-        });
-    },
-    async saveFont(base64) {
-        if (!this.instance) return;
-        const tx = this.instance.transaction('fonts', 'readwrite');
-        tx.objectStore('fonts').put({ id: 'bizud', base64 });
     },
     async addHistory(record) {
         if (!this.instance) return;
@@ -548,6 +570,18 @@ const UI = {
         this.els.round.addEventListener('change', (e) => { AppState.round = e.target.value; this.update(); });
         this.els.whCheck.addEventListener('change', (e) => { AppState.withholding = e.target.checked; this.els.whOptions.style.display = e.target.checked ? 'grid' : 'none'; this.update(); });
         this.els.whCategory.addEventListener('change', (e) => { AppState.whCategory = e.target.value; this.update(); });
+        
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            document.getElementById('theme-toggle').innerText = theme === 'dark' ? '☀️' : '🌙';
+        });
+        
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('theme-toggle').innerText = savedTheme === 'dark' ? '☀️' : '🌙';
+
         this.update();
     },
     handleInput(e) {
@@ -596,7 +630,7 @@ const UI = {
         const btn = document.getElementById('btn-pdf');
         const isValid = /^T\d{13}$/.test(tNum) && client !== '';
         btn.disabled = !isValid;
-        btn.innerText = isValid ? "📥 適格請求書PDFを出力 (Ctrl+P)" : "⚠️ 顧客名と登録番号を入力してください";
+        btn.innerText = isValid ? "📥 適格請求書PDFを出力" : "⚠️ 顧客名と登録番号を入力してください";
     },
     sanitize(str) { return window.DOMPurify ? DOMPurify.sanitize(str) : String(str).replace(/[<>"']/g, ""); },
     showToast(msg) {
@@ -634,8 +668,17 @@ const Tracker = {
     async render() {
         const all = await DB.getAllHistory();
         const currentYear = new Date().getFullYear();
-        document.getElementById('yearly-total').innerText = "¥" + all.filter(r => new Date(r.timestamp).getFullYear() === currentYear).reduce((s, r) => s + r.amount, 0).toLocaleString();
-        document.getElementById('monthly-total').innerText = "¥" + all.filter(r => new Date(r.timestamp).getMonth() === new Date().getMonth()).reduce((s, r) => s + r.amount, 0).toLocaleString();
+        const currentMonth = new Date().getMonth();
+        
+        const yearly = all.filter(r => new Date(r.timestamp).getFullYear() === currentYear).reduce((s, r) => s + r.amount, 0);
+        const monthly = all.filter(r => {
+            const d = new Date(r.timestamp);
+            return d.getFullYear() === currentYear && d.getMonth() === currentMonth;
+        }).reduce((s, r) => s + r.amount, 0);
+
+        document.getElementById('yearly-total').innerText = "¥" + yearly.toLocaleString();
+        document.getElementById('monthly-total').innerText = "¥" + monthly.toLocaleString();
+        document.getElementById('month-badge').innerText = `今月: ¥${monthly.toLocaleString()}`;
         
         const list = document.getElementById('history-list');
         list.innerHTML = all.length ? all.map(r => `
@@ -662,23 +705,55 @@ const PDF = {
         const btn = document.getElementById('btn-pdf');
         btn.disabled = true;
         try {
-            const { jsPDF } = window.jspdf; const doc = new jsPDF();
-            // フォント処理（省略：前回と同じロジック）
-            doc.setFontSize(20); doc.text("適 格 請 求 書", 105, 20, { align: 'center' });
-            doc.setFontSize(11);
-            doc.text(`${UI.sanitize(document.getElementById('pdf-client').value)}`, 20, 35);
-            doc.text(`発行日: ${document.getElementById('pdf-date').value}`, 140, 35);
-            doc.text(`登録番号: ${document.getElementById('pdf-invoice-id').value}`, 140, 41);
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // 日本語フォント対応（標準フォントは日本語不可のため、簡易的に描画）
+            doc.setFontSize(20);
+            doc.text("INVOICE", 105, 20, { align: 'center' });
+            
+            doc.setFontSize(10);
+            doc.text(`To: ${document.getElementById('pdf-client').value}`, 20, 40);
+            doc.text(`Date: ${document.getElementById('pdf-date').value || new Date().toLocaleDateString()}`, 140, 40);
+            doc.text(`Invoice No: ${document.getElementById('pdf-no').value || '-'}`, 140, 45);
+            doc.text(`Registration No: ${document.getElementById('pdf-invoice-id').value}`, 140, 50);
+            
+            doc.text(`From: ${document.getElementById('pdf-my-name').value}`, 20, 60);
+            doc.text(`${document.getElementById('pdf-address').value}`, 20, 65);
+
             doc.autoTable({
-                startY: 50, head: [['品名', '金額']],
-                body: [[document.getElementById('pdf-item-name').value || '委託料', `¥${r.ex.toLocaleString()}`],['消費税', `¥${r.tax.toLocaleString()}`],['源泉徴収', `-¥${r.wh.toLocaleString()}`],['合計額', `¥${r.net.toLocaleString()}`]]
+                startY: 80,
+                head: [['Description', 'Amount']],
+                body: [
+                    [document.getElementById('pdf-item-name').value || 'Service Fee', `JPY ${r.ex.toLocaleString()}`],
+                    ['Consumption Tax', `JPY ${r.tax.toLocaleString()}`],
+                    ['Withholding Tax', `JPY -${r.wh.toLocaleString()}`],
+                    ['Total Amount', `JPY ${r.net.toLocaleString()}`]
+                ],
+                theme: 'grid',
+                headStyles: { fillColor: [37, 99, 235] }
             });
-            doc.save("請求書.pdf");
-        } catch (e) { UI.showToast("❌ PDF作成失敗"); } finally { btn.disabled = false; }
+
+            const finalY = doc.lastAutoTable.finalY || 120;
+            doc.text("Bank Details:", 20, finalY + 20);
+            doc.text(document.getElementById('pdf-bank').value, 20, finalY + 30);
+
+            doc.save(`invoice_${Date.now()}.pdf`);
+            UI.showToast("✅ PDFをダウンロードしました");
+        } catch (e) {
+            console.error(e);
+            UI.showToast("❌ PDF作成に失敗しました");
+        } finally {
+            btn.disabled = false;
+        }
     }
 };
 
-window.onload = async () => { initTheme(); await DB.init(); UI.init(); Tracker.render(); };
+window.onload = async () => {
+    await DB.init();
+    UI.init();
+    Tracker.render();
+};
 </script>
 </body>
 </html>
