@@ -208,9 +208,7 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
     <!-- 広告枠 (上部) -->
     <div class="ad-space" aria-label="広告">
         <span class="ad-label">スポンサーリンク</span>
-        <!-- admax -->
         <script src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
-        <!-- admax -->
     </div>
 
     <!-- 計算カード -->
@@ -311,9 +309,7 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
         <!-- 収益最大化: 結果カードの直下に広告配置 -->
         <div class="ad-space" aria-label="広告" style="margin-top: 24px; margin-bottom: 0;">
             <span class="ad-label">スポンサーリンク</span>
-            <!-- admax -->
             <script src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
-            <!-- admax -->
         </div>
     </div>
 
@@ -339,9 +335,7 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
     <!-- 広告枠 (中間) -->
     <div class="ad-space" aria-label="広告">
         <span class="ad-label">スポンサーリンク</span>
-        <!-- admax -->
         <script src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
-        <!-- admax -->
     </div>
 
     <!-- 履歴カード -->
@@ -387,9 +381,7 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
     <!-- 広告枠 (履歴下) -->
     <div class="ad-space" aria-label="広告">
         <span class="ad-label">スポンサーリンク</span>
-        <!-- admax -->
         <script src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
-        <!-- admax -->
     </div>
 
     <!-- FAQセクション (SEO対策兼ヘルプ) -->
@@ -571,16 +563,18 @@ const UI = {
         this.els.whCheck.addEventListener('change', (e) => { AppState.withholding = e.target.checked; this.els.whOptions.style.display = e.target.checked ? 'grid' : 'none'; this.update(); });
         this.els.whCategory.addEventListener('change', (e) => { AppState.whCategory = e.target.value; this.update(); });
         
-        document.getElementById('theme-toggle').addEventListener('click', () => {
-            const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            document.getElementById('theme-toggle').innerText = theme === 'dark' ? '☀️' : '🌙';
-        });
-        
+        // テーマ初期化
         const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.setAttribute('data-theme', savedTheme);
         document.getElementById('theme-toggle').innerText = savedTheme === 'dark' ? '☀️' : '🌙';
+        
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            document.getElementById('theme-toggle').innerText = next === 'dark' ? '☀️' : '🌙';
+        });
 
         this.update();
     },
