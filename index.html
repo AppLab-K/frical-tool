@@ -13,8 +13,8 @@
     <!-- SEO強化: robots meta -->
     <meta name="robots" content="index,follow,max-image-preview:large">
     
-    <!-- セキュリティ強化: CSPの最適化 -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://adm.shinobi.jp https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://cdn.jsdelivr.net; frame-src https:;">
+    <!-- セキュリティ強化: CSPの最適化 (Chart.js用のCDNを追加) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://adm.shinobi.jp https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://cdn.jsdelivr.net; frame-src https:;">
     
     <title>フリーランス源泉徴収・手取り計算ツール【インボイス対応】 | フリカル</title>
     <meta name="description" content="フリーランス専用の源泉徴収・消費税・手取りを一瞬で計算できる無料ツール。インボイス制度の要件を満たした請求書PDFも登録不要で作成可能です。データは端末に保存され安全です。">
@@ -47,6 +47,13 @@
           "@type": "Answer",
           "text": "所得税法第204条第1項に基づく報酬区分（第1号、第2号、第5号）に対応しています。第1号報酬（デザイン料や原稿料など）の場合、100万円以下の部分は10.21%、100万円を超える部分は20.42%で自動計算されます。"
         }
+      }, {
+        "@type": "Question",
+        "name": "消費税の端数処理はインボイス制度に対応していますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい、対応しています。インボイス制度（適格請求書等保存方式）では「1つの適格請求書につき、税率ごとに1回の端数処理を行う」ことが定められています。本ツールおよび生成されるPDFは、このルールに完全に準拠して消費税額を計算しています。"
+        }
       }]
     }
     </script>
@@ -59,6 +66,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js" integrity="sha512-H9yKwOjqNdF8q/8wF40sFj50/B0R0zZJzM8y0zZ1BqEw1s1A1e1z1e1z1e1z1e1z1e1z1e1z1e1z1g==" crossorigin="anonymous" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
     
     <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -144,7 +152,7 @@ button, select, input, textarea { min-height: 44px; font-family: inherit; }
 
 .button-group { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
 .button-group-share { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px; }
-button { padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background-color 0.2s, opacity 0.2s; }
+button { padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background-color 0.2s, opacity 0.2s, color 0.2s; }
 button:hover { background: var(--primary-dark); }
 button:disabled { opacity: 0.5; cursor: not-allowed; background: var(--text-muted); }
 .btn-success { background: var(--success); }
@@ -163,8 +171,8 @@ button:disabled { opacity: 0.5; cursor: not-allowed; background: var(--text-mute
 .summary-box { flex: 1; background: var(--primary-light); color: var(--primary-dark); padding: 16px; border-radius: 8px; text-align: center; border: 1px solid var(--primary); }
 .summary-box .label { font-size: 12px; font-weight: 700; margin-bottom: 4px; opacity: 0.8; }
 .summary-box .value { font-size: 24px; font-weight: 900; }
-.client-summary { margin-bottom: 20px; font-size: 13px; background: var(--bg-history); padding: 16px; border-radius: 8px; max-height: 180px; overflow-y: auto; border: 1px solid var(--border-main); }
-.client-summary-item { display: flex; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid var(--border-input); padding-bottom: 8px; }
+.client-summary { margin-bottom: 20px; font-size: 13px; background: var(--bg-history); padding: 16px; border-radius: 8px; max-height: 250px; overflow-y: auto; border: 1px solid var(--border-main); }
+.client-summary-item { display: flex; flex-direction: column; margin-bottom: 12px; border-bottom: 1px solid var(--border-input); padding-bottom: 12px; }
 .client-summary-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 
 .history-filters { display: flex; gap: 8px; margin-bottom: 16px; }
@@ -249,6 +257,8 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
                 <!-- UX改善: inputmode="numeric" でスマホの数値キーボードを表示 -->
                 <input id="main-input" type="text" inputmode="numeric" autocomplete="off" placeholder="0" aria-labelledby="input-label">
             </div>
+            <!-- バリデーション強化: エラーメッセージ領域 -->
+            <div id="input-error" style="color: var(--danger); font-size: 12px; margin-top: 8px; display: none; font-weight: bold;">⚠️ 数値（または万, k, m）を入力してください</div>
         </div>
         <div class="preset-buttons">
             <button onclick="UI.preset('5万')" aria-label="5万円を入力">5万</button>
@@ -320,8 +330,9 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
         <div id="calc-formula" class="calc-formula" aria-label="計算根拠" aria-live="polite"></div>
         
         <div class="button-group">
-            <button class="btn-secondary" onclick="UI.copy('formula')">📋 計算式をコピー</button>
-            <button class="btn-secondary" onclick="UI.copy('result')">📋 結果をコピー</button>
+            <!-- コピー機能のフィードバック改善: thisを渡す -->
+            <button class="btn-secondary" onclick="UI.copy('formula', this)">📋 計算式をコピー</button>
+            <button class="btn-secondary" onclick="UI.copy('result', this)">📋 結果をコピー</button>
             <button class="btn-success" onclick="Tracker.addSale()">➕ 履歴に保存 (Ctrl+Enter)</button>
         </div>
         
@@ -379,6 +390,11 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
                 <div class="value" id="monthly-total">¥0</div>
             </div>
         </div>
+
+        <!-- 履歴の視覚化: グラフ追加 -->
+        <div style="margin-bottom: 20px;">
+            <canvas id="salesChart" style="width: 100%; max-height: 250px;"></canvas>
+        </div>
         
         <div class="history-filters">
             <select id="history-filter-year" onchange="Tracker.render()" aria-label="年で絞り込み">
@@ -394,6 +410,7 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
         </div>
         
         <h3 style="font-size: 14px; margin-bottom: 8px; color: var(--text-muted);">🏢 クライアント別売上 (表示期間)</h3>
+        <!-- 履歴機能の視覚化: プログレスバー表示領域 -->
         <div id="client-summary" class="client-summary" aria-live="polite"></div>
         
         <h3 style="font-size: 14px; margin-bottom: 8px; color: var(--text-muted);">📅 履歴リスト</h3>
@@ -418,6 +435,10 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
         <div class="faq-item">
             <button class="faq-question" role="button" aria-expanded="false" onclick="UI.toggleAccordion(this)">源泉徴収の計算はどのように行われますか？</button>
             <div class="faq-answer">所得税法第204条第1項に基づく報酬区分（第1号、第2号、第5号）に対応しています。第1号報酬（デザイン料や原稿料など）の場合、100万円以下の部分は10.21%、100万円を超える部分は20.42%で自動計算されます。</div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question" role="button" aria-expanded="false" onclick="UI.toggleAccordion(this)">消費税の端数処理はインボイス制度に対応していますか？</button>
+            <div class="faq-answer">はい、対応しています。インボイス制度（適格請求書等保存方式）では「1つの適格請求書につき、税率ごとに1回の端数処理を行う」ことが定められています。本ツールおよび生成されるPDFは、このルールに完全に準拠して消費税額を計算しています。</div>
         </div>
     </div>
 </div>
@@ -511,7 +532,7 @@ const DB = {
         });
     },
     async getAllHistory() {
-        if (!this.instance) return [];
+        if (!this.instance) return[];
         return new Promise((resolve, reject) => {
             const records =[];
             const tx = this.instance.transaction('history', 'readonly');
@@ -624,13 +645,34 @@ const UI = {
             document.documentElement.setAttribute('data-theme', next);
             localStorage.setItem('theme', next);
             document.getElementById('theme-toggle').innerText = next === 'dark' ? '☀️' : '🌙';
+            Tracker.render(); // グラフの色を更新するため
         });
+
+        // 年フィルタの初期化
+        const yearSelect = document.getElementById('history-filter-year');
+        const currentYear = new Date().getFullYear();
+        for(let i = 0; i < 5; i++) {
+            const y = currentYear - i;
+            const option = document.createElement('option');
+            option.value = y.toString();
+            option.text = y + '年';
+            yearSelect.appendChild(option);
+        }
 
         this.update();
         this.validateInvoiceForm();
     },
     handleInput(e) {
         let rawVal = e.target.value.replace(/[０-９]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0)).replace(/-/g, '');
+        
+        // バリデーション強化: 数値以外の入力に対するフィードバック
+        const errorEl = document.getElementById('input-error');
+        if (/[^\d.,万km]/i.test(rawVal) && rawVal !== '') {
+            errorEl.style.display = 'block';
+        } else {
+            errorEl.style.display = 'none';
+        }
+
         AppState.inputValue = rawVal;
         AppState.parsedValue = Calculator.parseCurrency(rawVal);
         if (!/[万km]/.test(rawVal.toLowerCase())) {
@@ -685,10 +727,26 @@ const UI = {
         const t = document.createElement("div"); t.innerText = msg; t.style = "position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.8);color:white;padding:12px 20px;border-radius:6px;z-index:10000;";
         document.body.appendChild(t); setTimeout(() => t.remove(), 2500);
     },
-    copy(type) {
+    copy(type, btn) {
         const r = AppState.results;
         const txt = type === 'formula' ? this.els.formula.innerText : `税抜: ¥${r.ex.toLocaleString()}\n消費税: ¥${r.tax.toLocaleString()}\n合計: ¥${r.total.toLocaleString()}\n源泉徴収: ¥${r.wh.toLocaleString()}\n支払額: ¥${r.net.toLocaleString()}`;
-        navigator.clipboard.writeText(txt).then(() => this.showToast("✅ コピーしました"));
+        navigator.clipboard.writeText(txt).then(() => {
+            if (btn) {
+                const originalText = btn.innerText;
+                const originalBg = btn.style.background;
+                const originalColor = btn.style.color;
+                btn.innerText = "✅ コピーしました！";
+                btn.style.background = "var(--success)";
+                btn.style.color = "white";
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = originalBg;
+                    btn.style.color = originalColor;
+                }, 2000);
+            } else {
+                this.showToast("✅ コピーしました");
+            }
+        });
     },
     shareSNS(p) {
         const r = AppState.results;
@@ -726,6 +784,7 @@ const UI = {
 };
 
 const Tracker = {
+    chart: null,
     async addSale() {
         const r = AppState.results;
         if (!r.total) return;
@@ -751,13 +810,96 @@ const Tracker = {
         document.getElementById('monthly-total').innerText = "¥" + monthly.toLocaleString();
         document.getElementById('month-badge').innerText = `今月: ¥${monthly.toLocaleString()}`;
         
+        // フィルタリング
+        const filterYear = document.getElementById('history-filter-year').value;
+        const filterMonth = document.getElementById('history-filter-month').value;
+        
+        const filtered = all.filter(r => {
+            const d = new Date(r.timestamp);
+            const yMatch = filterYear === 'all' || d.getFullYear().toString() === filterYear;
+            const mMatch = filterMonth === 'all' || (d.getMonth() + 1).toString().padStart(2, '0') === filterMonth;
+            return yMatch && mMatch;
+        });
+
+        // クライアント別売上集計 (プログレスバー付き)
+        const clientTotals = {};
+        let totalAmount = 0;
+        filtered.forEach(r => {
+            clientTotals[r.client] = (clientTotals[r.client] || 0) + r.amount;
+            totalAmount += r.amount;
+        });
+
+        const clientHtml = Object.entries(clientTotals)
+            .sort((a, b) => b[1] - a[1])
+            .map(([client, amount]) => {
+                const percent = totalAmount > 0 ? Math.round((amount / totalAmount) * 100) : 0;
+                return `
+                <div class="client-summary-item">
+                    <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 4px;">
+                        <span>${UI.sanitize(client)}</span>
+                        <strong>¥${amount.toLocaleString()}</strong>
+                    </div>
+                    <div style="width: 100%; background: var(--border-main); height: 6px; border-radius: 3px; overflow: hidden;">
+                        <div style="width: ${percent}%; background: var(--primary); height: 100%;"></div>
+                    </div>
+                </div>`;
+            }).join('');
+        document.getElementById('client-summary').innerHTML = clientHtml || '<div style="text-align:center;color:var(--text-muted);">データなし</div>';
+
         const list = document.getElementById('history-list');
-        list.innerHTML = all.length ? all.map(r => `
+        list.innerHTML = filtered.length ? filtered.map(r => `
             <div class="history-item">
                 <div><strong>${UI.sanitize(r.client)}</strong><br><small>${r.date}</small></div>
                 <div>¥${r.total.toLocaleString()} <button class="history-delete" onclick="Tracker.del('${r.id}')">削除</button></div>
             </div>
         `).join('') : '<div style="text-align:center;color:var(--text-muted);">履歴なし</div>';
+
+        this.drawChart(filtered);
+    },
+    drawChart(data) {
+        const ctx = document.getElementById('salesChart');
+        if (!ctx || typeof Chart === 'undefined') return;
+        
+        // 月別集計
+        const monthlyData = Array(12).fill(0);
+        data.forEach(r => {
+            const d = new Date(r.timestamp);
+            // フィルタが「全期間」の場合は現在の年のデータを表示
+            const targetYear = document.getElementById('history-filter-year').value === 'all' ? new Date().getFullYear() : parseInt(document.getElementById('history-filter-year').value);
+            if (d.getFullYear() === targetYear) {
+                monthlyData[d.getMonth()] += r.amount;
+            }
+        });
+
+        if (this.chart) this.chart.destroy();
+        
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const textColor = isDark ? '#cbd5e1' : '#4b5563';
+        const gridColor = isDark ? '#334155' : '#e5e7eb';
+
+        this.chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+                datasets:[{
+                    label: '税抜売上',
+                    data: monthlyData,
+                    backgroundColor: '#3b82f6',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, ticks: { color: textColor }, grid: { color: gridColor } },
+                    x: { ticks: { color: textColor }, grid: { display: false } }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
     },
     async del(id) { await DB.deleteHistory(id); this.render(); },
     async clearAll() { await DB.clearHistory(); UI.closeModal('delete-modal'); this.render(); UI.showToast("🗑️ クリアしました"); },
@@ -802,6 +944,7 @@ const PDF = {
     },
     async generate() {
         const r = AppState.results;
+        const clientName = document.getElementById('pdf-client').value.trim();
         const btn = document.getElementById('btn-pdf');
         btn.disabled = true;
         const originalText = btn.innerText;
@@ -820,18 +963,25 @@ const PDF = {
             doc.text("請求書 (INVOICE)", 105, 20, { align: 'center' });
             
             doc.setFontSize(10);
-            doc.text(`宛先: ${document.getElementById('pdf-client').value}`, 20, 40);
-            doc.text(`発行日: ${document.getElementById('pdf-date').value || new Date().toLocaleDateString('ja-JP')}`, 140, 40);
+            doc.text(`宛先: ${clientName}`, 20, 40);
+            
+            const issueDate = document.getElementById('pdf-date').value || new Date().toLocaleDateString('ja-JP');
+            doc.text(`発行日: ${issueDate}`, 140, 40);
             doc.text(`請求書番号: ${document.getElementById('pdf-no').value || '-'}`, 140, 45);
             doc.text(`登録番号: ${document.getElementById('pdf-invoice-id').value}`, 140, 50);
             
             doc.text(`発行者: ${document.getElementById('pdf-my-name').value}`, 20, 60);
             doc.text(`${document.getElementById('pdf-address').value}`, 20, 65);
 
+            // インボイス制度対応: 税率ごとの区分記載
+            const taxRateStr = Math.round(AppState.taxRate * 100) + '%';
+            
             doc.autoTable({
                 startY: 80,
                 head: [['取引内容', '金額']],
-                body: [[document.getElementById('pdf-item-name').value || '業務委託料', `¥ ${r.ex.toLocaleString()}`],['消費税', `¥ ${r.tax.toLocaleString()}`],['源泉徴収税', `¥ -${r.wh.toLocaleString()}`],['合計金額', `¥ ${r.net.toLocaleString()}`]
+                body: [[document.getElementById('pdf-item-name').value || '業務委託料', `¥ ${r.ex.toLocaleString()}`],
+                    [`${taxRateStr}対象`, `¥ ${r.ex.toLocaleString()}`],
+                    [`消費税 (${taxRateStr})`, `¥ ${r.tax.toLocaleString()}`],['源泉徴収税', `¥ -${r.wh.toLocaleString()}`],['合計金額', `¥ ${r.net.toLocaleString()}`]
                 ],
                 theme: 'grid',
                 headStyles: { fillColor:[37, 99, 235], font: 'mplus' },
@@ -847,7 +997,12 @@ const PDF = {
                 currentY += 6;
             });
 
-            doc.save(`invoice_${Date.now()}.pdf`);
+            // ファイル名の自動生成 (invoice_YYYYMMDD_顧客名.pdf)
+            const dateStr = new Date().toISOString().slice(0,10).replace(/-/g, '');
+            const safeClientName = clientName.replace(/[\\/:*?"<>|]/g, '_');
+            const fileName = `invoice_${dateStr}_${safeClientName}.pdf`;
+
+            doc.save(fileName);
             UI.showToast("✅ PDFをダウンロードしました");
         } catch (e) {
             console.error(e);
