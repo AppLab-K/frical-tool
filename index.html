@@ -13,8 +13,8 @@
     <!-- SEO強化: robots meta -->
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
     
-    <!-- セキュリティ強化: CSPの最適化 -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://adm.shinobi.jp; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://cdn.jsdelivr.net; frame-src https:;">
+    <!-- セキュリティ強化: CSPの最適化 (connect-src に fonts.gstatic.com を追加) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://adm.shinobi.jp; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; frame-src https:;">
     
     <title>フリーランス源泉徴収・手取り計算ツール【インボイス対応】 | フリカル</title>
     <meta name="description" content="フリーランス専用の源泉徴収・消費税・手取りを一瞬で計算できる無料ツール。インボイス制度の要件を満たした請求書PDFも登録不要で作成可能です。データは端末に保存され安全です。">
@@ -1016,45 +1016,41 @@ const PDF = {
 
             const taxRateStr = Math.round(AppState.taxRate * 100) + '%';
             
+            // autoTableの呼び出しを堅牢な形式に変更 (列幅計算エラーを防止)
             doc.autoTable({
                 startY: 80,
-                columns:[
-                    { header: '取引内容', dataKey: 'desc' },
-                    { header: '金額', dataKey: 'amount' }
-                ],
+                head: [['取引内容', '金額']],
                 body:[
-                    { desc: itemName, amount: `¥ ${r.ex.toLocaleString()}` },
-                    { desc: `${taxRateStr}対象`, amount: `¥ ${r.ex.toLocaleString()}` },
-                    { desc: `消費税 (${taxRateStr})`, amount: `¥ ${r.tax.toLocaleString()}` },
-                    { desc: '源泉徴収税', amount: `¥ -${r.wh.toLocaleString()}` },
-                    { desc: '合計金額', amount: `¥ ${r.net.toLocaleString()}` }
+                    [itemName, `¥ ${r.ex.toLocaleString()}`],[`${taxRateStr}対象`, `¥ ${r.ex.toLocaleString()}`],[`消費税 (${taxRateStr})`, `¥ ${r.tax.toLocaleString()}`],['源泉徴収税', `¥ -${r.wh.toLocaleString()}`],
+                    ['合計金額', `¥ ${r.net.toLocaleString()}`]
                 ],
                 theme: 'grid',
                 headStyles: { fillColor:[37, 99, 235], font: 'mplus', fontStyle: 'normal' },
                 styles: { font: 'mplus', fontStyle: 'normal' }
             });
 
-            // 安全な finalY の取得
-            const finalY = doc.lastAutoTable ? doc.lastAutoTable.finalY : 120;
+            // 安全な finalY の取得と振込先情報の描画
+            const finalY = doc.lastAutoTable ? doc.lastAutoTable.finalY : 80;
             
+            doc.setFontSize(11);
             doc.text("【振込先情報】", 20, finalY + 20);
-            const bankInfo = bankInfoText.split('\n');
-            let currentY = finalY + 30;
-            bankInfo.forEach(line => {
-                doc.text(line, 20, currentY);
-                currentY += 6;
+            
+            const bankLines = bankInfoText.split('\n');
+            bankLines.forEach((line, i) => {
+                doc.text(line, 20, finalY + 28 + (i * 6));
             });
 
             const d = new Date();
             const dateStr = d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0');
             const safeClientName = clientName.replace(/[\\/:*?"<>|]/g, '_');
-            const fileName = `invoice_${dateStr}_${safeClientName}.pdf`;
+            const fileName = invoiceNo !== '-' ? `invoice-${invoiceNo}.pdf` : `invoice_${dateStr}_${safeClientName}.pdf`;
 
             doc.save(fileName);
-            UI.showToast("✅ PDFをダウンロードしました");
+            UI.showToast("✅ PDFを作成しました");
         } catch (e) {
-            console.error(e);
-            UI.showToast("❌ PDF作成に失敗しました: " + (e.message || ""));
+            console.error("PDF Generation Error:", e);
+            const errorMsg = e.message ? e.message : String(e);
+            UI.showToast(`❌ PDF作成失敗: ${errorMsg}`);
         } finally {
             btn.disabled = false;
             btn.innerText = originalText;
