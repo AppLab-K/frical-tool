@@ -13,8 +13,8 @@
     <!-- SEO強化: robots meta -->
     <meta name="robots" content="index,follow,max-image-preview:large">
     
-    <!-- 【重要】審査用：CSPを最大限に緩めて広告ブロックを回避 -->
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; img-src * data:; frame-src *; connect-src *;">
+    <!-- セキュリティ強化: CSPの最適化 -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://adm.shinobi.jp https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://cdn.jsdelivr.net; frame-src https:;">
     
     <title>フリーランス源泉徴収・手取り計算ツール【インボイス対応】 | フリカル</title>
     <meta name="description" content="フリーランス専用の源泉徴収・消費税・手取りを一瞬で計算できる無料ツール。インボイス制度の要件を満たした請求書PDFも登録不要で作成可能です。データは端末に保存され安全です。">
@@ -28,6 +28,29 @@
     <meta property="og:image" content="https://frical-tool.applab-k0314.workers.dev/ogp.png">
     <meta name="twitter:card" content="summary_large_image">
     
+    <!-- SEO強化: 構造化データ (FAQPage) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity":[{
+        "@type": "Question",
+        "name": "インボイス制度に対応した請求書は作れますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい、作成可能です。「適格請求書 (インボイス) PDF生成」フォームにて、ご自身の「適格請求書発行事業者番号（T+13桁の数字）」と「顧客名」を入力することで、税務署の要件を満たしたインボイス対応の請求書PDFを無料でダウンロードできます。"
+        }
+      }, {
+        "@type": "Question",
+        "name": "源泉徴収の計算はどのように行われますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "所得税法第204条第1項に基づく報酬区分（第1号、第2号、第5号）に対応しています。第1号報酬（デザイン料や原稿料など）の場合、100万円以下の部分は10.21%、100万円を超える部分は20.42%で自動計算されます。"
+        }
+      }]
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap">
@@ -66,9 +89,9 @@
     --border-main: #334155; --border-input: #475569; --border-focus: #3b82f6;
 }
 html { scroll-behavior: smooth; }
-body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg-body); color: var(--text-main); line-height: 1.6; min-height: 100vh; transition: background 0.3s, color 0.3s; }
+body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg-body); color: var(--text-main); line-height: 1.6; min-height: 100vh; transition: background-color 0.3s, color 0.3s; }
 .container { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
-header { background: var(--bg-header); border-bottom: 1px solid var(--border-main); padding: 16px 0; margin-bottom: 24px; box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 100; }
+header { background: var(--bg-header); border-bottom: 1px solid var(--border-main); padding: 16px 0; margin-bottom: 24px; box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 100; transition: background-color 0.3s; }
 .header-content { max-width: 900px; margin: 0 auto; padding: 0 16px; display: flex; justify-content: space-between; align-items: center; }
 .logo { font-size: 24px; font-weight: 900; color: var(--primary); text-decoration: none; letter-spacing: -0.5px; }
 .header-actions { display: flex; gap: 12px; align-items: center; }
@@ -78,27 +101,27 @@ header { background: var(--bg-header); border-bottom: 1px solid var(--border-mai
 .alert-box { background: var(--warning); color: #fff; padding: 12px; text-align: center; font-size: 13px; font-weight: bold; margin-bottom: 24px; border-radius: 8px; box-shadow: var(--shadow-sm); }
 .info-box { background: var(--primary-light); color: var(--primary-dark); padding: 12px; font-size: 13px; margin-bottom: 24px; border-radius: 8px; border: 1px solid var(--primary); }
 
-.ad-space { background: var(--bg-btn-sec); border: 1px dashed var(--border-input); border-radius: 8px; padding: 20px; text-align: center; margin-bottom: 24px; color: var(--text-muted); font-size: 12px; min-height: 250px; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; }
+.ad-space { background: var(--bg-btn-sec); border: 1px dashed var(--border-input); border-radius: 8px; padding: 20px; text-align: center; margin-bottom: 24px; color: var(--text-muted); font-size: 12px; min-height: 250px; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; flex-shrink: 0; }
 .ad-label { display: block; font-size: 10px; margin-bottom: 8px; opacity: 0.7; }
 
-.card { background: var(--bg-card); border-radius: 12px; padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow-md); border: 1px solid var(--border-main); }
+.card { background: var(--bg-card); border-radius: 12px; padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow-md); border: 1px solid var(--border-main); transition: background-color 0.3s, border-color 0.3s; }
 .card h2 { font-size: 18px; font-weight: 700; color: var(--text-main); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
 
 button, select, input, textarea { min-height: 44px; font-family: inherit; }
 
 .mode-buttons { display: flex; gap: 8px; margin-bottom: 20px; }
-.mode-buttons button { flex: 1; padding: 10px; background: var(--bg-btn-sec); border: 2px solid var(--border-main); color: var(--text-muted); border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+.mode-buttons button { flex: 1; padding: 10px; background: var(--bg-btn-sec); border: 2px solid var(--border-main); color: var(--text-muted); border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background-color 0.2s, color 0.2s, border-color 0.2s; }
 .mode-buttons button.active { background: var(--primary); color: white; border-color: var(--primary); }
 
 .input-group { margin-bottom: 16px; }
 .input-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; }
 .input-wrapper { position: relative; display: flex; align-items: center; }
 .currency-symbol { position: absolute; left: 16px; font-size: 20px; font-weight: 700; color: var(--text-currency); }
-#main-input { width: 100%; padding: 16px 16px 16px 44px; font-size: 28px; font-weight: 900; background: var(--bg-input); color: var(--text-main); border: 2px solid var(--border-input); border-radius: 8px; transition: 0.2s; }
+#main-input { width: 100%; padding: 16px 16px 16px 44px; font-size: 28px; font-weight: 900; background: var(--bg-input); color: var(--text-main); border: 2px solid var(--border-input); border-radius: 8px; transition: border-color 0.2s, box-shadow 0.2s; }
 #main-input:focus { outline: none; border-color: var(--border-focus); box-shadow: 0 0 0 3px var(--primary-light); }
 
 .preset-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 20px; }
-.preset-buttons button { padding: 8px; background: var(--bg-btn-sec); border: 1px solid var(--border-main); color: var(--text-muted); border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.preset-buttons button { padding: 8px; background: var(--bg-btn-sec); border: 1px solid var(--border-main); color: var(--text-muted); border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; transition: background-color 0.2s; }
 
 .row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px; }
 .row-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
@@ -121,7 +144,7 @@ button, select, input, textarea { min-height: 44px; font-family: inherit; }
 
 .button-group { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
 .button-group-share { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px; }
-button { padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+button { padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background-color 0.2s, opacity 0.2s; }
 button:hover { background: var(--primary-dark); }
 button:disabled { opacity: 0.5; cursor: not-allowed; background: var(--text-muted); }
 .btn-success { background: var(--success); }
@@ -169,7 +192,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; background: var(--text-mute
 .modal-body h3 { font-size: 14px; color: var(--text-main); margin: 16px 0 8px; }
 .modal-body p { margin-bottom: 12px; }
 
-footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1px solid var(--border-main); color: var(--text-muted); font-size: 13px; background: var(--bg-header); }
+footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1px solid var(--border-main); color: var(--text-muted); font-size: 13px; background: var(--bg-header); transition: background-color 0.3s; }
 .footer-links { display: flex; justify-content: center; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
 .footer-links a { color: var(--primary); text-decoration: none; font-weight: 600; }
 .footer-links a:hover { text-decoration: underline; }
@@ -208,7 +231,6 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
     <!-- 広告枠 (上部) -->
     <div class="ad-space" aria-label="広告">
         <span class="ad-label">スポンサーリンク</span>
-        <!-- 1つ目の広告タグ -->
         <script data-cfasync="false" src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
     </div>
 
@@ -224,7 +246,8 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
             <label for="main-input" id="input-label">手取り額を入力</label>
             <div class="input-wrapper">
                 <span class="currency-symbol" aria-hidden="true">¥</span>
-                <input id="main-input" type="text" autocomplete="off" placeholder="0" aria-labelledby="input-label">
+                <!-- UX改善: inputmode="numeric" でスマホの数値キーボードを表示 -->
+                <input id="main-input" type="text" inputmode="numeric" autocomplete="off" placeholder="0" aria-labelledby="input-label">
             </div>
         </div>
         <div class="preset-buttons">
@@ -293,7 +316,7 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
             </div>
         </div>
 
-        <!-- 計算式の明示 (税務署視点対応) -->
+        <!-- 計算式の明示 -->
         <div id="calc-formula" class="calc-formula" aria-label="計算根拠" aria-live="polite"></div>
         
         <div class="button-group">
@@ -307,14 +330,14 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
             <button class="btn-line" onclick="UI.shareSNS('line')">LINEで送る</button>
         </div>
 
-        <!-- 収益最大化: 結果カードの直下に広告配置 (2つ目の広告) -->
+        <!-- 広告枠 (中間) -->
         <div class="ad-space" aria-label="広告" style="margin-top: 24px; margin-bottom: 0;">
             <span class="ad-label">スポンサーリンク</span>
             <script data-cfasync="false" src="https://adm.shinobi.jp/s/9ab754809559f2389dc09b667b1854ed"></script>
         </div>
     </div>
 
-    <!-- 請求書カード (インボイス要件完全対応) -->
+    <!-- 請求書カード -->
     <div class="card" id="invoice">
         <h2>📄 適格請求書 (インボイス) PDF生成</h2>
         <div class="info-box">
@@ -333,10 +356,9 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
         </div>
     </div>
 
-    <!-- 広告枠 (中間) -->
+    <!-- 広告枠 (中間2) -->
     <div class="ad-space" aria-label="広告">
         <span class="ad-label">スポンサーリンク</span>
-        <!-- 3つ目の広告タグ -->
         <script data-cfasync="false" src="https://adm.shinobi.jp/s/c3be82e6a0c87469e87cd32613936e7d"></script>
     </div>
 
@@ -383,19 +405,18 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
     <!-- 広告枠 (履歴下) -->
     <div class="ad-space" aria-label="広告">
         <span class="ad-label">スポンサーリンク</span>
-        <!-- 1つ目のタグを再利用 -->
         <script data-cfasync="false" src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
     </div>
 
-    <!-- FAQセクション (SEO対策兼ヘルプ) -->
+    <!-- FAQセクション -->
     <div class="card" id="faq">
         <h2>❓ よくある質問 (FAQ)</h2>
         <div class="faq-item">
-            <button class="faq-question" aria-expanded="false" onclick="UI.toggleAccordion(this)">インボイス制度に対応した請求書は作れますか？</button>
+            <button class="faq-question" role="button" aria-expanded="false" onclick="UI.toggleAccordion(this)">インボイス制度に対応した請求書は作れますか？</button>
             <div class="faq-answer">はい、作成可能です。「適格請求書 (インボイス) PDF生成」フォームにて、ご自身の「適格請求書発行事業者番号（T+13桁の数字）」と「顧客名」を入力することで、税務署の要件を満たしたインボイス対応の請求書PDFを無料でダウンロードできます。</div>
         </div>
         <div class="faq-item">
-            <button class="faq-question" aria-expanded="false" onclick="UI.toggleAccordion(this)">源泉徴収の計算はどのように行われますか？</button>
+            <button class="faq-question" role="button" aria-expanded="false" onclick="UI.toggleAccordion(this)">源泉徴収の計算はどのように行われますか？</button>
             <div class="faq-answer">所得税法第204条第1項に基づく報酬区分（第1号、第2号、第5号）に対応しています。第1号報酬（デザイン料や原稿料など）の場合、100万円以下の部分は10.21%、100万円を超える部分は20.42%で自動計算されます。</div>
         </div>
     </div>
@@ -411,7 +432,7 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
 </footer>
 
 <!-- 削除確認モーダル -->
-<div id="delete-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="delete-title">
+<div id="delete-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="delete-title" aria-hidden="true">
     <div class="modal-content">
         <h3 id="delete-title" class="modal-title" style="color: var(--danger);">⚠️ データを消去しますか？</h3>
         <div class="modal-body"><p>この操作は取り消せません。計算履歴がすべて削除されます。</p></div>
@@ -423,9 +444,9 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
 </div>
 
 <!-- 利用規約モーダル -->
-<div id="terms-modal" class="modal-overlay" role="dialog" aria-modal="true">
+<div id="terms-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-content">
-        <button class="modal-close" onclick="UI.closeModal('terms-modal')">&times;</button>
+        <button class="modal-close" onclick="UI.closeModal('terms-modal')" aria-label="閉じる">&times;</button>
         <h3 class="modal-title">利用規約・免責事項</h3>
         <div class="modal-body">
             <p>本ツール「フリカル」をご利用いただく際は、以下の事項に同意したものとみなします。</p>
@@ -438,9 +459,9 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
 </div>
 
 <!-- プライバシーポリシーモーダル -->
-<div id="privacy-modal" class="modal-overlay" role="dialog" aria-modal="true">
+<div id="privacy-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-content">
-        <button class="modal-close" onclick="UI.closeModal('privacy-modal')">&times;</button>
+        <button class="modal-close" onclick="UI.closeModal('privacy-modal')" aria-label="閉じる">&times;</button>
         <h3 class="modal-title">プライバシーポリシー</h3>
         <div class="modal-body">
             <h3>1. 広告の配信について</h3>
@@ -458,7 +479,7 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
 const DB = {
     name: 'furical_db', version: 3, instance: null,
     init() {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             const req = indexedDB.open(this.name, this.version);
             req.onupgradeneeded = (e) => {
                 const db = e.target.result;
@@ -468,35 +489,59 @@ const DB = {
                     histStore.createIndex('timestamp', 'timestamp', { unique: false });
                 }
             };
-            req.onsuccess = async (e) => { this.instance = e.target.result; resolve(); };
-            req.onerror = () => { UI.showToast("⚠️ データベースエラー"); resolve(); };
+            req.onsuccess = (e) => { 
+                this.instance = e.target.result; 
+                // 別タブでのDB更新を検知して安全に閉じる
+                this.instance.onversionchange = () => {
+                    this.instance.close();
+                    UI.showToast("⚠️ データベースが更新されました。ページをリロードしてください。");
+                };
+                resolve(); 
+            };
+            req.onerror = () => { UI.showToast("⚠️ データベースエラー"); reject(); };
         });
     },
     async addHistory(record) {
         if (!this.instance) return;
-        const tx = this.instance.transaction('history', 'readwrite');
-        tx.objectStore('history').put(record);
+        return new Promise((resolve, reject) => {
+            const tx = this.instance.transaction('history', 'readwrite');
+            tx.oncomplete = () => resolve();
+            tx.onerror = () => reject(tx.error);
+            tx.objectStore('history').put(record);
+        });
     },
     async getAllHistory() {
-        if (!this.instance) return[];
-        return new Promise((resolve) => {
+        if (!this.instance) return [];
+        return new Promise((resolve, reject) => {
             const records =[];
-            const index = this.instance.transaction('history', 'readonly').objectStore('history').index('timestamp');
+            const tx = this.instance.transaction('history', 'readonly');
+            const index = tx.objectStore('history').index('timestamp');
             const req = index.openCursor(null, 'prev');
             req.onsuccess = (e) => {
                 const cursor = e.target.result;
                 if (cursor) { records.push(cursor.value); cursor.continue(); }
                 else resolve(records);
             };
+            req.onerror = () => reject(req.error);
         });
     },
     async deleteHistory(id) {
-        const tx = this.instance.transaction('history', 'readwrite');
-        tx.objectStore('history').delete(id);
+        if (!this.instance) return;
+        return new Promise((resolve, reject) => {
+            const tx = this.instance.transaction('history', 'readwrite');
+            tx.oncomplete = () => resolve();
+            tx.onerror = () => reject(tx.error);
+            tx.objectStore('history').delete(id);
+        });
     },
     async clearHistory() {
-        const tx = this.instance.transaction('history', 'readwrite');
-        tx.objectStore('history').clear();
+        if (!this.instance) return;
+        return new Promise((resolve, reject) => {
+            const tx = this.instance.transaction('history', 'readwrite');
+            tx.oncomplete = () => resolve();
+            tx.onerror = () => reject(tx.error);
+            tx.objectStore('history').clear();
+        });
     }
 };
 
@@ -559,6 +604,8 @@ const UI = {
         ex: document.getElementById("res-ex"), taxRes: document.getElementById("res-tax"), wh: document.getElementById("res-wh"),
         total: document.getElementById("res-total"), net: document.getElementById("res-net")
     },
+    _escListener: null,
+    _currentModalId: null,
     init() {
         this.els.input.addEventListener('input', (e) => this.handleInput(e));
         this.els.tax.addEventListener('change', (e) => { AppState.taxRate = Number(e.target.value); this.update(); });
@@ -580,6 +627,7 @@ const UI = {
         });
 
         this.update();
+        this.validateInvoiceForm();
     },
     handleInput(e) {
         let rawVal = e.target.value.replace(/[０-９]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0)).replace(/-/g, '');
@@ -593,7 +641,11 @@ const UI = {
     },
     setMode(m) {
         AppState.mode = m;
-        document.querySelectorAll(".mode-buttons button").forEach(b => b.classList.toggle('active', b.id === 'tab-' + m));
+        document.querySelectorAll(".mode-buttons button").forEach(b => {
+            const isActive = b.id === 'tab-' + m;
+            b.classList.toggle('active', isActive);
+            b.setAttribute('aria-selected', isActive);
+        });
         document.getElementById('input-label').innerText = { net: '手取り額を入力', ex: '税抜金額を入力', in: '税込金額を入力' }[m];
         this.update();
     },
@@ -619,7 +671,6 @@ const UI = {
         } else { formula += `源泉徴収額：なし\n`; }
         formula += `支払額：${r.ex.toLocaleString()} + ${r.tax.toLocaleString()} − ${r.wh.toLocaleString()} = ${r.net.toLocaleString()}円`;
         this.els.formula.innerText = formula;
-        this.validateInvoiceForm();
     },
     validateInvoiceForm() {
         const tNum = document.getElementById('pdf-invoice-id').value.trim();
@@ -647,8 +698,31 @@ const UI = {
         window.open(link, '_blank', 'width=600,height=400');
     },
     toggleAccordion(btn) { btn.setAttribute('aria-expanded', btn.getAttribute('aria-expanded') === 'false'); },
-    openModal(id) { document.getElementById(id).classList.add('active'); },
-    closeModal(id) { document.getElementById(id).classList.remove('active'); }
+    openModal(id) { 
+        const modal = document.getElementById(id);
+        modal.classList.add('active'); 
+        modal.setAttribute('aria-hidden', 'false');
+        
+        // アクセシビリティ: モーダル内の最初のフォーカス可能要素にフォーカス
+        const focusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        if (focusable) focusable.focus();
+        
+        // Escキーで閉じる
+        this._currentModalId = id;
+        this._escListener = (e) => {
+            if (e.key === 'Escape') this.closeModal(this._currentModalId);
+        };
+        document.addEventListener('keydown', this._escListener);
+    },
+    closeModal(id) { 
+        const modal = document.getElementById(id);
+        modal.classList.remove('active'); 
+        modal.setAttribute('aria-hidden', 'true');
+        if (this._escListener) {
+            document.removeEventListener('keydown', this._escListener);
+            this._escListener = null;
+        }
+    }
 };
 
 const Tracker = {
@@ -706,7 +780,6 @@ const PDF = {
                     resolve(e.target.result.base64);
                 } else {
                     try {
-                        // CDNから日本語フォント(M+フォント)をフェッチ
                         const res = await fetch('https://cdn.jsdelivr.net/npm/font-source-mplus@1.0.0/fonts/mplus-1p-regular.ttf');
                         const buffer = await res.arrayBuffer();
                         const bytes = new Uint8Array(buffer);
@@ -716,7 +789,6 @@ const PDF = {
                         }
                         const base64 = window.btoa(binary);
                         
-                        // IndexedDBにキャッシュして次回以降高速化
                         const txW = DB.instance.transaction('fonts', 'readwrite');
                         txW.objectStore('fonts').put({ id: 'mplus', base64: base64 });
                         resolve(base64);
@@ -739,7 +811,6 @@ const PDF = {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             
-            // 日本語フォントの読み込みと適用
             const fontBase64 = await this.getFont();
             doc.addFileToVFS('mplus.ttf', fontBase64);
             doc.addFont('mplus.ttf', 'mplus', 'normal');
@@ -760,8 +831,7 @@ const PDF = {
             doc.autoTable({
                 startY: 80,
                 head: [['取引内容', '金額']],
-                body: [[document.getElementById('pdf-item-name').value || '業務委託料', `¥ ${r.ex.toLocaleString()}`],['消費税', `¥ ${r.tax.toLocaleString()}`],['源泉徴収税', `¥ -${r.wh.toLocaleString()}`],
-                    ['合計金額', `¥ ${r.net.toLocaleString()}`]
+                body: [[document.getElementById('pdf-item-name').value || '業務委託料', `¥ ${r.ex.toLocaleString()}`],['消費税', `¥ ${r.tax.toLocaleString()}`],['源泉徴収税', `¥ -${r.wh.toLocaleString()}`],['合計金額', `¥ ${r.net.toLocaleString()}`]
                 ],
                 theme: 'grid',
                 headStyles: { fillColor:[37, 99, 235], font: 'mplus' },
@@ -790,11 +860,11 @@ const PDF = {
     }
 };
 
-window.onload = async () => {
+document.addEventListener("DOMContentLoaded", async () => {
     await DB.init();
     UI.init();
     Tracker.render();
-};
+});
 </script>
 </body>
 </html>
