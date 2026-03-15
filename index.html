@@ -10,7 +10,7 @@
     <!-- SEO強化: Canonicalタグ -->
     <link rel="canonical" href="https://frical-tool.applab-k0314.workers.dev/">
     
-    <!-- SEO強化: robots meta (スニペット・ビデオプレビュー制限追加) -->
+    <!-- SEO強化: robots meta -->
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
     
     <!-- セキュリティ強化: CSPの最適化 -->
@@ -30,13 +30,13 @@
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     
-    <!-- パフォーマンス向上: preconnect & dns-prefetch -->
+    <!-- パフォーマンス向上 -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- SEO強化: 構造化データ (FAQPage & WebApplication) -->
+    <!-- SEO強化: 構造化データ -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -80,10 +80,10 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap" media="print" onload="this.media='all'">
     
-    <!-- スクリプト読み込み順の最適化 (DOMPurify -> jsPDF -> autoTable -> Chart.js) -->
+    <!-- スクリプト読み込み順の最適化とバージョン更新 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js" integrity="sha512-H9yKwOjqNdF8q/8wF40sFj50/B0R0zZJzM8y0zZ1BqEw1s1A1e1z1e1z1e1z1e1z1e1z1e1z1g==" crossorigin="anonymous" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
     
     <style>
@@ -272,7 +272,6 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
             <label for="main-input" id="input-label">手取り額を入力</label>
             <div class="input-wrapper">
                 <span class="currency-symbol" aria-hidden="true">¥</span>
-                <!-- UX改善: patternとenterkeyhintを追加 -->
                 <input id="main-input" type="text" inputmode="numeric" pattern="[0-9]*" enterkeyhint="done" autocomplete="off" placeholder="0" aria-labelledby="input-label">
             </div>
             <div id="input-error" style="color: var(--danger); font-size: 12px; margin-top: 8px; display: none; font-weight: bold;">⚠️ 数値（または万, k, m）を入力してください</div>
@@ -546,7 +545,7 @@ const DB = {
         });
     },
     async getAllHistory() {
-        if (!this.instance) return [];
+        if (!this.instance) return[];
         return new Promise((resolve, reject) => {
             const records =[];
             const tx = this.instance.transaction('history', 'readonly');
@@ -930,12 +929,12 @@ const PDF = {
             const tx = DB.instance.transaction('fonts', 'readonly');
             const req = tx.objectStore('fonts').get('mplus');
             req.onsuccess = async (e) => {
-                if (e.target.result) {
+                if (e.target.result && e.target.result.base64) {
                     resolve(e.target.result.base64);
                 } else {
                     try {
-                        // PDF生成の安定化: ローカル配置のフォントを読み込む
-                        const res = await fetch('/assets/fonts/mplus.ttf');
+                        // 確実に存在するCDNからフォントを取得 (404エラー防止)
+                        const res = await fetch('https://cdn.jsdelivr.net/gh/rayshan/mplus-fonts@master/mplus-1p-regular.ttf');
                         if (!res.ok) throw new Error("フォントファイルの読み込みに失敗しました");
                         
                         const buffer = await res.arrayBuffer();
@@ -959,7 +958,6 @@ const PDF = {
         });
     },
     async generate() {
-        // jsPDFの読み込みチェック
         if (typeof window.jspdf === 'undefined') {
             UI.showToast("⏳ PDFライブラリを読み込み中です。少し待ってから再度お試しください。");
             return;
@@ -982,12 +980,13 @@ const PDF = {
         
         try {
             const { jsPDF } = window.jspdf;
+            window.jsPDF = jsPDF; // jspdf-autotable のためにグローバルに設定
             const doc = new jsPDF();
             
             const fontBase64 = await this.getFont();
             doc.addFileToVFS('mplus.ttf', fontBase64);
             doc.addFont('mplus.ttf', 'mplus', 'normal');
-            doc.setFont('mplus');
+            doc.setFont('mplus', 'normal');
             
             doc.setFontSize(20);
             doc.text("請求書 (INVOICE)", 105, 20, { align: 'center' });
@@ -1004,14 +1003,23 @@ const PDF = {
 
             const taxRateStr = Math.round(AppState.taxRate * 100) + '%';
             
+            // autoTableの呼び出しを堅牢な形式に変更 (列幅計算エラーを防止)
             doc.autoTable({
                 startY: 80,
-                head: [['取引内容', '金額']],
-                body: [[itemName, `¥ ${r.ex.toLocaleString()}`],[`${taxRateStr}対象`, `¥ ${r.ex.toLocaleString()}`],[`消費税 (${taxRateStr})`, `¥ ${r.tax.toLocaleString()}`],['源泉徴収税', `¥ -${r.wh.toLocaleString()}`],['合計金額', `¥ ${r.net.toLocaleString()}`]
+                columns:[
+                    { header: '取引内容', dataKey: 'desc' },
+                    { header: '金額', dataKey: 'amount' }
+                ],
+                body:[
+                    { desc: itemName, amount: `¥ ${r.ex.toLocaleString()}` },
+                    { desc: `${taxRateStr}対象`, amount: `¥ ${r.ex.toLocaleString()}` },
+                    { desc: `消費税 (${taxRateStr})`, amount: `¥ ${r.tax.toLocaleString()}` },
+                    { desc: '源泉徴収税', amount: `¥ -${r.wh.toLocaleString()}` },
+                    { desc: '合計金額', amount: `¥ ${r.net.toLocaleString()}` }
                 ],
                 theme: 'grid',
-                headStyles: { fillColor:[37, 99, 235], font: 'mplus' },
-                styles: { font: 'mplus' }
+                headStyles: { fillColor: [37, 99, 235], font: 'mplus', fontStyle: 'normal' },
+                styles: { font: 'mplus', fontStyle: 'normal' }
             });
 
             const finalY = doc.lastAutoTable.finalY || 120;
