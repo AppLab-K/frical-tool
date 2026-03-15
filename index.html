@@ -80,10 +80,10 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap" media="print" onload="this.media='all'">
     
-    <!-- スクリプト読み込み順の最適化とバージョン更新 -->
+    <!-- スクリプト読み込み順の最適化 (PDFライブラリはdeferを外し確実に読み込む) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js" integrity="sha512-H9yKwOjqNdF8q/8wF40sFj50/B0R0zZJzM8y0zZ1BqEw1s1A1e1z1e1z1e1z1e1z1e1z1e1z1g==" crossorigin="anonymous" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
     
     <style>
@@ -933,8 +933,14 @@ const PDF = {
                     resolve(e.target.result.base64);
                 } else {
                     try {
-                        // 確実に存在するCDNからフォントを取得 (404エラー防止)
-                        const res = await fetch('https://cdn.jsdelivr.net/gh/rayshan/mplus-fonts@master/mplus-1p-regular.ttf');
+                        // 1. まずローカル配置のフォントを試す (CDN依存ゼロ)
+                        let res = await fetch('/fonts/mplus.ttf').catch(() => null);
+                        
+                        // 2. ローカルに無い場合は、安全なGoogle FontsのCDNから取得
+                        if (!res || !res.ok) {
+                            res = await fetch('https://cdn.jsdelivr.net/gh/google/fonts/ofl/mplus1p/MPLUS1p-Regular.ttf');
+                        }
+                        
                         if (!res.ok) throw new Error("フォントファイルの読み込みに失敗しました");
                         
                         const buffer = await res.arrayBuffer();
@@ -958,8 +964,13 @@ const PDF = {
         });
     },
     async generate() {
-        if (typeof window.jspdf === 'undefined') {
-            UI.showToast("⏳ PDFライブラリを読み込み中です。少し待ってから再度お試しください。");
+        // 1. ライブラリの読み込みチェック (安全対策)
+        if (!window.jspdf || !window.jspdf.jsPDF) {
+            UI.showToast("❌ PDFライブラリが読み込まれていません。ページをリロードしてください。");
+            return;
+        }
+        if (typeof window.jspdf.jsPDF.API.autoTable !== "function") {
+            UI.showToast("❌ 表作成ライブラリ(autoTable)が読み込まれていません。");
             return;
         }
 
@@ -978,9 +989,11 @@ const PDF = {
         const originalText = btn.innerText;
         btn.innerText = "⏳ PDF生成中...";
         
+        // UIフリーズを軽減するため、少し遅延させてから重い処理を開始
+        await new Promise(resolve => setTimeout(resolve, 50));
+        
         try {
             const { jsPDF } = window.jspdf;
-            window.jsPDF = jsPDF; // jspdf-autotable のためにグローバルに設定
             const doc = new jsPDF();
             
             const fontBase64 = await this.getFont();
@@ -1003,7 +1016,6 @@ const PDF = {
 
             const taxRateStr = Math.round(AppState.taxRate * 100) + '%';
             
-            // autoTableの呼び出しを堅牢な形式に変更 (列幅計算エラーを防止)
             doc.autoTable({
                 startY: 80,
                 columns:[
@@ -1018,11 +1030,13 @@ const PDF = {
                     { desc: '合計金額', amount: `¥ ${r.net.toLocaleString()}` }
                 ],
                 theme: 'grid',
-                headStyles: { fillColor: [37, 99, 235], font: 'mplus', fontStyle: 'normal' },
+                headStyles: { fillColor:[37, 99, 235], font: 'mplus', fontStyle: 'normal' },
                 styles: { font: 'mplus', fontStyle: 'normal' }
             });
 
-            const finalY = doc.lastAutoTable.finalY || 120;
+            // 安全な finalY の取得
+            const finalY = doc.lastAutoTable ? doc.lastAutoTable.finalY : 120;
+            
             doc.text("【振込先情報】", 20, finalY + 20);
             const bankInfo = bankInfoText.split('\n');
             let currentY = finalY + 30;
