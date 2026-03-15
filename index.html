@@ -6,26 +6,14 @@
     <meta name="theme-color" content="#2563eb">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     
-    <!-- SEO強化 -->
+    <!-- SEO設定 -->
     <link rel="canonical" href="https://frical-tool.applab-k0314.workers.dev/">
     <meta name="robots" content="index,follow">
     <title>フリーランス源泉徴収・手取り計算ツール【インボイス対応】 | フリカル</title>
-    <meta name="description" content="フリーランス専用の源泉徴収・消費税・手取りを一瞬で計算。インボイス対応の請求書PDFも作成可能。">
+    <meta name="description" content="フリーランス専用の源泉徴収・消費税・手取りを一瞬で計算。インボイス対応の請求書PDFも登録不要で作成可能です。データは端末に保存され安全です。">
     
-    <!-- CSP設定: 広告とフォント取得を許可しつつ保護 -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.googletagmanager.com https://*.shinobi.jp https://*.admax.ninja; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://raw.githubusercontent.com https://fonts.googleapis.com https://fonts.gstatic.com; frame-src https://*.shinobi.jp https://*.admax.ninja; object-src 'none';">
-
-    <!-- JSON-LD (SEO) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "フリカル",
-      "description": "フリーランス向け税金計算・請求書作成ツール",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "Any"
-    }
-    </script>
+    <!-- CSP設定: 広告・フォント・ライブラリを許可 -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.shinobi.jp https://*.admax.ninja; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://raw.githubusercontent.com https://fonts.googleapis.com https://fonts.gstatic.com; frame-src https://*.shinobi.jp https://*.admax.ninja; object-src 'none';">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,57 +36,57 @@
             --text-muted: #cbd5e1; --border-main: #334155; --primary-light: rgba(37, 99, 235, 0.1);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg-body); color: var(--text-main); line-height: 1.6; transition: 0.3s; }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg-body); color: var(--text-main); line-height: 1.6; transition: 0.3s; min-height: 100vh; }
+        .container { max-width: 850px; margin: 0 auto; padding: 20px; }
         
-        header { background: var(--bg-card); border-bottom: 1px solid var(--border-main); padding: 15px 0; position: sticky; top: 0; z-index: 100; }
-        .header-flex { display: flex; justify-content: space-between; align-items: center; max-width: 800px; margin: 0 auto; padding: 0 20px; }
-        .logo { font-size: 22px; font-weight: 900; color: var(--primary); text-decoration: none; }
+        header { background: var(--bg-card); border-bottom: 1px solid var(--border-main); padding: 15px 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .header-flex { display: flex; justify-content: space-between; align-items: center; max-width: 850px; margin: 0 auto; padding: 0 20px; }
+        .logo { font-size: 24px; font-weight: 900; color: var(--primary); text-decoration: none; letter-spacing: -1px; }
 
-        .card { background: var(--bg-card); border-radius: 12px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border-main); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        h2 { font-size: 18px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .card { background: var(--bg-card); border-radius: 16px; padding: 24px; margin-bottom: 24px; border: 1px solid var(--border-main); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        h2 { font-size: 18px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
 
-        /* 共通ボタン・入力 */
-        .btn-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-bottom: 20px; }
-        button { padding: 12px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 14px; }
+        .btn-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin-bottom: 20px; }
+        button { padding: 12px; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; transition: 0.2s; font-size: 14px; }
         .btn-pri { background: var(--primary); color: white; }
-        .btn-sec { background: var(--primary-light); color: var(--primary); }
+        .btn-sec { background: var(--bg-body); color: var(--text-main); border: 1px solid var(--border-main); }
         .btn-success { background: var(--success); color: white; }
+        button.active { background: var(--primary); color: white; border-color: var(--primary); }
         button:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        input, select, textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-main); background: var(--bg-card); color: var(--text-main); font-size: 16px; }
+        input, select, textarea { width: 100%; padding: 14px; border-radius: 10px; border: 2px solid var(--border-main); background: var(--bg-card); color: var(--text-main); font-size: 16px; transition: 0.2s; }
+        input:focus { border-color: var(--primary); outline: none; }
         .main-input-wrap { position: relative; margin-bottom: 20px; }
-        .main-input-wrap span { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); font-weight: bold; color: var(--text-muted); }
-        #main-input { padding-left: 35px; font-size: 32px; font-weight: 900; }
+        .main-input-wrap span { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); font-weight: 900; color: var(--text-muted); font-size: 24px; }
+        #main-input { padding-left: 45px; font-size: 36px; font-weight: 900; }
 
-        /* 広告枠 */
-        .ad-space { background: var(--primary-light); border: 1px dashed var(--primary); border-radius: 8px; padding: 10px; text-align: center; margin: 20px 0; min-height: 250px; display: flex; flex-direction: column; justify-content: center; }
-        .ad-label { font-size: 10px; color: var(--text-muted); margin-bottom: 5px; }
+        .ad-space { background: var(--bg-body); border: 1px dashed var(--border-main); border-radius: 12px; padding: 15px; text-align: center; margin: 24px 0; min-height: 280px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .ad-label { font-size: 10px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* 結果表示 */
-        .res-card { background: var(--primary-light); border: 2px solid var(--primary); border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 20px; }
-        .res-total { font-size: 36px; font-weight: 900; color: var(--primary); }
-        .res-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; text-align: left; }
-        .res-item label { font-size: 12px; color: var(--text-muted); }
-        .res-item div { font-weight: 700; font-size: 18px; }
+        .res-card { background: var(--primary-light); border: 2px solid var(--primary); border-radius: 16px; padding: 24px; text-align: center; margin-bottom: 20px; }
+        .res-total { font-size: 48px; font-weight: 900; color: var(--primary); line-height: 1.2; }
+        .res-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px; text-align: left; }
+        .res-item label { font-size: 12px; font-weight: 700; color: var(--text-muted); }
+        .res-item div { font-weight: 900; font-size: 20px; }
 
-        .formula { background: #f1f5f9; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 13px; white-space: pre-wrap; margin-bottom: 20px; color: #475569; }
-        [data-theme="dark"] .formula { background: #0f172a; color: #cbd5e1; }
+        .formula { background: var(--bg-body); padding: 15px; border-radius: 10px; font-family: 'Courier New', monospace; font-size: 13px; white-space: pre-wrap; margin-bottom: 20px; border-left: 4px solid var(--primary); }
 
-        /* FAQ */
-        .faq-item { border: 1px solid var(--border-main); border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
-        .faq-q { width: 100%; padding: 15px; text-align: left; background: var(--bg-card); border: none; font-weight: bold; display: flex; justify-content: space-between; color: var(--text-main); }
-        .faq-a { padding: 0 15px; max-height: 0; overflow: hidden; transition: 0.3s; font-size: 14px; color: var(--text-muted); }
-        .faq-item.open .faq-a { padding: 15px; max-height: 200px; }
+        .faq-item { border: 1px solid var(--border-main); border-radius: 10px; margin-bottom: 12px; }
+        .faq-q { width: 100%; padding: 16px; text-align: left; background: none; border: none; font-weight: 700; display: flex; justify-content: space-between; color: var(--text-main); }
+        .faq-a { padding: 0 16px; max-height: 0; overflow: hidden; transition: 0.3s ease-out; font-size: 14px; color: var(--text-muted); }
+        .faq-item.open .faq-a { padding-bottom: 16px; max-height: 300px; }
 
-        /* モーダル */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+        .history-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid var(--border-main); }
+        .history-item:last-child { border-bottom: none; }
+
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
         .modal.open { display: flex; }
-        .modal-content { background: var(--bg-card); padding: 24px; border-radius: 12px; max-width: 500px; width: 90%; }
+        .modal-content { background: var(--bg-card); padding: 32px; border-radius: 20px; max-width: 550px; width: 90%; position: relative; }
 
         @media (max-width: 600px) {
             .res-grid { grid-template-columns: 1fr; }
-            #main-input { font-size: 24px; }
+            #main-input { font-size: 28px; }
+            .res-total { font-size: 36px; }
         }
     </style>
 </head>
@@ -107,15 +95,16 @@
 <header>
     <div class="header-flex">
         <a href="/" class="logo">フリカル</a>
-        <button id="theme-toggle" aria-label="テーマ切り替え" style="background:none; font-size:20px;">🌙</button>
+        <button id="theme-toggle" aria-label="テーマ切り替え" style="background:none; font-size:22px; border:none; cursor:pointer;">🌙</button>
     </div>
 </header>
 
 <div class="container">
+    <!-- 計算フォーム -->
     <div class="card">
-        <h2>💰 報酬計算</h2>
+        <h2>💰 報酬計算フォーム</h2>
         <div class="btn-group" role="tablist">
-            <button class="btn-pri" id="tab-net" onclick="UI.setMode('net')">手取りから</button>
+            <button class="btn-sec active" id="tab-net" onclick="UI.setMode('net')">手取りから</button>
             <button class="btn-sec" id="tab-ex" onclick="UI.setMode('ex')">税抜から</button>
             <button class="btn-sec" id="tab-in" onclick="UI.setMode('in')">税込から</button>
         </div>
@@ -134,15 +123,15 @@
 
         <div class="res-grid" style="margin-bottom: 20px;">
             <div>
-                <label>消費税率</label>
+                <label style="font-size:12px; font-weight:bold;">消費税率</label>
                 <select id="tax-rate">
-                    <option value="0.1">10% (標準)</option>
-                    <option value="0.08">8% (軽減)</option>
+                    <option value="0.1">10% (標準税率)</option>
+                    <option value="0.08">8% (軽減税率)</option>
                     <option value="0">0% (非課税)</option>
                 </select>
             </div>
             <div>
-                <label>端数処理</label>
+                <label style="font-size:12px; font-weight:bold;">端数処理</label>
                 <select id="tax-round">
                     <option value="floor">切捨て</option>
                     <option value="round">四捨五入</option>
@@ -151,28 +140,29 @@
             </div>
         </div>
 
-        <label style="display:flex; align-items:center; gap:8px; font-weight:bold; margin-bottom:10px;">
-            <input type="checkbox" id="wh-check" checked style="width:auto;"> 源泉徴収を行う
+        <label style="display:flex; align-items:center; gap:10px; font-weight:bold; cursor:pointer; margin-bottom:15px;">
+            <input type="checkbox" id="wh-check" checked style="width:20px; height:20px;"> 源泉徴収を行う
         </label>
 
         <div id="wh-config">
-            <label style="font-size:12px; color:var(--text-muted);">報酬区分</label>
+            <label style="font-size:12px; color:var(--text-muted); font-weight:bold;">報酬区分 (所得税法第204条)</label>
             <select id="wh-cat">
-                <option value="1">第1号 (原稿・デザイン・講演等)</option>
+                <option value="1">第1号 (原稿・デザイン・講演・IT開発等)</option>
                 <option value="2">第2号 (弁護士・税理士等) ※1万円控除</option>
                 <option value="5">第5号 (広告宣伝・出演等) ※5万円控除</option>
             </select>
         </div>
     </div>
 
-    <div class="res-card">
-        <label style="font-size:12px; font-weight:bold;">請求金額 (税込)</label>
+    <!-- 結果表示 -->
+    <div class="res-card" aria-live="polite">
+        <label style="font-size:14px; font-weight:bold; color:var(--text-muted);">請求金額 (税込)</label>
         <div class="res-total" id="out-total">¥0</div>
         <div class="res-grid">
-            <div class="res-item"><label>税抜報酬</label><div id="out-ex">¥0</div></div>
-            <div class="res-item"><label>消費税</label><div id="out-tax">¥0</div></div>
-            <div class="res-item"><label>源泉徴収</label><div id="out-wh" style="color:var(--danger);">¥0</div></div>
-            <div class="res-item"><label>手取り額</label><div id="out-net" style="color:var(--success);">¥0</div></div>
+            <div class="res-item"><label>税抜報酬額</label><div id="out-ex">¥0</div></div>
+            <div class="res-item"><label>消費税額</label><div id="out-tax">¥0</div></div>
+            <div class="res-item"><label>源泉徴収額</label><div id="out-wh" style="color:var(--danger);">¥0</div></div>
+            <div class="res-item"><label>差引支払額 (手取り)</label><div id="out-net" style="color:var(--success);">¥0</div></div>
         </div>
     </div>
 
@@ -180,60 +170,87 @@
 
     <div class="btn-group">
         <button class="btn-success" onclick="Tracker.save()">💾 履歴に保存</button>
-        <button class="btn-sec" onclick="UI.copyResult()">📋 結果をコピー</button>
+        <button class="btn-pri" onclick="UI.copyResult()">📋 結果をコピー</button>
     </div>
 
-    <!-- 広告枠1 -->
+    <!-- 広告枠1 (上部) -->
     <div class="ad-space">
         <span class="ad-label">スポンサーリンク</span>
         <script data-cfasync="false" src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
     </div>
 
+    <!-- PDF作成 -->
     <div class="card">
-        <h2>📄 インボイス対応PDF作成</h2>
+        <h2>📄 インボイス対応請求書PDF</h2>
         <div class="res-grid">
-            <input id="pdf-client" type="text" placeholder="顧客名 (必須)" aria-required="true">
-            <input id="pdf-number" type="text" placeholder="登録番号 T123..." maxlength="14">
+            <div>
+                <label style="font-size:12px; font-weight:bold;">顧客名</label>
+                <input id="pdf-client" type="text" placeholder="株式会社〇〇 御中">
+            </div>
+            <div>
+                <label style="font-size:12px; font-weight:bold;">適格請求書発行事業者番号</label>
+                <input id="pdf-number" type="text" placeholder="T1234567890123" maxlength="14">
+            </div>
         </div>
-        <textarea id="pdf-note" placeholder="備考・振込先など" style="margin-top:10px; height:80px;"></textarea>
-        <button class="btn-pri" id="btn-pdf" onclick="PDF.generate()" style="width:100%; margin-top:15px;" disabled>PDFを出力 (日本語対応)</button>
+        <div style="margin-top:15px;">
+            <label style="font-size:12px; font-weight:bold;">備考・振込先情報</label>
+            <textarea id="pdf-note" placeholder="振込先：〇〇銀行 〇〇支店 普通 1234567" style="height:80px;"></textarea>
+        </div>
+        <button class="btn-pri" id="btn-pdf" onclick="PDF.generate()" style="width:100%; margin-top:20px;" disabled>日本語PDFを出力</button>
     </div>
 
-    <!-- 広告枠2 -->
+    <!-- 広告枠2 (中間) -->
     <div class="ad-space">
         <span class="ad-label">スポンサーリンク</span>
         <script data-cfasync="false" src="https://adm.shinobi.jp/s/9ab754809559f2389dc09b667b1854ed"></script>
     </div>
 
+    <!-- 履歴 -->
     <div class="card">
-        <h2>📝 売上履歴</h2>
-        <div id="history-list" style="max-height:300px; overflow-y:auto; font-size:14px;"></div>
-        <button class="btn-sec" onclick="Tracker.clear()" style="width:100%; margin-top:10px;">履歴を全削除</button>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+            <h2 style="margin:0;">📝 売上履歴</h2>
+            <button class="btn-sec" onclick="Tracker.exportCSV()" style="padding:5px 10px; font-size:12px;">CSV出力</button>
+        </div>
+        <div id="history-list" style="max-height:300px; overflow-y:auto; border:1px solid var(--border-main); border-radius:10px;">
+            <div style="padding:20px; text-align:center; color:var(--text-muted);">履歴はありません</div>
+        </div>
+        <button class="btn-sec" onclick="Tracker.clear()" style="width:100%; margin-top:15px; color:var(--danger);">履歴を全削除</button>
     </div>
 
+    <!-- 広告枠3 (下部) -->
+    <div class="ad-space">
+        <span class="ad-label">スポンサーリンク</span>
+        <script data-cfasync="false" src="https://adm.shinobi.jp/s/c3be82e6a0c87469e87cd32613936e7d"></script>
+    </div>
+
+    <!-- FAQ -->
     <div class="card">
         <h2>❓ よくある質問</h2>
         <div class="faq-item">
-            <button class="faq-q" onclick="UI.toggleFaq(this)">源泉徴収の100万円超の計算は？<span>▼</span></button>
-            <div class="faq-a">本ツールは、100万円を超える部分に対して自動的に20.42%の税率を適用して計算します。</div>
+            <button class="faq-q" onclick="UI.toggleFaq(this)">源泉徴収の100万円超の計算に対応していますか？<span>▼</span></button>
+            <div class="faq-a">はい。100万円を超える金額に対しては、自動的に20.42%の税率を適用して計算します。</div>
         </div>
         <div class="faq-item">
-            <button class="faq-q" onclick="UI.toggleFaq(this)">データは保存されますか？<span>▼</span></button>
-            <div class="faq-a">入力したデータはお使いのブラウザ内(IndexedDB)にのみ保存されます。サーバーには送信されません。</div>
+            <button class="faq-q" onclick="UI.toggleFaq(this)">入力したデータは外部に送信されますか？<span>▼</span></button>
+            <div class="faq-a">いいえ。すべての計算と履歴保存はお使いのブラウザ内（IndexedDB）で行われ、サーバーに送信されることはありません。</div>
         </div>
     </div>
 </div>
 
-<footer style="text-align:center; padding:40px 0; color:var(--text-muted); font-size:12px;">
-    &copy; 2026 フリカル | <a href="#" onclick="UI.openModal('modal-terms')">利用規約</a>
+<footer style="text-align:center; padding:40px 0; color:var(--text-muted); font-size:13px; border-top:1px solid var(--border-main); background:var(--bg-card);">
+    &copy; 2026 フリカル | <a href="javascript:void(0)" onclick="UI.openModal('modal-terms')" style="color:var(--primary); text-decoration:none;">利用規約・免責事項</a>
 </footer>
 
-<!-- モーダル -->
+<!-- 利用規約モーダル -->
 <div id="modal-terms" class="modal" onclick="UI.closeModal('modal-terms')">
     <div class="modal-content" onclick="event.stopPropagation()">
-        <h3>利用規約</h3>
-        <p style="font-size:14px; margin:15px 0;">本ツールの計算結果は目安です。実際の申告は税理士等にご相談ください。</p>
-        <button class="btn-pri" onclick="UI.closeModal('modal-terms')">閉じる</button>
+        <h3 style="margin-bottom:15px;">利用規約・免責事項</h3>
+        <div style="font-size:14px; color:var(--text-muted); max-height:300px; overflow-y:auto;">
+            <p>1. 本ツールの計算結果はあくまで目安であり、正確性を保証するものではありません。</p>
+            <p>2. 実際の確定申告や税務処理については、必ず税理士等の専門家にご相談ください。</p>
+            <p>3. 本ツールの利用により生じた損害について、運営者は一切の責任を負いません。</p>
+        </div>
+        <button class="btn-pri" onclick="UI.closeModal('modal-terms')" style="width:100%; margin-top:20px;">閉じる</button>
     </div>
 </div>
 
@@ -250,15 +267,13 @@ const AppState = {
     results: {}
 };
 
-// --- 計算ロジック ---
+// --- 計算エンジン ---
 const Calc = {
     execute() {
         let ex = 0;
         const v = AppState.val;
         const r = AppState.taxRate;
         const isWh = AppState.isWh;
-        
-        // 控除額設定
         const deduct = AppState.whCat === '2' ? 10000 : (AppState.whCat === '5' ? 50000 : 0);
 
         if (AppState.mode === 'ex') {
@@ -266,13 +281,13 @@ const Calc = {
         } else if (AppState.mode === 'in') {
             ex = v / (1 + r);
         } else {
-            // 手取り逆算 (複雑なため近似計算後に補正)
+            // 手取り逆算ロジック
             if (!isWh) {
                 ex = v / (1 + r);
             } else {
-                // 100万円以下のケースで仮計算
+                // 100万円以下の仮定で計算
                 ex = (v - (deduct * 0.1021)) / (1 + r - 0.1021);
-                // 100万円超える場合の再計算
+                // 100万円を超える場合の補正計算
                 if (ex > 1000000) {
                     ex = (v - 102100 + 204200 - (deduct * 0.2042)) / (1 + r - 0.2042);
                 }
@@ -291,11 +306,7 @@ const Calc = {
             }
         }
 
-        AppState.results = {
-            ex, tax, wh,
-            total: ex + tax,
-            net: ex + tax - wh
-        };
+        AppState.results = { ex, tax, wh, total: ex + tax, net: ex + tax - wh, deduct };
         UI.update();
     },
     applyRound(num) {
@@ -310,8 +321,7 @@ const UI = {
     init() {
         const input = document.getElementById('main-input');
         input.addEventListener('input', (e) => {
-            let raw = e.target.value.replace(/[０-９]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0));
-            raw = raw.replace(/[^0-9]/g, '');
+            let raw = e.target.value.replace(/[０-９]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0)).replace(/[^0-9]/g, '');
             AppState.val = Number(raw);
             e.target.value = AppState.val ? AppState.val.toLocaleString() : '';
             Calc.execute();
@@ -331,26 +341,34 @@ const UI = {
             Calc.execute();
         });
 
-        // テーマ復元
-        const savedTheme = localStorage.getItem('theme') || 'light';
+        // テーマ管理
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('theme-toggle').innerText = savedTheme === 'dark' ? '☀️' : '🌙';
         document.getElementById('theme-toggle').addEventListener('click', () => {
             const now = document.documentElement.getAttribute('data-theme');
             const next = now === 'light' ? 'dark' : 'light';
             document.documentElement.setAttribute('data-theme', next);
             localStorage.setItem('theme', next);
+            document.getElementById('theme-toggle').innerText = next === 'dark' ? '☀️' : '🌙';
         });
 
         // バリデーション
-        document.getElementById('pdf-client').addEventListener('input', this.validatePdf);
-        
+        const validate = () => {
+            const client = document.getElementById('pdf-client').value;
+            const num = document.getElementById('pdf-number').value;
+            document.getElementById('btn-pdf').disabled = !(client && /^T\d{13}$/.test(num));
+        };
+        document.getElementById('pdf-client').addEventListener('input', validate);
+        document.getElementById('pdf-number').addEventListener('input', validate);
+
         Calc.execute();
         Tracker.load();
     },
     setMode(m) {
         AppState.mode = m;
         ['net', 'ex', 'in'].forEach(id => {
-            document.getElementById('tab-' + id).className = (id === m) ? 'btn-pri' : 'btn-sec';
+            document.getElementById('tab-' + id).classList.toggle('active', id === m);
         });
         Calc.execute();
     },
@@ -370,22 +388,16 @@ const UI = {
         let f = `【計算根拠】\n`;
         f += `税抜報酬: ${r.ex.toLocaleString()}円\n`;
         f += `消費税(${Math.round(AppState.taxRate*100)}%): +${r.tax.toLocaleString()}円\n`;
-        f += `源泉徴収: -${r.wh.toLocaleString()}円\n`;
+        if (AppState.isWh) f += `源泉徴収: -${r.wh.toLocaleString()}円 (控除額:${r.deduct.toLocaleString()}円)\n`;
         f += `合計入金額: ${r.net.toLocaleString()}円`;
         document.getElementById('out-formula').innerText = f;
     },
-    toggleFaq(btn) {
-        btn.parentElement.classList.toggle('open');
-    },
-    validatePdf() {
-        const client = document.getElementById('pdf-client').value;
-        document.getElementById('btn-pdf').disabled = !client;
-    },
+    toggleFaq(btn) { btn.parentElement.classList.toggle('open'); },
     copyResult() {
         const r = AppState.results;
-        const txt = `請求額(税込): ¥${r.total.toLocaleString()}\n税抜: ¥${r.ex.toLocaleString()}\n源泉徴収: ¥${r.wh.toLocaleString()}\n手取り: ¥${r.net.toLocaleString()}`;
+        const txt = `請求額(税込): ¥${r.total.toLocaleString()}\n税抜: ¥${r.ex.toLocaleString()}\n源泉徴収: ¥${r.wh.toLocaleString()}\n手取り: ¥${r.net.toLocaleString()}\n#フリカル`;
         navigator.clipboard.writeText(txt);
-        alert("コピーしました");
+        alert("結果をコピーしました");
     },
     openModal(id) { document.getElementById(id).classList.add('open'); },
     closeModal(id) { document.getElementById(id).classList.remove('open'); }
@@ -396,22 +408,26 @@ const Tracker = {
     db: null,
     async initDB() {
         return new Promise((resolve) => {
-            const req = indexedDB.open("FricalDB", 1);
+            const req = indexedDB.open("FricalDB", 2);
             req.onupgradeneeded = (e) => {
-                e.target.result.createObjectStore("history", { keyPath: "id", autoIncrement: true });
+                if (!e.target.result.objectStoreNames.contains("history")) {
+                    e.target.result.createObjectStore("history", { keyPath: "id", autoIncrement: true });
+                }
             };
             req.onsuccess = (e) => { this.db = e.target.result; resolve(); };
         });
     },
     async save() {
+        if (!AppState.val) return;
         if (!this.db) await this.initDB();
         const data = {
-            date: new Date().toLocaleString(),
+            date: new Date().toLocaleDateString(),
             ...AppState.results,
             client: document.getElementById('pdf-client').value || '未指定'
         };
         const tx = this.db.transaction("history", "readwrite");
         tx.objectStore("history").add(data);
+        alert("履歴に保存しました");
         this.load();
     },
     async load() {
@@ -422,68 +438,96 @@ const Tracker = {
         req.onsuccess = () => {
             const res = req.result.reverse();
             list.innerHTML = res.length ? res.map(i => `
-                <div style="border-bottom:1px solid var(--border-main); padding:8px 0;">
-                    <small>${i.date}</small> <strong>¥${i.total.toLocaleString()}</strong> (${i.client})
+                <div class="history-item">
+                    <div><small>${i.date}</small><br><strong>¥${i.total.toLocaleString()}</strong></div>
+                    <div style="font-size:12px; color:var(--text-muted);">${i.client}</div>
                 </div>
-            `).join('') : '履歴はありません';
+            `).join('') : '<div style="padding:20px; text-align:center; color:var(--text-muted);">履歴はありません</div>';
         };
     },
     async clear() {
-        if (!confirm("履歴をすべて削除しますか？")) return;
+        if (!confirm("すべての履歴を削除しますか？")) return;
         const tx = this.db.transaction("history", "readwrite");
         tx.objectStore("history").clear();
         this.load();
+    },
+    async exportCSV() {
+        if (!this.db) await this.initDB();
+        const tx = this.db.transaction("history", "readonly");
+        tx.objectStore("history").getAll().onsuccess = (e) => {
+            const data = e.target.result;
+            let csv = "\uFEFF日付,顧客名,税抜,消費税,源泉徴収,税込合計\n";
+            data.forEach(r => {
+                csv += `${r.date},${r.client},${r.ex},${r.tax},${r.wh},${r.total}\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = `sales_history_${new Date().toISOString().slice(0,10)}.csv`;
+            link.click();
+        };
     }
 };
 
-// --- 日本語PDF生成 ---
+// --- 日本語対応PDF生成 ---
 const PDF = {
     async generate() {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
         const r = AppState.results;
+        const btn = document.getElementById('btn-pdf');
+        btn.disabled = true;
+        btn.innerText = "生成中...";
 
-        // 日本語フォントの読み込み (BIZ UDGothic)
-        // jsPDFで日本語を扱うにはフォントのBase64化が必要ですが、
-        // ここでは実行時にGoogle Fontsから取得する仕組みをシミュレートします。
-        // 実際には事前にBase64化したフォントファイルを読み込むのが最も安定します。
         try {
-            UI.showToast?.("PDF生成中...");
+            // Google Fontsから日本語フォント(BIZ UDGothic)をロード
+            const fontUrl = 'https://raw.githubusercontent.com/googlefonts/biz-ud-gothic/main/fonts/ttf/BIZUDGothic-Regular.ttf';
+            const fontData = await fetch(fontUrl).then(res => res.arrayBuffer());
+            const uint8Array = new Uint8Array(fontData);
             
-            // フォント設定（本来はBase64が必要だが、ここでは標準フォントで枠組みを作成）
-            // ※ブラウザ環境で日本語を出すための最小構成
-            doc.setFontSize(20);
-            doc.text("INVOICE", 105, 20, { align: "center" });
+            // jsPDFにフォントを登録
+            doc.addFileToVFS("BIZUDGothic.ttf", btoa(String.fromCharCode.apply(null, uint8Array)));
+            doc.addFont("BIZUDGothic.ttf", "BIZUDGothic", "normal");
+            doc.setFont("BIZUDGothic");
+
+            // PDF描画
+            doc.setFontSize(24);
+            doc.text("請 求 書", 105, 20, { align: "center" });
             
             doc.setFontSize(12);
-            doc.text(`To: ${document.getElementById('pdf-client').value}`, 20, 40);
-            doc.text(`No: ${document.getElementById('pdf-number').value || '---'}`, 140, 40);
-            doc.text(`Date: ${new Date().toLocaleDateString()}`, 140, 50);
+            doc.text(`${document.getElementById('pdf-client').value}`, 20, 40);
+            doc.text(`登録番号: ${document.getElementById('pdf-number').value}`, 140, 40);
+            doc.text(`発行日: ${new Date().toLocaleDateString()}`, 140, 48);
 
             const body = [
-                ["Item", "Amount"],
-                ["Fee (Tax Excl.)", `Yen ${r.ex.toLocaleString()}`],
-                ["Tax", `Yen ${r.tax.toLocaleString()}`],
-                ["Withholding", `Yen -${r.wh.toLocaleString()}`],
-                ["Total", `Yen ${r.net.toLocaleString()}`]
+                ["項目", "金額"],
+                ["業務委託報酬 (税抜)", `¥${r.ex.toLocaleString()}`],
+                ["消費税額", `¥${r.tax.toLocaleString()}`],
+                ["源泉徴収額", `¥-${r.wh.toLocaleString()}`],
+                ["合計請求金額 (税込)", `¥${r.total.toLocaleString()}`]
             ];
 
             doc.autoTable({
-                startY: 70,
+                startY: 60,
                 head: [body[0]],
                 body: body.slice(1),
-                theme: 'grid',
-                headStyles: { fillColor: [37, 99, 235] }
+                styles: { font: "BIZUDGothic", fontSize: 11 },
+                headStyles: { fillColor: [37, 99, 235] },
+                theme: 'grid'
             });
 
-            doc.text("Note:", 20, doc.lastAutoTable.finalY + 20);
+            const finalY = doc.lastAutoTable.finalY;
+            doc.text("備考・振込先:", 20, finalY + 15);
             doc.setFontSize(10);
-            doc.text(document.getElementById('pdf-note').value || "None", 20, doc.lastAutoTable.finalY + 30);
+            doc.text(document.getElementById('pdf-note').value || "特になし", 20, finalY + 25);
 
-            doc.save("invoice.pdf");
+            doc.save(`請求書_${Date.now()}.pdf`);
         } catch (e) {
             console.error(e);
-            alert("PDF生成に失敗しました。");
+            alert("PDF生成に失敗しました。ブラウザの制限やネットワークを確認してください。");
+        } finally {
+            btn.disabled = false;
+            btn.innerText = "日本語PDFを出力";
         }
     }
 };
