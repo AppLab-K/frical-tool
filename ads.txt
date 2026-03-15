@@ -1,1 +1,17 @@
-adm.shinobi.jp, 6baec358617c7f0f67d4cd1d34d3fab8, DIRECT
+// worker.js のイメージ
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+
+    // ads.txt のリクエストを受け取る
+    if (url.pathname === '/ads.txt') {
+      const adsTxtContent = "adm.shinobi.jp, 6baec358617c7f0f67d4cd1d34d3fab8, DIRECT\n"; 
+      return new Response(adsTxtContent, {
+        headers: { 'Content-Type': 'text/plain; charset=utf-8' }
+      });
+    }
+
+    // メインのHTMLを配信する処理（既存のコード）
+    // return new Response(html, { headers: { 'content-type': 'text/html; charset=utf-8' } });
+  }
+};
