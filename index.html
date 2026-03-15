@@ -13,7 +13,7 @@
     <!-- SEO強化: robots meta -->
     <meta name="robots" content="index,follow,max-image-preview:large">
     
-    <!-- セキュリティ強化: CSPの最適化 (Chart.js用のCDNを追加) -->
+    <!-- セキュリティ強化: CSPの最適化 (Chart.js用とフォント用のCDNを追加) -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://adm.shinobi.jp https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://cdn.jsdelivr.net; frame-src https:;">
     
     <title>フリーランス源泉徴収・手取り計算ツール【インボイス対応】 | フリカル</title>
@@ -363,6 +363,7 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
             <input id="pdf-address" type="text" placeholder="発行者の住所（例：東京都渋谷区...）" aria-label="発行者の住所">
             <input id="pdf-invoice-id" type="text" placeholder="適格請求書番号（例：T+13桁の数字）" oninput="UI.validateInvoiceForm()" aria-label="適格請求書番号">
             <textarea id="pdf-bank" placeholder="振込先情報&#10;例：〇〇銀行 〇〇支店&#10;普通 1234567&#10;フリカル タロウ" aria-label="振込先情報"></textarea>
+            <!-- 未入力でもPDF生成できるように制限を解除 -->
             <button id="btn-pdf" onclick="PDF.generate()">📥 適格請求書PDFを出力</button>
         </div>
     </div>
@@ -448,8 +449,8 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
         <a href="javascript:void(0)" onclick="UI.openModal('terms-modal')">利用規約・免責事項</a>
         <a href="javascript:void(0)" onclick="UI.openModal('privacy-modal')">プライバシーポリシー</a>
         <!-- DMリンクの修正: recipient_id を指定して直接DM画面を開く -->
-        <a href="https://x.com/messages/compose?recipient_id=@AppLab_K&text=%E3%80%90%E3%83%95%E3%83%AA%E3%82%AB%E3%83%AB%20%E3%81%94%E6%84%8F%E8%A6%8B%E3%83%BB%E3%81%94%E8%A6%81%E6%9C%9B%E3%80%91%0A%E3%83%BB%E8%A6%81%E6%9C%9B%E5%86%85%E5%AE%B9%EF%BC%9A%0A%0A%E3%83%BB%E3%81%9D%E3%81%AE%E4%BB%96%EF%BC%9A%0A" target="_blank" rel="noopener">ご意見・ご要望 (XのDMへ)</a>
-        <!-- ※@AppLab_K の部分は、ご自身のXアカウントの数値IDに書き換えてください -->
+        <!-- ※YOUR_NUMERIC_ID の部分は、ご自身のXアカウントの数値IDに書き換えてください -->
+        <a href="https://x.com/messages/compose?recipient_id=YOUR_NUMERIC_ID&text=%E3%80%90%E3%83%95%E3%83%AA%E3%82%AB%E3%83%AB%20%E3%81%94%E6%84%8F%E8%A6%8B%E3%83%BB%E3%81%94%E8%A6%81%E6%9C%9B%E3%80%91%0A%E3%83%BB%E8%A6%81%E6%9C%9B%E5%86%85%E5%AE%B9%EF%BC%9A%0A%0A%E3%83%BB%E3%81%9D%E3%81%AE%E4%BB%96%EF%BC%9A%0A" target="_blank" rel="noopener">ご意見・ご要望 (XのDMへ)</a>
     </div>
     <div>&copy; 2026 フリカル All Rights Reserved.</div>
 </footer>
@@ -762,7 +763,7 @@ const UI = {
         modal.setAttribute('aria-hidden', 'false');
         
         // アクセシビリティ: モーダル内の最初のフォーカス可能要素にフォーカス
-        const focusable = modal.querySelector('button, [href], input, select, textarea,[tabindex]:not([tabindex="-1"])');
+        const focusable = modal.querySelector('button,[href], input, select, textarea,[tabindex]:not([tabindex="-1"])');
         if (focusable) focusable.focus();
         
         // Escキーで閉じる
