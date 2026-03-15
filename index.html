@@ -2,185 +2,387 @@
 <html lang="ja" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <metaを認識しやすくしました。
+3.  **スクリプトのエラー修正**: `initTheme` が未 name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#2563eb">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/定義でエラーになる箇所を修正し、テーマ切り替えが確実に動くようにしました。
+
+このコードをコピーして、GitHubの `index.html` に上書きしてください。
+
+```html
+<!DOCTYPE html>
+<html lang="png" href="/icon-192.png">
+    
+    <!-- SEO強化: Canonicalタグ -->
+ja" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta    <link rel="canonical" href="https://frical-tool.applab-k0314.workers.dev/">
+    
+    <!-- SEO強化: robots meta -->
+    <meta name="robots" name="theme-color" content="#2563eb">
+    <link rel="icon" type=" content="index,follow,max-image-preview:large">
+    
+    <!-- 【重要】審査用：CSPを最大限に緩めて広告ブロックを回避 -->
+    <meta http-equiv="Content-Security-image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" href="/icon-192.png">
     
     <!-- SEO強化: Canonicalタグ -->
-    <link rel="canonical" href="https://frical-tool.applab-k0314.workers.dev/">
+Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; script    <link rel="canonical" href="https://frical-tool.applab-k0314-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; img-.workers.dev/">
     
     <!-- SEO強化: robots meta -->
-    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="robots"src * data:; frame-src *; connect-src *;">
+    
+    <title>フリーランス content="index,follow,max-image-preview:large">
     
     <!-- 【重要】審査用：CSPを最大限に緩めて広告ブロックを回避 -->
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; img-src * data:; frame-src *; connect-src *;">
+    <meta http-equiv="Content-Security-源泉徴収・手取り計算ツール【インボイス対応】 | フリカル</title>
+    <meta name="description" content="フリーランス専用の源泉徴収・消費税・手取りを一瞬Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; img-src * data:; frame-src *; connect-src *;">
     
-    <title>フリーランス源泉徴収・手取り計算ツール【インボイス対応】 | フリカル</title>
-    <meta name="description" content="フリーランス専用の源泉徴収・消費税・手取りを一瞬で計算できる無料ツール。インボイス制度の要件を満たした請求書PDFも登録不要で作成可能です。データは端末に保存され安全です。">
-    <meta name="keywords" content="フリーランス, 源泉徴収, 消費税, 計算, インボイス, 請求書, PDF, 手取り, 逆算">
+    <title>フリーランスで計算できる無料ツール。インボイス制度の要件を満たした請求書PDFも登録不要で作成可能です。データは端末に保存され安全です。">
+    <meta name="keywords" content="フリーランス源泉徴収・手取り計算ツール【インボイス対応】 | フリカル</title>
+    , 源泉徴収, 消費税, 計算, インボイス, 請求書, PDF, 手取り, 逆算">
     
     <!-- OGP設定 -->
     <meta property="og:title" content="フリーランス源泉徴収・手取り計算ツール | フリカル">
-    <meta property="og:description" content="インボイス対応の請求書PDFも一瞬で作成。登録不要・無料で使えるフリーランス向け税金計算ツール。">
+    <meta property="og:description" content="インボイス対応の請求書PDFも一瞬で作成。登録不要・無料で使える<meta name="description" content="フリーランス専用の源泉徴収・消費税・手取りを一瞬で計算できる無料ツール。インボイス制度の要件を満たした請求書PDFも登録不要で作成可能です。データは端末に保存され安全です。">
+    <meta name="keywords" content="フリーランス, 源泉徴収, 消費税, 計算, インボイス, 請求書, PDF, 手取り,フリーランス向け税金計算ツール。">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://frical-tool.applab-k0314.workers.dev/">
+     逆算">
+    
+    <!-- OGP設定 -->
+    <meta property="og:title" content<meta property="og:url" content="https://frical-tool.applab-k031="フリーランス源泉徴収・手取り計算ツール | フリカル">
+    <meta property="og4.workers.dev/">
+    <meta property="og:image" content="https://frical-tool.applab-k0314.workers.dev/ogp.png">
+    <meta name:description" content="インボイス対応の請求書PDFも一瞬で作成。登録不要・無料で使える="twitter:card" content="summary_large_image">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstaticフリーランス向け税金計算ツール。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://frical-tool.applab-k031.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;4.workers.dev/">
     <meta property="og:image" content="https://frical-tool.applab-k0314.workers.dev/ogp.png">
     <meta name="twitter:card" content="summary_large_image">
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href600;700;900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap" media="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap" media="print" onload="this.media='all'">
+    <link rel="preload" as="style" href="https://fonts.googleapis="print" onload="this.media='all'">
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js" integrity="sha512-H9yKwOjqNdF8q/8wF40sFj50/B0R0zZJzM8y0zZ1BqEw1s1A1e1z1e1z1e1z1e1z1e1z1e1z1e1z1g==" crossorigin="anonymous" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js" integrity="sha512-H9yKwOjqNdF8q/8wF40s.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@4Fj50/B0R0zZJzM8y0zZ1BqEw00;500;600;700;900&display=swap" media1s1A1e1z1e1z1e1z1e1z1e1z1e1z1e1z1g==" crossorigin="anonymous" defer></script>
+    <script src="print" onload="this.media='all'">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin. integrity="sha512-H9yKwOjqNdF8q/8wF40sFj50/B0R0zZJzM8y0zZ1BqEwautotable.min.js" defer></script>
     
     <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-    --primary: #2563eb; --primary-dark: #1d4ed8; --primary-light: #eff6ff;
+    --primary: #2563eb; --primary-dark: #1d4ed8; --primary-1s1A1e1z1e1z1e1z1e1z1e1z1e1z1e1z1g==" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.light: #eff6ff;
     --success: #10b981; --danger: #ef4444; --warning: #f59e0b;
-    --bg-body: linear-gradient(135deg, #f9fafb 0%, #f0f4ff 100%);
+    --bg-body:autotable.min.js" defer></script>
+    
+    <style>
+* { margin: linear-gradient(135deg, #f9fafb 0%, #f0f4ff 100%);
+    --bg-card: #ffffff; --bg-header: #ffffff; --bg-input: #ffffff;
+    --bg-btn-sec: #f3f4f6; -- 0; padding: 0; box-sizing: border-box; }
+:root {
+    --primary: #2563eb; --primary-dark: #1d4ed8; --primary-light: #eff6ff;
+    --success: #10b981; --danger: #bg-btn-sec-hover: #e5e7eb;
+    --bg-result: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
+    --bg-badge: #d1fae5; --bg-history: #f3f4f6;
+    --text-main: #111827; --text-muted:ef4444; --warning: #f59e0b;
+    --bg-body: linear-gradient(135deg, #f9fafb 0%, #f0f4ff  #4b5563; --text-light: #6b7280;
+    --text-badge: #059669; --text-currency: #9ca3af;
+    --border-main: #e5e7eb; --border-input: #d1d5db100%);
     --bg-card: #ffffff; --bg-header: #ffffff; --bg-input: #ffffff;
     --bg-btn-sec: #f3f4f6; --bg-btn-sec-hover: #e5e7eb;
     --bg-result: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
-    --bg-badge: #d1fae5; --bg-history: #f3f4f6;
+    --bg-badge: #d1fae5; --bg-history: #f3f; --border-focus: #2563eb;
+    --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.14f6;
     --text-main: #111827; --text-muted: #4b5563; --text-light: #6b7280;
     --text-badge: #059669; --text-currency: #9ca3af;
-    --border-main: #e5e7eb; --border-input: #d1d5db; --border-focus: #2563eb;
-    --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+    --border-main: #e5e7eb; --border-input: #d1d5db);
 }
 :root[data-theme="dark"] {
     --primary: #3b82f6; --primary-dark: #2563eb; --primary-light: rgba(59, 130, 246, 0.15);
-    --success: #34d399; --danger: #f87171; --warning: #fbbf24;
+    --success: #3; --border-focus: #2563eb;
+    --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+    --shadow-4d399; --danger: #f87171; --warning: #fbbf24;
     --bg-body: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-    --bg-card: #1e293b; --bg-header: #1e293b; --bg-input: #0f172a;
+    --bg-card: #md: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+:root[data-theme="dark"] {
+    --primary: #3b821e293b; --bg-header: #1e293b; --bg-input: #0f172a;
     --bg-btn-sec: #334155; --bg-btn-sec-hover: #475569;
     --bg-result: rgba(37, 99, 235, 0.1);
-    --bg-badge: rgba(16, 185, 129, 0.2); --bg-history: #334155;
-    --text-main: #f8fafc; --text-muted: #cbd5e1; --text-light: #94a3b8;
+    --f6; --primary-dark: #2563eb; --primary-light: rgba(59, 130, 246, 0.15);
+    --success: #3bg-badge: rgba(16, 185, 129, 0.2); --bg-history: #334155;
+    --text-main: #f8fafc; --text-muted: #cbd5e1; --text-light: #94a3b4d399; --danger: #f87171; --warning: #fbbf24;
+    --bg-body: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    --bg-card: #1e293b; --bg-header: #1e293b; --bg-input: #0f172a;
+    --bg-btn-sec: #334158;
     --text-badge: #34d399; --text-currency: #64748b;
-    --border-main: #334155; --border-input: #475569; --border-focus: #3b82f6;
+    --border-main: #334155; --border-5; --bg-btn-sec-hover: #475569;
+    --bg-result: rgba(37, 99, 235, 0.1);
+    --bg-badge: rgba(16, 185, 129, 0.2); --bg-history: #334155;
+    --text-main: #f8fafinput: #475569; --border-focus: #3b82f6;
 }
 html { scroll-behavior: smooth; }
-body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg-body); color: var(--text-main); line-height: 1.6; min-height: 100vh; transition: background 0.3s, color 0.3s; }
+body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg-body); color: var(--text-main); line-height: 1.6; min-height: 100vh; transition: background 0.3s, colorc; --text-muted: #cbd5e1; --text-light: #94a3b8;
+    --text-badge: #34d399; --text-currency: #64748b;
+    --border-main: #334155; --border- 0.3s; }
 .container { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
-header { background: var(--bg-header); border-bottom: 1px solid var(--border-main); padding: 16px 0; margin-bottom: 24px; box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 100; }
+header { background: var(--bg-header); border-bottom: 1px solid var(--border-main); padding: 16px 0; margin-bottom: 24px; box-shadow: var(--shadow-sm); position: sticky;input: #475569; --border-focus: #3b82f6;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg-body); color: var(--text-main); line-height: 1.6; min-height: 100vh; transition: background 0.3s, color top: 0; z-index: 100; }
 .header-content { max-width: 900px; margin: 0 auto; padding: 0 16px; display: flex; justify-content: space-between; align-items: center; }
-.logo { font-size: 24px; font-weight: 900; color: var(--primary); text-decoration: none; letter-spacing: -0.5px; }
-.header-actions { display: flex; gap: 12px; align-items: center; }
-.badge { background: var(--primary-light); color: var(--primary); padding: 6px 10px; border-radius: 6px; font-size: 12px; font-weight: 700; }
-.badge-green { background: var(--bg-badge); color: var(--text-badge); }
+.logo { font-size 0.3s; }
+.container { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
+header { background: var(--bg-header); border-bottom: 1px solid var(--border-main); padding: 16px 0: 24px; font-weight: 900; color: var(--primary); text-decoration: none; letter-spacing: -0.5px; }
+.header-actions { display: flex;; margin-bottom: 24px; box-shadow: var(--shadow-sm); position: sticky; gap: 12px; align-items: center; }
+.badge { background: var(--primary-light); color: var(--primary); padding: 6px 10px; border-radius: 6 top: 0; z-index: 100; }
+.header-content { max-width: 900px; margin: 0 auto; padding: 0 16px; display:px; font-size: 12px; font-weight: 700; }
+.badge flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 24px; font-weight: 900; color: var(--primary); text-decoration-green { background: var(--bg-badge); color: var(--text-badge); }
 
-.alert-box { background: var(--warning); color: #fff; padding: 12px; text-align: center; font-size: 13px; font-weight: bold; margin-bottom: 24px; border-radius: 8px; box-shadow: var(--shadow-sm); }
+.alert-box { background: var(--warning); color: #fff; padding: 12px; text-align:: none; letter-spacing: -0.5px; }
+.header-actions { display: flex; center; font-size: 13px; font-weight: bold; margin-bottom: 24px; border-radius: 8px; box-shadow: var(--shadow-sm); }
+.info-box { background: var(--primary-light); color: var(--primary-dark); padding: 12 gap: 12px; align-items: center; }
+.badge { background: var(--primary-light); color: var(--primary); padding: 6px 10px; border-radius: 6px; font-size: 12px; font-weight: 700; }
+.badgepx; font-size: 13px; margin-bottom: 24px; border-radius:-green { background: var(--bg-badge); color: var(--text-badge); }
+
+.alert-box { background: var(--warning); color: #fff; padding: 12px; text-align: 8px; border: 1px solid var(--primary); }
+
+/* 広告枠のスタイル修正：審査用に高さを確保 */
+.ad-space { background: var(--bg-btn-sec); border: 1px dashed var(--border-input); border-radius: 8px; padding: 20px; text-align: center; margin-bottom: 24px; color: var(--text-muted); font-size: 12px; min-height: 250px; display: flex; flex-direction: center; font-size: 13px; font-weight: bold; margin-bottom: 24px; border-radius: 8px; box-shadow: var(--shadow-sm); }
 .info-box { background: var(--primary-light); color: var(--primary-dark); padding: 12px; font-size: 13px; margin-bottom: 24px; border-radius: 8px; border: 1px solid var(--primary); }
 
-.ad-space { background: var(--bg-btn-sec); border: 1px dashed var(--border-input); border-radius: 8px; padding: 20px; text-align: center; margin-bottom: 24px; color: var(--text-muted); font-size: 12px; min-height: 250px; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; }
+/* 広告枠のスタイル修正：審査 column; justify-content: center; align-items: center; }
 .ad-label { display: block; font-size: 10px; margin-bottom: 8px; opacity: 0.7; }
 
-.card { background: var(--bg-card); border-radius: 12px; padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow-md); border: 1px solid var(--border-main); }
-.card h2 { font-size: 18px; font-weight: 700; color: var(--text-main); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+.card { background: var(--bg-card); border-radius: 12px; padding: 2用に高さを確保 */
+.ad-space { background: var(--bg-btn-sec); border: 1px dashed var(--border-input); border-radius: 8px; padding: 20px; text-align: center; margin-bottom: 24px; color: var(--text-muted); font-size: 12px; min-height: 250px; display: flex; flex-direction:4px; margin-bottom: 24px; box-shadow: var(--shadow-md); border: 1px solid var(--border-main); }
+.card h2 { font-size: 18px; font-weight: 700; color: var(--text-main); margin-bottom:  column; justify-content: center; align-items: center; }
+.ad-label { display: block; font-size: 10px; margin-bottom: 8px; opacity: 0.7; }
+
+20px; display: flex; align-items: center; gap: 8px; }
 
 button, select, input, textarea { min-height: 44px; font-family: inherit; }
 
 .mode-buttons { display: flex; gap: 8px; margin-bottom: 20px; }
-.mode-buttons button { flex: 1; padding: 10px; background: var(--bg-btn-sec); border: 2px solid var(--border-main); color: var(--text-muted); border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; }
-.mode-buttons button.active { background: var(--primary); color: white; border-color: var(--primary); }
+.mode-buttons button { flex: 1; padding: 10px; background: var(--bg.card { background: var(--bg-card); border-radius: 12px; padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow-md); border: 1px solid var(--border-main); }
+.card h2 { font-size: 18px; font-weight: 700; color: var(--text-main); margin-bottom: -btn-sec); border: 2px solid var(--border-main); color: var(--text-muted); border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+.mode-buttons button.active20px; display: flex; align-items: center; gap: 8px; }
+
+button, select, input, textarea { min-height: 44px; font-family: inherit; }
+
+. { background: var(--primary); color: white; border-color: var(--primary); }
 
 .input-group { margin-bottom: 16px; }
-.input-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; }
+.input-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text-mutedmode-buttons { display: flex; gap: 8px; margin-bottom: 20px; }
+.mode-buttons button { flex: 1; padding: 10px; background: var(--bg-btn-sec); border: 2px solid var(--border-main); color: var(--text-muted); margin-bottom: 8px; }
 .input-wrapper { position: relative; display: flex; align-items: center; }
-.currency-symbol { position: absolute; left: 16px; font-size: 20px; font-weight: 700; color: var(--text-currency); }
-#main-input { width: 100%; padding: 16px 16px 16px 44px; font-size: 28px; font-weight: 900; background: var(--bg-input); color: var(--text-main); border: 2px solid var(--border-input); border-radius: 8px; transition: 0.2s; }
+.currency-symbol { position: absolute; left: 16px; font-size: 20px; font-weight: 700; color: var(--text-); border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+.mode-buttons button.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+.input-currency); }
+#main-input { width: 100%; padding: 16px 16px 16px 44px; font-size: 28px; font-weight: 900; background: var(--bg-input); color: var(--text-main); border: group { margin-bottom: 16px; }
+.input-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; }
+.input-wrapper { position: relative; display: flex;2px solid var(--border-input); border-radius: 8px; transition: 0.2s align-items: center; }
+.currency-symbol { position: absolute; left: 16px; font-size: 20px; font-weight: 700; color: var(--text-; }
 #main-input:focus { outline: none; border-color: var(--border-focus); box-shadow: 0 0 0 3px var(--primary-light); }
 
 .preset-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 20px; }
-.preset-buttons button { padding: 8px; background: var(--bg-btn-sec); border: 1px solid var(--border-main); color: var(--text-muted); border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.preset-buttons button { padding: 8px; background: var(--bg-btn-sec); border: 1px solid var(--border-main); colorcurrency); }
+#main-input { width: 100%; padding: 16px 16px 16px 44px; font-size: 28px; font-weight: 900; background: var(--bg-input); color: var(--text-main); border: 2px solid var(--border-input); border-radius: 8px; transition: 0.2s: var(--text-muted); border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; }
 
 .row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px; }
-.row-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+.row-3 { display: grid; grid-template-columns: repeat(3; }
+#main-input:focus { outline: none; border-color: var(--border-focus); box-shadow: 0 0 0 3px var(--primary-light); }
+
+.preset-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 20px; }
+.preset-buttons button { padding: 8px; background: var(--bg-btn-sec); border: 1px solid var(--border-main); color: var(--text-muted); border-radius: 6px; font-size: 13px;, 1fr); gap: 12px; margin-bottom: 24px; }
 .form-group { display: flex; flex-direction: column; justify-content: center; }
-.form-group label { font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; }
-.form-group select, .form-group input { padding: 10px; background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border-input); border-radius: 6px; font-size: 14px; }
-.checkbox-label { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--text-main); cursor: pointer; margin-top: 20px; }
+.form font-weight: 600; cursor: pointer; }
+
+.row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px; }
+.row-3 { display: grid; grid-template-columns: repeat(3-group label { font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; }
+.form-group select, .form-group input { padding: 10px; background: var(--bg-input); color: var(--text, 1fr); gap: 12px; margin-bottom: 24px; }
+.form-group { display: flex; flex-direction: column; justify-content: center; }
+.form-group label { font-size: 12px; font-weight: 600; color:-main); border: 1px solid var(--border-input); border-radius: 6px; font-size: 14px; }
+.checkbox-label { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600 var(--text-muted); margin-bottom: 6px; }
+.form-group select, .form-group input { padding: 10px; background: var(--bg-input); color: var(--text; color: var(--text-main); cursor: pointer; margin-top: 20px; }
 .checkbox-label input { width: 18px; height: 18px; cursor: pointer; }
 
 .result-card { background: var(--bg-result); border: 2px solid var(--primary); border-radius: 12px; padding: 24px; margin-bottom: 16px; text-align: center; }
-.result-label { font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
+.result-label { font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px-main); border: 1px solid var(--border-input); border-radius: 6px; font-size: 14px; }
+.checkbox-label { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--text-main); cursor: pointer; margin-top: 20px; }
+; }
 .result-amount { font-size: 42px; font-weight: 900; color: var(--primary); line-height: 1; margin-bottom: 20px; }
-.result-breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-top: 16px; border-top: 2px solid var(--primary); text-align: left; }
+.result-breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-top: 16px; border-top: 2px.checkbox-label input { width: 18px; height: 18px; cursor: pointer; }
+
+.result-card { background: var(--bg-result); border: 2px solid var(--primary); border-radius: 12px; padding: 24px; margin-bottom: 16px; text-align: center; }
+.result-label { font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
+.result-amount { font-size: 42px; font-weight: 90 solid var(--primary); text-align: left; }
+.result-item-label { font-size: 12px; color: var(--text-muted); margin-bottom: 2px; }
+.result-item-value { font-size: 18px; font-weight: 700;0; color: var(--primary); line-height: 1; margin-bottom: 20px; }
+.result-breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-top: 16px; border-top: 2px color: var(--text-main); }
+.result-item-value.danger { color: var(--danger); }
+.result-item-value.success { color: var(--success); }
+
+.calc-formula { font-size: 13px; color: var(--text-muted); background: var(--bg- solid var(--primary); text-align: left; }
 .result-item-label { font-size: 12px; color: var(--text-muted); margin-bottom: 2px; }
 .result-item-value { font-size: 18px; font-weight: 700; color: var(--text-main); }
 .result-item-value.danger { color: var(--danger); }
 .result-item-value.success { color: var(--success); }
 
-.calc-formula { font-size: 13px; color: var(--text-muted); background: var(--bg-btn-sec); padding: 16px; border-radius: 8px; white-space: pre-wrap; font-family: monospace; margin-bottom: 24px; border: 1px dashed var(--border-input); line-height: 1.8; }
+.calc-formulabtn-sec); padding: 16px; border-radius: 8px; white-space: pre-wrap; font-family: monospace; margin-bottom: 24px; border: 1px dashed var(--border-input); line-height: 1.8; }
 
-.button-group { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
-.button-group-share { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px; }
+.button-group { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin- { font-size: 13px; color: var(--text-muted); background: var(--bg-btn-sec); padding: 16px; border-radius: 8px; white-space: prebottom: 16px; }
+.button-group-share { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px-wrap; font-family: monospace; margin-bottom: 24px; border: 1px dashed var(--border-input); line-height: 1.8; }
+
+.button-group { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-; }
 button { padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; }
 button:hover { background: var(--primary-dark); }
 button:disabled { opacity: 0.5; cursor: not-allowed; background: var(--text-muted); }
 .btn-success { background: var(--success); }
 .btn-success:hover { background: #059669; }
 .btn-secondary { background: var(--bg-btn-sec); color: var(--text-main); }
-.btn-secondary:hover { background: var(--bg-btn-sec-hover); }
+.btn-secondarybottom: 16px; }
+.button-group-share { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px; }
+button { padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+button:hover { background: var(--primary-dark); }
+button:disabled { opacity: 0.5; cursor: not-allowed:hover { background: var(--bg-btn-sec-hover); }
 .btn-danger { background: var(--danger); }
+.btn-x { background: #000000; color: #; background: var(--text-muted); }
+.btn-success { background: var(--success); }
+.btn-success:hover { background: #059669; }
+.btn-secondary {fff; }
+.btn-line { background: #06C755; color: #fff; }
+
+.pdf-form { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.pdf-form input, .pdf-form textarea { width: 100%; padding: 10px; background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border-input); border-radius: 6px; font-size: background: var(--bg-btn-sec); color: var(--text-main); }
+.btn-secondary:hover { background: var(--bg-btn-sec-hover); }
+.btn-danger { background: 13px; }
+.pdf-form textarea { resize: vertical; min-height: 80px; }
+
+.history-summary { display: flex; gap: 12px; margin-bottom: var(--danger); }
 .btn-x { background: #000000; color: #fff; }
 .btn-line { background: #06C755; color: #fff; }
 
 .pdf-form { display: grid; grid-template-columns: 1fr; gap: 12px; }
-.pdf-form input, .pdf-form textarea { width: 100%; padding: 10px; background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border-input); border-radius: 6px; font-size: 13px; }
+.pdf-form input, .pdf-form textarea { width: 100%; padding: 10px; background: var(--bg-input); color: var(--text-main); 16px; }
+.summary-box { flex: 1; background: var(--primary-light); color: var(--primary-dark); padding: 16px; border-radius: 8px; border: 1px solid var(--border-input); border-radius: 6px; font-size: 13px; }
 .pdf-form textarea { resize: vertical; min-height: 80px; }
 
 .history-summary { display: flex; gap: 12px; margin-bottom: 16px; }
-.summary-box { flex: 1; background: var(--primary-light); color: var(--primary-dark); padding: 16px; border-radius: 8px; text-align: center; border: 1px solid var(--primary); }
+.summary-box { flex: 1; background: var(--primary-light text-align: center; border: 1px solid var(--primary); }
 .summary-box .label { font-size: 12px; font-weight: 700; margin-bottom: 4px; opacity: 0.8; }
 .summary-box .value { font-size: 24px; font-weight: 900; }
-.client-summary { margin-bottom: 20px; font-size: 13px; background: var(--bg-history); padding: 16px; border-radius: 8px; max-height: 180px; overflow-y: auto; border: 1px solid var(--border-main); }
+.client-summary { margin-bottom:); color: var(--primary-dark); padding: 16px; border-radius: 8px; text-align: center; border: 1px solid var(--primary); }
+.summary-box .label 20px; font-size: 13px; background: var(--bg-history); padding: 16px; border-radius: 8px; max-height: 180px; overflow { font-size: 12px; font-weight: 700; margin-bottom: 4px; opacity: 0.8; }
+.summary-box .value { font-size: 24px; font-weight: 900; }
+.client-summary { margin-bottom:-y: auto; border: 1px solid var(--border-main); }
 .client-summary-item { display: flex; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid var(--border-input); padding-bottom: 8px; }
 .client-summary-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 
 .history-filters { display: flex; gap: 8px; margin-bottom: 16px; }
-.history-filters select { flex: 1; padding: 8px; border-radius: 6px; border: 1px solid var(--border-input); background: var(--bg-input); color: var(--text-main); }
+.history-filters select { flex: 1; padding: 8 20px; font-size: 13px; background: var(--bg-history); padding: 16px; border-radius: 8px; max-height: 180px; overflow-y: auto; border: 1px solid var(--border-main); }
+.client-summary-item { display: flex; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid var(--border-input); padding-bottom: 8px; }
+.clientpx; border-radius: 6px; border: 1px solid var(--border-input); background: var(--bg-input); color: var(--text-main); }
+
+.history-item { display: flex-summary-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.history-filters { display: flex; gap: 8px; margin-bottom: 16px; }
+.history-filters select { flex: 1; padding: 8; justify-content: space-between; align-items: center; padding: 12px; background: var(--bg-history); color: var(--text-main); border-radius: 6px; font-size: 13px; margin-bottom: 8px; border: 1px solid var(--border-main); }
+.history-delete { color: var(--danger); cursor: pointer; text-decoration:px; border-radius: 6px; border: 1px solid var(--border-input); background: underline; background: none; padding: 0; font-size: 12px; }
+
+/* FAQ Accordion */
+.faq-item { margin-bottom: 12px; border: 1px solid var(--border-main); border-radius: 8px; overflow: hidden; }
+.faq-question { width: 100%; text-align: left; padding: 16px; background: var(--bg-btn-sec); border: none; font-weight: 600; font-size: 14px; color: var(--text-main); cursor: pointer; display: flex; justify-content var(--bg-input); color: var(--text-main); }
 
 .history-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--bg-history); color: var(--text-main); border-radius: 6px; font-size: 13px; margin-bottom: 8px; border: 1px solid var(--border-main); }
 .history-delete { color: var(--danger); cursor: pointer; text-decoration: underline; background: none; padding: 0; font-size: 12px; }
 
-/* FAQ Accordion */
-.faq-item { margin-bottom: 12px; border: 1px solid var(--border-main); border-radius: 8px; overflow: hidden; }
-.faq-question { width: 100%; text-align: left; padding: 16px; background: var(--bg-btn-sec); border: none; font-weight: 600; font-size: 14px; color: var(--text-main); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-.faq-question::after { content: '▼'; font-size: 12px; transition: transform 0.3s; }
+/* FAQ: space-between; align-items: center; }
+.faq-question::after { content: '▼ Accordion */
+.faq-item { margin-bottom: 12px; border: 1px solid'; font-size: 12px; transition: transform 0.3s; }
 .faq-question[aria-expanded="true"]::after { transform: rotate(180deg); }
 .faq-answer { padding: 0 16px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease; background: var(--bg-card); font-size: 13px; color: var(--text-muted); line-height: 1.6; }
 .faq-question[aria-expanded="true"] + .faq-answer { padding: 16px; max-height: 500px; }
 
 /* Modal */
-.modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; padding: 16px; opacity: 0; transition: opacity 0.3s; }
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; var(--border-main); border-radius: 8px; overflow: hidden; }
+.faq-question { width: 100%; text-align: left; padding: 16px; background: var(--bg-btn-sec); border: none; font-weight: 600; font-size: 14px; color: var(--text-main); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.faq-question::after { content: '▼'; font-size: 12px; transition: transform 0.3s; }
+.faq-question[aria-expanded="true"]::after { transform: rotate(180deg); }
+.faq-answer { padding: 0 16px; max-height: 0; overflow: hidden; transition right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; padding: 16px; opacity: 0; transition: opacity 0.3s; }
 .modal-overlay.active { display: flex; opacity: 1; }
 .modal-content { background: var(--bg-card); border-radius: 12px; padding: 24px; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-md); transform: translateY(20px); transition: transform 0.3s; }
 .modal-overlay.active .modal-content { transform: translateY(0); }
-.modal-close { float: right; background: none; border: none; font-size: 20px; cursor: pointer; color: var(--text-muted); padding: 0; min-height: auto; }
-.modal-title { font-size: 18px; font-weight: bold; margin-bottom: 16px; color: var(--text-main); border-bottom: 1px solid var(--border-main); padding-bottom: 8px; }
-.modal-body { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
-.modal-body h3 { font-size: 14px; color: var(--text-main); margin: 16px 0 8px; }
-.modal-body p { margin-bottom: 12px; }
+.modal-close { float: right; background: none; border: none; font-size: max-height 0.3s ease-out, padding 0.3s ease; background: var(--bg-card); font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+.faq-question[aria-expanded="true"] + .faq-answer { padding: 16px; max-height: 500px; }
 
-footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1px solid var(--border-main); color: var(--text-muted); font-size: 13px; background: var(--bg-header); }
-.footer-links { display: flex; justify-content: center; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+/* Modal */
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; padding: 16px; opacity: 0; transition: opacity 0.3s; }
+.modal-overlay.active { display: flex; opacity: 1; }
+.modal-content { background: var(--: 20px; cursor: pointer; color: var(--text-muted); padding: 0; min-height: auto; }
+.modal-title { font-size: 18px; font-weight: bold; margin-bottom: 16px; color: var(--text-main); border-bottom: 1px solid var(--border-main); padding-bottom: 8px; }
+.modal-body { font-size: 13px; color: var(--text-muted); line-height: 1bg-card); border-radius: 12px; padding: 24px; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-md); transform: translateY(20px); transition: transform 0.3s; }
+.modal-overlay.active .modal-content { transform: translateY(0); }
+.modal-close { float: right; background: none; border: none; font-size.6; }
+.modal-body h3 { font-size: 14px; color: var(--text-main); margin: 16px 0 8px; }
+.modal-body p: 20px; cursor: pointer; color: var(--text-muted); padding: 0; min-height: auto; }
+.modal-title { font-size: 18px; font-weight: bold; margin-bottom: 16px; color: var(--text-main); border-bottom: { margin-bottom: 12px; }
+
+footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1px solid 1px solid var(--border-main); padding-bottom: 8px; }
+.modal-body { font-size: 13px; color: var(--text-muted); line-height: 1 var(--border-main); color: var(--text-muted); font-size: 13px; background: var(--bg-header); }
+.footer-links { display: flex; justify-content: center;.6; }
+.modal-body h3 { font-size: 14px; color: var(--text-main); margin: 16px 0 8px; }
+.modal-body p gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
 .footer-links a { color: var(--primary); text-decoration: none; font-weight: 600; }
 .footer-links a:hover { text-decoration: underline; }
 
 @media (max-width: 768px) {
-    .result-amount { font-size: 32px; }
+    .result-amount { font-size: 3 { margin-bottom: 12px; }
+
+footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1px solid var(--border-main); color: var(--text-muted); font-size: 13px; background: var(--bg-header); }
+.footer-links { display: flex; justify-content: center; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+2px; }
     .row, .row-3 { grid-template-columns: 1fr; gap: 16px; }
-    .form-group .checkbox-label { margin-top: 0; }
+    .form-group .checkbox-label { margin-top: .footer-links a { color: var(--primary); text-decoration: none; font-weight: 600; }
+.footer-links a:hover { text-decoration: underline; }
+
+@media (max-width: 768px) {
+    .result-amount { font-size: 30; }
     .result-breakdown { grid-template-columns: 1fr; }
     .button-group { grid-template-columns: 1fr; }
-    .history-summary { flex-direction: column; }
+    .history-summary { flex2px; }
+    .row, .row-3 { grid-template-columns: 1fr; gap: 16px; }
+    .form-group .checkbox-label { margin-top: -direction: column; }
+}
+@media (max-width: 480px) {
+    .preset-buttons { grid-template-columns: repeat(2, 1fr); }
+}
+0; }
+    .result-breakdown { grid-template-columns: 1fr; }
+    .button-group { grid-template-columns: 1fr; }
+    .history-summary { flex    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <a href="/" class="logo">フリカル</a>
+        <div class="header-actions">-direction: column; }
 }
 @media (max-width: 480px) {
     .preset-buttons { grid-template-columns: repeat(2, 1fr); }
@@ -191,6 +393,8 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
 
 <header>
     <div class="header-content">
+            <button id="theme-toggle" aria-label="テーマ切り替え" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0;min-height:auto;">🌙</button>
+            <div class="badge badge-green" id="month-badge" aria
         <a href="/" class="logo">フリカル</a>
         <div class="header-actions">
             <button id="theme-toggle" aria-label="テーマ切り替え" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0;min-height:auto;">🌙</button>
@@ -208,7 +412,21 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
     <!-- 広告枠 (上部) -->
     <div class="ad-space" aria-label="広告">
         <span class="ad-label">スポンサーリンク</span>
-        <script src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
+        <script-live="polite">今月: ¥0</div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    
+    <div class="alert-box" role="alert">
+        ⚠️ 本ツールは参考計算用です。正式な申告・税務判断にはご自身で確認してください。
+    </div>
+
+    <!-- 広告枠 (上部) -->
+    <div class="ad-space" aria-label="広告">
+        <span class="ad-label">スポンサーリンク</span>
+        <script src="https://adm.shinobi.jp/s/6baec358617c7 src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
     </div>
 
     <!-- 計算カード -->
@@ -216,28 +434,65 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
         <h2>💰 報酬計算フォーム</h2>
         <div class="mode-buttons" role="tablist">
             <button onclick="UI.setMode('net')" id="tab-net" class="active" role="tab" aria-selected="true">手取りから計算</button>
-            <button onclick="UI.setMode('ex')" id="tab-ex" role="tab" aria-selected="false">税抜入力</button>
-            <button onclick="UI.setMode('in')" id="tab-in" role="tab" aria-selected="false">税込入力</button>
+            <button onclick="UI.setMode('ex')" id="tabf0f67d4cd1d34d3fab8"></script>
+    </div>
+
+    <!-- 計算カード -->
+    <div class="card" id="calc">
+        <h2>💰 報酬計算フォーム</h2>
+        <div class="mode-buttons" role="tablist">
+            <button onclick="UI.-ex" role="tab" aria-selected="false">税抜入力</button>
+            <button onclick="UI.setMode('in')" id="tab-in" role="tab" aria-selected="false">setMode('net')" id="tab-net" class="active" role="tab" aria-selected="true">手取りから計算</button>
+            <button onclick="UI.setMode('ex')" id="tab税込入力</button>
         </div>
         <div class="input-group">
             <label for="main-input" id="input-label">手取り額を入力</label>
             <div class="input-wrapper">
                 <span class="currency-symbol" aria-hidden="true">¥</span>
-                <input id="main-input" type="text" autocomplete="off" placeholder="0" aria-labelledby="input-label">
+                <-ex" role="tab" aria-selected="false">税抜入力</button>
+            <button onclick="UI.setMode('in')" id="tab-in" role="tab" aria-selected="false">税込入力</button>
+        </div>
+        <div class="input-group">
+            <label for="input id="main-input" type="text" autocomplete="off" placeholder="0" aria-labelledby="input-label">
             </div>
         </div>
         <div class="preset-buttons">
             <button onclick="UI.preset('5万')" aria-label="5万円を入力">5万</button>
-            <button onclick="UI.preset('10万')" aria-label="10万円を入力">10万</button>
-            <button onclick="UI.preset('30万')" aria-label="30万円を入力">30万</button>
+            <main-input" id="input-label">手取り額を入力</label>
+            <div class="input-wrapper">
+                <span class="currency-symbol" aria-hidden="true">¥</span>
+                <input id="main-input" type="text" autocomplete="off" placeholder="0" aria-labelledby="inputbutton onclick="UI.preset('10万')" aria-label="10万円を入力">10万</button>
+            <button onclick="UI.preset('30万')" aria-label="30万円を入力-label">
+            </div>
+        </div>
+        <div class="preset-buttons">
+            <button onclick="UI.preset('5万')" aria-label="5万円を入力">5万</button>
+            <button onclick="UI.preset('10万')" aria-label="10万円を入力">10万</">30万</button>
             <button onclick="UI.preset('50万')" aria-label="50万円を入力">50万</button>
         </div>
         
         <div class="row-3">
             <div class="form-group">
-                <label for="tax-rate">消費税率</label>
+                <label for="tax-rate">消費button>
+            <button onclick="UI.preset('30万')" aria-label="30万円を入力">30万</button>
+            <button onclick="UI.preset('50万')" aria-label="50万円を入力">50万</button>
+        </div>
+        
+        <div class="row税率</label>
                 <select id="tax-rate">
                     <option value="0.1">10% (標準税率)</option>
+                    <option value="0.08">8% (軽減税率)</option>
+                    <option value="0">0% (非課税等)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for-3">
+            <div class="form-group">
+                <label for="tax-rate">消費税率</label>
+                <select id="tax-rate">
+                    <option value="0.1="tax-round">端数処理</label>
+                <select id="tax-round">
+                    <">10% (標準税率)</option>
                     <option value="0.08">8% (軽減税率)</option>
                     <option value="0">0% (非課税等)</option>
                 </select>
@@ -246,6 +501,7 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
                 <label for="tax-round">端数処理</label>
                 <select id="tax-round">
                     <option value="floor">切捨て</option>
+                    <option value="round">四捨五入</optionoption value="floor">切捨て</option>
                     <option value="round">四捨五入</option>
                     <option value="ceil">切上げ</option>
                 </select>
@@ -259,10 +515,34 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
         
         <div class="row" id="wh-options">
             <div class="form-group" style="grid-column: span 2;">
-                <label for="wh-category">源泉徴収の報酬区分 (所得税法第204条第1項)</label>
+                <label for="wh-category>
+                    <option value="ceil">切上げ</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="withholding-check" checked> 源泉徴収あり
+                </label>
+            </div>">源泉徴収の報酬区分 (所得税法第204条第1項)</label>
                 <select id="wh-category">
-                    <option value="1">第1号 (原稿料、デザイン料、IT開発等) ※控除なし</option>
+                    <option value="1">第1号 (原稿料
+        </div>
+        
+        <div class="row" id="wh-options">
+            <div class="form-group" style="grid-column: span 2;">
+                <label for="wh-category">源泉徴収の報酬区分 (所得税法第204条第1項)</label>
+、デザイン料、IT開発等) ※控除なし</option>
                     <option value="2">第2号 (弁護士、税理士等の士業) ※1万円控除</option>
+                    <option value="3">第5号 (映画・演劇の出演等) ※5万円控除</                <select id="wh-category">
+                    <option value="1">第1号 (原稿料、デザイン料、IT開発等) ※控除なし</option>
+                    <option value="2">第option>
+                </select>
+                <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">※第1号は100万円超で税率が変わります。第2号は1万円、第3号は5万円を控除した額に課税されます。</p>
+            </div>
+        </div>
+        
+        <div class="result-card" aria-live="polite">
+            <div class="result-label">📊 請求額（税込2号 (弁護士、税理士等の士業) ※1万円控除</option>
                     <option value="3">第5号 (映画・演劇の出演等) ※5万円控除</option>
                 </select>
                 <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">※第1号は100万円超で税率が変わります。第2号は1万円、第3号は5万円を控除した額に課税されます。</p>
@@ -271,6 +551,8 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
         
         <div class="result-card" aria-live="polite">
             <div class="result-label">📊 請求額（税込）</div>
+            <div class="result-amount" id="res-total">¥0</div>
+            <）</div>
             <div class="result-amount" id="res-total">¥0</div>
             <div class="result-breakdown">
                 <div>
@@ -281,15 +563,41 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
                     <div class="result-item-label">消費税額</div>
                     <div class="result-item-value" id="res-tax">¥0</div>
                 </div>
+div class="result-breakdown">
                 <div>
+                    <div class="result-item-label">税抜報酬額</div>
+                    <div class="result-item-value" id="res-ex">¥0                <div>
                     <div class="result-item-label">源泉徴収額</div>
                     <div class="result-item-value danger" id="res-wh">¥0</div>
                 </div>
                 <div>
                     <div class="result-item-label">差引支払額（入金額）</div>
-                    <div class="result-item-value success" id="res-net">¥0</div>
+                    <</div>
+                </div>
+                <div>
+                    <div class="result-item-label">消費税額</div>
+                    <div class="result-item-value" id="res-tax">¥0</div>
+                </div>
+div class="result-item-value success" id="res-net">¥0</div>
                 </div>
             </div>
+        </div>
+
+        <!-- 計算式の明示 (税務署視点対応) -->
+        <div                <div>
+                    <div class="result-item-label">源泉徴収額</div>
+                    <div class="result-item-value danger" id="res-wh">¥0</div>
+                </div>
+                <div> id="calc-formula" class="calc-formula" aria-label="計算根拠" aria-live="
+                    <div class="result-item-label">差引支払額（入金額）</div>
+                    <div class="result-item-value success" id="res-net">¥0</div>
+                </div>
+            polite"></div>
+        
+        <div class="button-group">
+            <button class="btn-secondary" onclick="UI.copy('formula')">📋 計算式をコピー</button>
+            <button class="btn-secondary" onclick="UI.copy('result')">📋 結果をコピー</button>
+            <</div>
         </div>
 
         <!-- 計算式の明示 (税務署視点対応) -->
@@ -297,17 +605,33 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
         
         <div class="button-group">
             <button class="btn-secondary" onclick="UI.copy('formula')">📋 計算式をコピー</button>
-            <button class="btn-secondary" onclick="UI.copy('result')">📋 結果をコピー</button>
-            <button class="btn-success" onclick="Tracker.addSale()">➕ 履歴に保存 (Ctrl+Enter)</button>
+            <button classbutton class="btn-success" onclick="Tracker.addSale()">➕ 履歴に保存 (Ctrl+Enter)</button>
         </div>
         
         <div class="button-group-share">
-            <button class="btn-x" onclick="UI.shareSNS('x')">𝕏 結果をポスト</button>
+            <button class="btn-x" onclick="UI.shareSNS('x')">𝕏 結果をポスト</button="btn-secondary" onclick="UI.copy('result')">📋 結果をコピー</button>
+            <button class="btn-success" onclick="Tracker.addSale()">➕ 履歴に保存 (Ctrl+Enter)</>
             <button class="btn-line" onclick="UI.shareSNS('line')">LINEで送る</button>
         </div>
 
         <!-- 収益最大化: 結果カードの直下に広告配置 -->
-        <div class="ad-space" aria-label="広告" style="margin-top: 24px; margin-bottom: 0;">
+        <div class="ad-space" aria-label="広告" style="margin-top: 2button>
+        </div>
+        
+        <div class="button-group-share">
+            <button class="btn-x" onclick="UI.shareSNS('x')">𝕏 結果をポスト</button4px; margin-bottom: 0;">
+            <span class="ad-label">スポンサーリンク</span>
+            <script src="https://adm.shinobi.jp/s/6baec358>
+            <button class="btn-line" onclick="UI.shareSNS('line')">LINEで送る</button>
+        </div>
+
+        <!-- 収益最大化: 結果カードの直下に広告配置 -->
+        <div class="ad-space" aria-label="広告" style="margin-top: 2617c7f0f67d4cd1d34d3fab8"></script>
+        </div>
+    </div>
+
+    <!-- 請求書カード (インボイス要件完全対応) -->
+4px; margin-bottom: 0;">
             <span class="ad-label">スポンサーリンク</span>
             <script src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
         </div>
@@ -320,32 +644,78 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
             💡 入力した情報は端末内にのみ保存され、外部サーバーには送信されません。
         </div>
         <div class="pdf-form">
-            <input id="pdf-client" type="text" placeholder="顧客名（必須・例：株式会社〇〇 御中）" oninput="UI.validateInvoiceForm()" aria-label="顧客名">
-            <input id="pdf-item-name" type="text" placeholder="取引内容（例：3月分 Webデザイン制作料）" aria-label="取引内容">
+                <div class="card" id="invoice">
+        <h2>📄 適格請求書 (インボイス) PDF生成</h2>
+        <div class="info-box">
+            💡 入力した情報は端末内にのみ保存<input id="pdf-client" type="text" placeholder="顧客名（必須・例：株式会社〇〇 御中）" oninput="UI.validateInvoiceForm()" aria-label="顧客名">
+            <input id="pdf-item-name" type="text" placeholder="取引内容（例：3月分 Webデザインされ、外部サーバーには送信されません。
+        </div>
+        <div class="pdf-form">
+            <input id="pdf-client" type="text" placeholder="顧客名（必須・例：株式会社〇〇制作料）" aria-label="取引内容">
             <input id="pdf-no" type="text" placeholder="請求書番号（例：INV-202603-01）" aria-label="請求書番号">
-            <input id="pdf-date" type="text" placeholder="発行日（例：2026年3月31日）" aria-label="発行日">
+            <input id="pdf-date" type="text" placeholder="発行日 御中）" oninput="UI.validateInvoiceForm()" aria-label="顧客名">
+            <input id="pdf-item-name" type="text" placeholder="取引内容（例：3月分 Webデザイン制作料）" aria-label="取引内容">
+            <input id="pdf-no" type="text（例：2026年3月31日）" aria-label="発行日">
+            <input id="pdf-my-name" type="text" placeholder="発行者の氏名・屋号（" placeholder="請求書番号（例：INV-202603-01）" aria-label="請求書番号">
+            <input id="pdf-date" type="text" placeholder="発行日例：山田 太郎）" aria-label="発行者の氏名">
+            <input id="pdf-address" type="text" placeholder="発行者の住所（例：東京都渋谷区...）" aria-label="（例：2026年3月31日）" aria-label="発行日">
             <input id="pdf-my-name" type="text" placeholder="発行者の氏名・屋号（例：山田 太郎）" aria-label="発行者の氏名">
-            <input id="pdf-address" type="text" placeholder="発行者の住所（例：東京都渋谷区...）" aria-label="発行者の住所">
+            <input id="pdf-発行者の住所">
             <input id="pdf-invoice-id" type="text" placeholder="適格請求書番号（必須・T+13桁の数字）" oninput="UI.validateInvoiceForm()" aria-label="適格請求書番号">
-            <textarea id="pdf-bank" placeholder="振込先情報&#10;例：〇〇銀行 〇〇支店&#10;普通 1234567&#10;フリカル タロウ" aria-label="振込先情報"></textarea>
+            <textarea id="pdf-bank" placeholder="振込先情報&#10;例：〇〇銀行 〇〇支店&#10;普通 1234567&#10;フリカル タロウ" aria-label="振込先情報"></address" type="text" placeholder="発行者の住所（例：東京都渋谷区...）" aria-label="発行者の住所">
+            <input id="pdf-invoice-id" type="text" placeholder="適格textarea>
+            <button id="btn-pdf" onclick="PDF.generate()" disabled>⚠️ 顧客名と適格請求書番号を入力してください</button>
+        </div>
+    </div>
+
+    <!-- 広告枠 (請求書番号（必須・T+13桁の数字）" oninput="UI.validateInvoiceForm()" aria-label="適格請求書番号">
+            <textarea id="pdf-bank" placeholder="振込先情報&#10;例：〇〇銀行 〇〇支店&#10;普通 1234567&#10;フリカル タロウ" aria-label="振込先情報"></中間) -->
+    <div class="ad-space" aria-label="広告">
+        <span class="ad-label">スポンサーリンク</span>
+        <script src="https://adm.shinobi.jptextarea>
             <button id="btn-pdf" onclick="PDF.generate()" disabled>⚠️ 顧客名と適格請求書番号を入力してください</button>
         </div>
     </div>
 
     <!-- 広告枠 (中間) -->
     <div class="ad-space" aria-label="広告">
-        <span class="ad-label">スポンサーリンク</span>
-        <script src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
+        <span class/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
     </div>
 
     <!-- 履歴カード -->
     <div class="card" id="history">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
             <h2 style="margin:0;">📝 売上・計算履歴</h2>
-            <button class="btn-secondary" style="padding:8px 12px; font-size:12px; min-height:auto;" onclick="Tracker.exportCSV()">📥 CSV出力</button>
+            <button class="btn-secondary" style="padding:8="ad-label">スポンサーリンク</span>
+        <script src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1dpx 12px; font-size:12px; min-height:auto;" onclick="Tracker.exportCSV()">📥 CSV出力</button>
         </div>
         
-        <div class="history-summary">
+        <div class="history-summary">34d3fab8"></script>
+    </div>
+
+    <!-- 履歴カード -->
+    <div class="card" id="history">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h2 style="margin:0;">📝 売上・計算履歴</h2>
+            <button class="btn-secondary" style="padding:8
+            <div class="summary-box">
+                <div class="label">今年度累計売上 (税抜)</div>
+                <div class="value" id="yearly-total">¥0</div>
+            px 12px; font-size:12px; min-height:auto;" onclick="Tracker.exportCSV()">📥 CSV出力</button>
+        </div>
+        
+        <div class="history-summary"></div>
+            <div class="summary-box">
+                <div class="label">今月売上 (税抜)</div>
+                <div class="value" id="monthly-total">¥0</div>
+            </div>
+        </div>
+        
+        <div class="history-filters">
+            <select id="history-filter-year" onchange="Tracker.render()" aria-label="年で絞り込み">
+                <option value="all">全期間</option>
+            </select>
+            <select id="history-filter-
             <div class="summary-box">
                 <div class="label">今年度累計売上 (税抜)</div>
                 <div class="value" id="yearly-total">¥0</div>
@@ -357,22 +727,32 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
         </div>
         
         <div class="history-filters">
-            <select id="history-filter-year" onchange="Tracker.render()" aria-label="年で絞り込み">
+            <select id="history-filtermonth" onchange="Tracker.render()" aria-label="月で絞り込み">
+                <option value="all">全月</option>
+                <option value="01">1月</option><option value="02">2月</option><option value="03">3月</option>
+                <option-year" onchange="Tracker.render()" aria-label="年で絞り込み">
                 <option value="all">全期間</option>
             </select>
             <select id="history-filter-month" onchange="Tracker.render()" aria-label="月で絞り込み">
-                <option value="all">全月</option>
+                <option value value="04">4月</option><option value="05">5月</option><option value="="all">全月</option>
                 <option value="01">1月</option><option value="02">2月</option><option value="03">3月</option>
                 <option value="04">4月</option><option value="05">5月</option><option value="06">6月</option>
+                <option value="07">7月</option><option value="08">8月</option><option value="09">9月</option>
+                <option06">6月</option>
                 <option value="07">7月</option><option value="08">8月</option><option value="09">9月</option>
                 <option value="10">10月</option><option value="11">11月</option><option value="12">12月</option>
             </select>
         </div>
         
-        <h3 style="font-size: 14px; margin-bottom: 8px; color: var(--text-muted);">🏢 クライアント別売上 (表示期間)</h3>
+        < value="10">10月</option><option value="11">11月</option><optionh3 style="font-size: 14px; margin-bottom: 8px; color: var(--text-muted);">🏢 クライアント別売上 (表示期間)</h3>
         <div id="client-summary" class="client-summary" aria-live="polite"></div>
         
-        <h3 style="font-size: 14px; margin-bottom: 8px; color: var(--text-muted);">📅 履歴リスト</h3>
+        <h3 value="12">12月</option>
+            </select>
+        </div>
+        
+        <h3 style="font-size: 14px; margin-bottom: 8px; color: var(--text-muted);">🏢 クライアント別売上 (表示期間)</h3>
+        <div id="client style="font-size: 14px; margin-bottom: 8px; color: var(--text-muted);">📅 履歴リスト</h3>
         <div id="history-list" aria-live="polite"></div>
         
         <button class="btn-secondary" onclick="UI.openModal('delete-modal')" style="margin-top: 16px; width:100%;">🗑️ 全リセット</button>
@@ -381,19 +761,42 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
     <!-- 広告枠 (履歴下) -->
     <div class="ad-space" aria-label="広告">
         <span class="ad-label">スポンサーリンク</span>
-        <script src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
+-summary" class="client-summary" aria-live="polite"></div>
+        
+        <h3 style="font-size: 14px; margin-bottom: 8px; color: var(--text        <script src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
     </div>
 
-    <!-- FAQセクション (SEO対策兼ヘルプ) -->
+    -muted);">📅 履歴リスト</h3>
+        <div id="history-list" aria-live="polite"></div>
+        
+        <button class="btn-secondary" onclick="UI.openModal('delete-modal')" style="margin-top: 16px; width:100%;">🗑️ 全リセット</button>
+    </div>
+
+    <!-- 広告枠 (履歴下) -->
+    <div class="ad-space" aria-label="広告">
+        <span class="ad-label">スポンサーリンク</span>
+<!-- FAQセクション (SEO対策兼ヘルプ) -->
     <div class="card" id="faq">
         <h2>❓ よくある質問 (FAQ)</h2>
         <div class="faq-item">
-            <button class="faq-question" aria-expanded="false" onclick="UI.toggleAccordion(this)">インボイス制度に対応した請求書は作れますか？</button>
+            <        <script src="https://adm.shinobi.jp/s/6baec358617c7f0f67d4cd1d34d3fab8"></script>
+    </div>
+
+    button class="faq-question" aria-expanded="false" onclick="UI.toggleAccordion(this)">インボイス制度に対応した請求書は作れますか？</button>
             <div class="faq-answer">はい、作成可能です。「適格請求書 (インボイス) PDF生成」フォームにて、ご自身の「適格請求書発行事業者番号（T+13桁の数字）」と「顧客名」を入力することで、税務署の要件を満たしたインボイス対応の請求書PDFを無料でダウンロードできます。</div>
-        </div>
+        <!-- FAQセクション (SEO対策兼ヘルプ) -->
+    <div class="card" id="faq">
+        <h2>❓ よくある質問 (FAQ)</h2>
+        <div class="faq-item">
+            <</div>
+        <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" onclick="UI.toggleAccordion(this)">源泉徴収の計算はどのように行われますか？button class="faq-question" aria-expanded="false" onclick="UI.toggleAccordion(this)">インボイス制度に対応した請求書は作れますか？</button>
+            <div class="faq-answer">はい、作成可能です。「適格請求書 (インボイス) PDF生成」フォームにて、ご自身の「適格請求書発行事業者番号（T+13桁の数字）」と「顧客名」を入力することで、税務署の要件を満たしたインボイス対応の請求書PDFを無料でダウンロードできます。</div>
+        </button>
+            <div class="faq-answer">所得税法第204条第1項に基づく報酬区分（第1号、第2号、第5号）に対応しています。第1号報酬（デザイン料や原稿料など）の場合、100万円以下の部分は10.21%、10</div>
         <div class="faq-item">
             <button class="faq-question" aria-expanded="false" onclick="UI.toggleAccordion(this)">源泉徴収の計算はどのように行われますか？</button>
-            <div class="faq-answer">所得税法第204条第1項に基づく報酬区分（第1号、第2号、第5号）に対応しています。第1号報酬（デザイン料や原稿料など）の場合、100万円以下の部分は10.21%、100万円を超える部分は20.42%で自動計算されます。</div>
+            <div class="faq-answer">所得税法第204条第1項0万円を超える部分は20.42%で自動計算されます。</div>
         </div>
     </div>
 </div>
@@ -401,20 +804,52 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
 <footer>
     <div class="footer-links">
         <a href="javascript:void(0)" onclick="UI.openModal('terms-modal')">利用規約・免責事項</a>
-        <a href="javascript:void(0)" onclick="UI.openModal('privacy-modal')">プライバシーポリシー</a>
-        <a href="https://x.com/messages/compose?recipient_id=YOUR_NUMERIC_ID&text=%E3%80%90%E3%83%95%E3%83%AA%E3%82%AB%E3%83%AB%20%E3%81%94%E6%84%8F%E8%A6%8B%E3%83%BB%E3%81%94%E8%A6%81%E6%9C%9B%E3%80%91%0A%E3%83%BB%E8%A6%81%E6%9C%9B%E5%86%85%E5%AE%B9%EF%BC%9A%0A%0A%E3%83%BB%E3%81%9D%E3%81%AE%E4%BB%96%EF%BC%9A%0A" target="_blank" rel="noopener">ご意見・ご要望 (XのDMへ)</a>
+        <aに基づく報酬区分（第1号、第2号、第5号）に対応しています。第1号報酬（デザイン料や原稿料など）の場合、100万円以下の部分は10.21%、10 href="javascript:void(0)" onclick="UI.openModal('privacy-modal')">プライバシーポリシー</a>0万円を超える部分は20.42%で自動計算されます。</div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-links">
+        <a href="javascript:void(0)"
+        <a href="https://x.com/messages/compose?recipient_id=YOUR_NUMERIC_ID&text=%E3%80%90%E3%83%95%E onclick="UI.openModal('terms-modal')">利用規約・免責事項</a>
+        <a href="javascript:void(0)" onclick="UI.openModal('privacy-modal')">プライバシーポリシー</a>3%83%AA%E3%82%AB%E3%83%AB%20%E3%81%94%E6%84%8F%E8%A6%8B%E3%83%BB%E3%81%94%E8
+        <a href="https://x.com/messages/compose?recipient_id=YOUR_NUMERIC_ID&text=%E3%80%90%E3%83%95%E3%83%AA%E3%82%AB%E3%83%AB%2%A6%81%E6%9C%9B%E3%80%91%0A%E3%83%BB%E8%A6%81%E6%9C%9B%E5%86%85%E5%AE%B9%EF%BC%9A%0A%0A%E3%83%BB%E3%81%9D%E3%81%AE%E4%BB%96%EF%BC%9A%00%E3%81%94%E6%84%8F%E8%A6%8B%E3%83%BB%E3%81%94%E8A" target="_blank" rel="noopener">ご意見・ご要望 (XのDMへ)</a>
     </div>
     <div>&copy; 2026 フリカル All Rights Reserved.</div>
 </footer>
 
-<!-- 削除確認モーダル -->
+<!--%A6%81%E6%9C%9B%E3%80%91%0A%E3%83%BB%E8%A6%81%E6%9C% 削除確認モーダル -->
 <div id="delete-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="delete-title">
-    <div class="modal-content">
+    <div class="modal-content9B%E5%86%85%E5%AE%B9%EF%BC%9A%0A%0A%E3%83%BB%E3%81%9D%E3%81%AE%E4%BB%96%EF%BC%9A%0A" target="_blank" rel="noopener">ご意見・ご要望 (XのDMへ)</a>
+    </div>
+    <div>&copy; 2026 フリカル All Rights Reserved.</div>
+</footer>
+
+<!--">
         <h3 id="delete-title" class="modal-title" style="color: var(--danger);">⚠️ データを消去しますか？</h3>
         <div class="modal-body"><p>この操作は取り消せません。計算履歴がすべて削除されます。</p></div>
-        <div style="display:flex; gap:12px; margin-top:20px;">
-            <button class="btn-secondary" style="flex:1;" onclick="UI.closeModal('delete-modal')">キャンセル</button>
+        <div style="display 削除確認モーダル -->
+<div id="delete-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="delete-title">
+    <div class="modal-content:flex; gap:12px; margin-top:20px;">
+            <button class="btn-secondary" style="flex:1;" onclick="UI.closeModal('delete-modal')">キャンセル</button">
+        <h3 id="delete-title" class="modal-title" style="color: var(--danger);">⚠️ データを消去しますか？</h3>
+        <div class="modal-body"><p>この>
             <button class="btn-danger" style="flex:1;" onclick="Tracker.clearAll()">削除する</button>
+        </div>
+    </div>
+</div>
+
+<!-- 利用規約モーダル -->
+<div id="terms操作は取り消せません。計算履歴がすべて削除されます。</p></div>
+        <div style="display:flex; gap:12px; margin-top:20px;">
+            <button class="btn-secondary" style="flex:1;" onclick="UI.closeModal('delete-modal')">キャンセル</button-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-content">
+        <button class="modal-close" onclick="UI.closeModal('terms->
+            <button class="btn-danger" style="flex:1;" onclick="Tracker.clearAll()">modal')">&times;</button>
+        <h3 class="modal-title">利用規約・免責事項</h3>
+        <div class="modal-body">
+            <p>本ツール「フリカル」削除する</button>
         </div>
     </div>
 </div>
@@ -422,26 +857,58 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
 <!-- 利用規約モーダル -->
 <div id="terms-modal" class="modal-overlay" role="dialog" aria-modal="true">
     <div class="modal-content">
-        <button class="modal-close" onclick="UI.closeModal('terms-modal')">&times;</button>
+        <button class="modal-close" onclick="UI.closeModal('terms-をご利用いただく際は、以下の事項に同意したものとみなします。</p>
+            <h3>1. 免責事項</h3>
+            <p>本ツールで提供される計算結果は、あくまで概算であり、その正確性、完全性、有用性を保証するものではありません。実際の税額計算や確定申告に際しては、必ずmodal')">&times;</button>
         <h3 class="modal-title">利用規約・免責事項</h3>
         <div class="modal-body">
             <p>本ツール「フリカル」をご利用いただく際は、以下の事項に同意したものとみなします。</p>
-            <h3>1. 免責事項</h3>
-            <p>本ツールで提供される計算結果は、あくまで概算であり、その正確性、完全性、有用性を保証するものではありません。実際の税額計算や確定申告に際しては、必ず税理士等の専門家にご相談いただくか、所轄の税務署へご確認ください。本ツールの利用により生じたいかなる損害についても、運営者は一切の責任を負いません。</p>
+            <h3>1. 免責事項税理士等の専門家にご相談いただくか、所轄の税務署へご確認ください。本ツールの利用により生じたいかなる損害についても、運営者は一切の責任を負いません。</p>
             <h3>2. データの取り扱い</h3>
-            <p>入力されたデータは、ブラウザのIndexedDB（ローカルストレージ）にのみ保存され、外部サーバーへ送信されることはありません。ブラウザのキャッシュ削除等によりデータが消失する可能性があるため、重要なデータは各自でバックアップ（CSV出力等）を行ってください。</p>
+            <p>入力されたデータは、ブラウザのIndexedDB（ローカルストレージ）にのみ保存され、外部サーバーへ送信されることはありません。ブラウザのキャッシュ削除等によりデータが消失する可能性があるため、重要なデータは各自でバックアップ（CSV出力等）を行ってください。</p></h3>
+            <p>本ツールで提供される計算結果は、あくまで概算であり、その正確性、完全性、有用性を保証するものではありません。実際の税額計算や確定申告に際しては、必ず
+        </div>
+    </div>
+</div>
+
+<!-- プライバシーポリシーモーダル -->
+<div id="privacy-税理士等の専門家にご相談いただくか、所轄の税務署へご確認ください。本ツールの利用により生じたいかなる損害についても、運営者は一切の責任を負いません。</p>
+            <h3>modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-content">
+        <button class="modal-close" onclick="UI.closeModal('privacy-modal')">&times;</button>
+        <h3 class="modal-title">プライバシーポリシー</h3>
+        <div class="modal-body">
+            <h3>1. 広告の配信について</h3>
+            <p>当2. データの取り扱い</h3>
+            <p>入力されたデータは、ブラウザのIndexedDB（ローカルストレージ）にのみ保存され、外部サーバーへ送信されることはありません。ブラウザのキャッシュ削除等によりデータが消失する可能性があるため、重要なデータは各自でバックアップ（CSV出力等）を行ってください。</p>サイトでは、第三者配信の広告サービス（忍者AdMax）を利用しています。広告配信事業者は、ユーザーの興味に応じた商品やサービスの広告を表示するため、クッキー（Cookie）を使用することがあります。</p>
+            <h3>
         </div>
     </div>
 </div>
 
 <!-- プライバシーポリシーモーダル -->
 <div id="privacy-modal" class="modal-overlay" role="dialog" aria-modal="true">
-    <div class="modal-content">
+    <div class="2. アクセス解析について</h3>
+            <p>当サイトでは、Googleによるアクセス解析ツール「Googleアナリティクス」を利用しています。このGoogleアナリティクスはトラフィックデータの収集のためにクッキー（Cookie）を使用していますmodal-content">
         <button class="modal-close" onclick="UI.closeModal('privacy-modal')">&times;</button>
         <h3 class="modal-title">プライバシーポリシー</h3>
-        <div class="modal-body">
+        <。このトラフィックデータは匿名で収集されており、個人を特定するものではありません。</p>
+        </div>
+    </div>
+</div>
+
+<script>
+"use strict";
+
+// --- 1. テーマ・DB初期化div class="modal-body">
             <h3>1. 広告の配信について</h3>
-            <p>当サイトでは、第三者配信の広告サービス（忍者AdMax）を利用しています。広告配信事業者は、ユーザーの興味に応じた商品やサービスの広告を表示するため、クッキー（Cookie）を使用することがあります。</p>
+            <p>当サイトでは、第三者配信の広告サービス（忍者AdMax）を利用しています。広告配信事業者は、ユーザーの ---
+const DB = {
+    name: 'furical_db', version: 3, instance: null,
+    init() {
+        return new Promise((resolve) => {
+            const req = indexedDB.open(this.name, this.version);
+            req.onupgradeneeded = (e) =>興味に応じた商品やサービスの広告を表示するため、クッキー（Cookie）を使用することがあります。</p>
             <h3>2. アクセス解析について</h3>
             <p>当サイトでは、Googleによるアクセス解析ツール「Googleアナリティクス」を利用しています。このGoogleアナリティクスはトラフィックデータの収集のためにクッキー（Cookie）を使用しています。このトラフィックデータは匿名で収集されており、個人を特定するものではありません。</p>
         </div>
@@ -451,22 +918,27 @@ footer { text-align: center; padding: 32px 16px; margin-top: 40px; border-top: 1
 <script>
 "use strict";
 
-// --- 1. テーマ・DB初期化 ---
+// --- 1. テーマ・DB初期化 {
+                const db = e.target.result;
+                if (!db.objectStoreNames.contains('fonts')) db.createObjectStore('fonts', { keyPath: 'id' });
+                if (!db.objectStoreNames.contains('history')) {
+                    const histStore = db.createObjectStore('history', { ---
 const DB = {
     name: 'furical_db', version: 3, instance: null,
     init() {
         return new Promise((resolve) => {
-            const req = indexedDB.open(this.name, this.version);
-            req.onupgradeneeded = (e) => {
-                const db = e.target.result;
-                if (!db.objectStoreNames.contains('fonts')) db.createObjectStore('fonts', { keyPath: 'id' });
-                if (!db.objectStoreNames.contains('history')) {
-                    const histStore = db.createObjectStore('history', { keyPath: 'id' });
+            const req = indexedDB. keyPath: 'id' });
                     histStore.createIndex('timestamp', 'timestamp', { unique: false });
                 }
             };
-            req.onsuccess = async (e) => { this.instance = e.target.result; resolve(); };
-            req.onerror = () => { UI.showToast("⚠️ データベースエラー"); resolve(); };
+            req.onsuccess = async (e) => { this.instanceopen(this.name, this.version);
+            req.onupgradeneeded = (e) => {
+                const db = e.target.result;
+                if (!db.objectStoreNames.contains(' = e.target.result; resolve(); };
+            req.onerror = () => { UI.showToast("fonts')) db.createObjectStore('fonts', { keyPath: 'id' });
+                if (!db.objectStoreNames.contains('history')) {
+                    const histStore = db.createObjectStore('history', { keyPath: 'id' });
+                    histStore.createIndex('timestamp', 'timestamp', { unique: false⚠️ データベースエラー"); resolve(); };
         });
     },
     async addHistory(record) {
@@ -478,11 +950,49 @@ const DB = {
         if (!this.instance) return [];
         return new Promise((resolve) => {
             const records = [];
-            const index = this.instance.transaction('history', 'readonly').objectStore('history').index('timestamp');
+            const index = this.instance.transaction('history', 'readonly').objectStore('history'). });
+                }
+            };
+            req.onsuccess = async (e) => { this.instance = e.target.result; resolve(); };
+            req.onerror = () => { UI.showToast("⚠️ データベースエラー"); resolve(); };
+        });
+    },
+    async addHistory(record) {
+index('timestamp');
+            const req = index.openCursor(null, 'prev');
+            req.ons        if (!this.instance) return;
+        const tx = this.instance.transaction('history', 'readwrite');
+        tx.objectStore('history').put(record);
+    },
+    async getAllHistory()uccess = (e) => {
+                const cursor = e.target.result;
+                if (cursor) { records.push(cursor.value); cursor.continue(); }
+                else resolve(records);
+            };
+        });
+    },
+    async deleteHistory(id) {
+        const tx = this.instance.transaction('history', 'readwrite');
+        tx.objectStore('history').delete(id);
+     {
+        if (!this.instance) return [];
+        return new Promise((resolve) => {
+            const records = [];
+            const index = this.instance.transaction('history', 'readonly').objectStore('history').},
+    async clearHistory() {
+        const tx = this.instance.transaction('history', 'readwrite');
+        tx.objectStore('history').clear();
+    }
+};
+
+// --- 2. 状態管理・計算 ---
+const AppState = {
+    mode: 'net', taxRate: 0.index('timestamp');
             const req = index.openCursor(null, 'prev');
             req.onsuccess = (e) => {
                 const cursor = e.target.result;
-                if (cursor) { records.push(cursor.value); cursor.continue(); }
+                if (cursor1, round: 'floor', withholding: true, whCategory: '1', inputValue: '', parsedValue: 0,
+    results: { ex: 0, tax: 0, wh: 0, total:) { records.push(cursor.value); cursor.continue(); }
                 else resolve(records);
             };
         });
@@ -499,35 +1009,60 @@ const DB = {
 
 // --- 2. 状態管理・計算 ---
 const AppState = {
-    mode: 'net', taxRate: 0.1, round: 'floor', withholding: true, whCategory: '1', inputValue: '', parsedValue: 0,
-    results: { ex: 0, tax: 0, wh: 0, total: 0, net: 0, deduction: 0 }
+    mode: 'net', taxRate: 0. 0, net: 0, deduction: 0 }
 };
 
 const Calculator = {
-    WH_LOW: 0.1021, WH_HIGH: 0.2042, WH_BORDER: 1000000, MAX_VAL: 100000000,
+    WH_LOW: 0.1021, WH_HIGH: 0.2042, WH_BORDER: 1000000, MAX_VAL: 100000001, round: 'floor', withholding: true, whCategory: '1', inputValue: '', parsedValue: 0,
+    results: { ex: 0, tax: 0, wh: 0, total:0,
     parseCurrency(val) {
         val = String(val).toLowerCase().replace(/,/g, '');
         let multi = 1;
         if (val.endsWith('k')) multi = 1000;
         else if (val.endsWith('m')) multi = 1000000;
         else if (val.endsWith('万')) multi = 10000;
-        const num = Number(val.replace(/[^\d.]/g, ''));
+         0, net: 0, deduction: 0 }
+};
+
+const Calculator = {
+    WH_LOW: 0.1021, WH_HIGH: 0.2042, WH_const num = Number(val.replace(/[^\d.]/g, ''));
+        return isNaN(num) ? 0 : Math.min(Math.floor(num * multi), this.MAX_VAL);
+BORDER: 1000000, MAX_VAL: 100000000,
+    parseCurrency(val) {
+        val = String(val).toLowerCase().replace(/,/g, '');
+        let multi = 1;
+        if (val.endsWith('k')) multi = 1000;
+        else if (val.endsWith('m')) multi = 1000000;
+        else if (val.endsWith('万')) multi = 10000;
+            },
+    calcAll() {
+        const val = AppState.parsedValue;
+        if (!val) return { ex: 0, tax: 0, wh: 0, total: 0, net: 0, deduction: 0 };
+        let deduction = AppState.whCategory === '2' ?const num = Number(val.replace(/[^\d.]/g, ''));
         return isNaN(num) ? 0 : Math.min(Math.floor(num * multi), this.MAX_VAL);
     },
     calcAll() {
         const val = AppState.parsedValue;
-        if (!val) return { ex: 0, tax: 0, wh: 0, total: 0, net: 0, deduction: 0 };
-        let deduction = AppState.whCategory === '2' ? 10000 : (AppState.whCategory === '3' ? 50000 : 0);
+        if (!val 10000 : (AppState.whCategory === '3' ? 50000 : 0);
         let ex = 0;
         if (AppState.mode === 'net') {
             const whRate = AppState.withholding ? this.WH_LOW : 0;
-            const borderNet = this.WH_BORDER * (1 + AppState.taxRate) - 102100;
+            const border) return { ex: 0, tax: 0, wh: 0, total: 0, net: 0, deduction: 0 };
+        let deduction = AppState.whCategory === '2' ?Net = this.WH_BORDER * (1 + AppState.taxRate) - 102100;
+            if (AppState.withholding && AppState.whCategory === '1' && val > border 10000 : (AppState.whCategory === '3' ? 50000 : 0);
+        let ex = 0;
+        if (AppState.mode === 'net') {
+Net) {
+                ex = Math.floor((val - 102100) / (1 + AppState.taxRate - this.WH_HIGH));
+            } else {
+                ex = Math.            const whRate = AppState.withholding ? this.WH_LOW : 0;
+            const borderNet = this.WH_BORDER * (1 + AppState.taxRate) - 10210floor((val - (AppState.withholding ? deduction * whRate : 0)) / (1 + AppState.taxRate - whRate));
+            }
+        } else if (AppState.mode === 'in') {0;
             if (AppState.withholding && AppState.whCategory === '1' && val > borderNet) {
                 ex = Math.floor((val - 102100) / (1 + AppState.taxRate - this.WH_HIGH));
             } else {
-                ex = Math.floor((val - (AppState.withholding ? deduction * whRate : 0)) / (1 + AppState.taxRate - whRate));
-            }
-        } else if (AppState.mode === 'in') {
+                ex = Math.
             ex = Math.floor(val / (1 + AppState.taxRate));
         } else {
             ex = val;
@@ -536,11 +1071,24 @@ const Calculator = {
         const tax = AppState.round === 'ceil' ? Math.ceil(rawTax) : (AppState.round === 'round' ? Math.round(rawTax) : Math.floor(rawTax));
         let wh = 0;
         if (AppState.withholding) {
+            let targetEx = Math.maxfloor((val - (AppState.withholding ? deduction * whRate : 0)) / (1 + AppState.taxRate - whRate));
+            }
+        } else if (AppState.mode === 'in') {(0, ex - deduction);
+            if (AppState.whCategory === '1') {
+                wh = targetEx <= this.WH_BORDER ? Math.floor(targetEx * this.WH_LOW) : Math
+            ex = Math.floor(val / (1 + AppState.taxRate));
+        } else {
+            ex = val;
+        }
+        const rawTax = ex * AppState.taxRate;
+.floor(102100 + (targetEx - this.WH_BORDER) * this.WH_HIGH);
+            } else {
+                wh = Math.floor(targetEx * this.WH_LOW        const tax = AppState.round === 'ceil' ? Math.ceil(rawTax) : (AppState.round === 'round' ? Math.round(rawTax) : Math.floor(rawTax));
+        let wh = 0;
+        if (AppState.withholding) {
             let targetEx = Math.max(0, ex - deduction);
             if (AppState.whCategory === '1') {
-                wh = targetEx <= this.WH_BORDER ? Math.floor(targetEx * this.WH_LOW) : Math.floor(102100 + (targetEx - this.WH_BORDER) * this.WH_HIGH);
-            } else {
-                wh = Math.floor(targetEx * this.WH_LOW);
+                wh = targetEx <= this.WH_BORDER ? Math.floor(targetEx * this.WH_LOW) : Math);
             }
         }
         return { ex, tax, wh, total: ex + tax, net: ex + tax - wh, deduction };
@@ -550,37 +1098,90 @@ const Calculator = {
 // --- 3. UI・履歴・PDF処理 ---
 const UI = {
     els: {
-        input: document.getElementById("main-input"), tax: document.getElementById("tax-rate"), round: document.getElementById("tax-round"),
+        input: document.getElementById("main-input.floor(102100 + (targetEx - this.WH_BORDER) * this.WH_HIGH);
+            } else {
+                wh = Math.floor(targetEx * this.WH_LOW"), tax: document.getElementById("tax-rate"), round: document.getElementById("tax-round"),
         whCheck: document.getElementById("withholding-check"), whCategory: document.getElementById("wh-category"),
-        whOptions: document.getElementById("wh-options"), formula: document.getElementById("calc-formula"),
+        );
+            }
+        }
+        return { ex, tax, wh, total: ex + tax, net: ex + tax - wh, deduction };
+    }
+};
+
+// --- 3. UI・履歴・whOptions: document.getElementById("wh-options"), formula: document.getElementById("calc-formula"),
         ex: document.getElementById("res-ex"), taxRes: document.getElementById("res-tax"), wh: document.getElementById("res-wh"),
-        total: document.getElementById("res-total"), net: document.getElementById("res-net")
+        total: document.getElementById("res-total"), net: document.getElementById("PDF処理 ---
+const UI = {
+    els: {
+        input: document.getElementById("main-input"), tax: document.getElementById("tax-rate"), round: document.getElementById("tax-round"),
+        whres-net")
     },
     init() {
         this.els.input.addEventListener('input', (e) => this.handleInput(e));
-        this.els.tax.addEventListener('change', (e) => { AppState.taxRate = Number(e.target.value); this.update(); });
-        this.els.round.addEventListener('change', (e) => { AppState.round = e.target.value; this.update(); });
+        this.els.tax.addEventListener('change', (Check: document.getElementById("withholding-check"), whCategory: document.getElementById("wh-category"),
+        whOptions: document.getElementById("wh-options"), formula: document.getElementById("calc-formula"),
+        exe) => { AppState.taxRate = Number(e.target.value); this.update(); });
+        this.els.round.addEventListener('change', (e) => { AppState.round = e.target: document.getElementById("res-ex"), taxRes: document.getElementById("res-tax"), wh: document.getElementById("res-wh"),
+        total: document.getElementById("res-total"), net: document.getElementById("res-net")
+    },
+    init() {
+        this.els.input.addEventListener('input',.value; this.update(); });
         this.els.whCheck.addEventListener('change', (e) => { AppState.withholding = e.target.checked; this.els.whOptions.style.display = e.target.checked ? 'grid' : 'none'; this.update(); });
-        this.els.whCategory.addEventListener('change', (e) => { AppState.whCategory = e.target.value; this.update(); });
+        this.els (e) => this.handleInput(e));
+        this.els.tax.addEventListener('change', (e) => { AppState.taxRate = Number(e.target.value); this.update(); });
+.whCategory.addEventListener('change', (e) => { AppState.whCategory = e.target.value; this.update(); });
         
         // テーマ初期化
         const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.setAttribute('data-theme', savedTheme);
-        document.getElementById('theme-toggle').innerText = savedTheme === 'dark' ? '☀️' : '🌙';
+        document.getElementById('        this.els.round.addEventListener('change', (e) => { AppState.round = e.target.value; this.update(); });
+        this.els.whCheck.addEventListener('change', (e)theme-toggle').innerText = savedTheme === 'dark' ? '☀️' : '🌙';
         
         document.getElementById('theme-toggle').addEventListener('click', () => {
-            const current = document.documentElement.getAttribute('data-theme');
+            const current = document.documentElement. => { AppState.withholding = e.target.checked; this.els.whOptions.style.display = e.target.checked ? 'grid' : 'none'; this.update(); });
+        this.els.whCategory.addEventListener('change', (e) => { AppState.whCategory = e.target.value; this.update(); });
+        
+        // テーマ初期化
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' :getAttribute('data-theme');
             const next = current === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', next);
             localStorage.setItem('theme', next);
+            document.getElementById('theme-toggle').innerText = next === 'dark' ? '☀️' : '🌙 'light');
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('theme-toggle').innerText = savedTheme === 'dark' ? '☀️' : '🌙';
+        
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            const current = document.documentElement.';
+        });
+
+        this.update();
+    },
+    handleInput(e) {
+        let rawVal = e.target.value.replace(/[０-９]/g, s => String.fromCharCode(sgetAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);.charCodeAt(0) - 0xFEE0)).replace(/-/g, '');
+        AppState.inputValue = rawVal;
+        AppState.parsedValue = Calculator.parseCurrency(rawVal);
+        if (!/[万km]/.test(rawVal.toLowerCase())) {
+            const numStr = rawVal.replace(/[^\d
             document.getElementById('theme-toggle').innerText = next === 'dark' ? '☀️' : '🌙';
         });
 
         this.update();
     },
     handleInput(e) {
-        let rawVal = e.target.value.replace(/[０-９]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0)).replace(/-/g, '');
-        AppState.inputValue = rawVal;
+        let]/g, '');
+            if (numStr) e.target.value = Number(numStr).toLocaleString();
+        }
+        this.update();
+    },
+    setMode(m) {
+        AppState. rawVal = e.target.value.replace(/[０-９]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0)).replace(/-/g, '');
+        AppState.inputValue =mode = m;
+        document.querySelectorAll(".mode-buttons button").forEach(b => b.classList.toggle('active', b.id === 'tab-' + m));
+        document.getElementById('input-label').innerText rawVal;
         AppState.parsedValue = Calculator.parseCurrency(rawVal);
         if (!/[万km]/.test(rawVal.toLowerCase())) {
             const numStr = rawVal.replace(/[^\d]/g, '');
@@ -598,23 +1199,60 @@ const UI = {
     update() {
         AppState.results = Calculator.calcAll();
         const r = AppState.results;
+        this.els.ex.innerText = "¥" + r = { net: '手取り額を入力', ex: '税抜金額を入力', in: '税込金額を入力' }[m];
+        this.update();
+    },
+    preset(val) { this.els..ex.toLocaleString();
+        this.els.taxRes.innerText = "¥" + r.tax.toLocaleString();
+        this.els.wh.innerText = "¥" + r.wh.toLocaleString();
+        input.value = val; AppState.inputValue = val; AppState.parsedValue = Calculator.parseCurrency(val); this.update(); },
+    update() {
+        AppState.results = Calculator.calcAll();
+this.els.total.innerText = "¥" + r.total.toLocaleString();
+        this.els.net.innerText = "¥" + r.net.toLocaleString();
+        
+        let formula = `【計算根拠】\n`;
+        const roundStr = AppState.round === 'floor' ? '切捨て        const r = AppState.results;
         this.els.ex.innerText = "¥" + r.ex.toLocaleString();
         this.els.taxRes.innerText = "¥" + r.tax.toLocaleString();
         this.els.wh.innerText = "¥" + r.wh.toLocaleString();
+        ' : (AppState.round === 'round' ? '四捨五入' : '切上げ');
+        formula += `消費税額：${r.ex.toLocaleString()} × ${Math.round(AppState.taxRate * 100)}% = ${r.tax.toLocaleString()}円 (${roundStr})\n`;
         this.els.total.innerText = "¥" + r.total.toLocaleString();
         this.els.net.innerText = "¥" + r.net.toLocaleString();
         
         let formula = `【計算根拠】\n`;
-        const roundStr = AppState.round === 'floor' ? '切捨て' : (AppState.round === 'round' ? '四捨五入' : '切上げ');
-        formula += `消費税額：${r.ex.toLocaleString()} × ${Math.round(AppState.taxRate * 100)}% = ${r.tax.toLocaleString()}円 (${roundStr})\n`;
+        const roundStr = AppState.round === 'floor' ? '切捨てif (AppState.withholding) {
+            if (AppState.whCategory === '1') {
+                formula += r.ex <= 1000000 ? `源泉徴収額：${r.' : (AppState.round === 'round' ? '四捨五入' : '切上げ');
+        formula += `消費税額：${r.ex.toLocaleString()} × ${Math.round(AppState.taxRateex.toLocaleString()} × 10.21% = ${r.wh.toLocaleString()}円\n` : `源泉徴収額：102,100 + (${(r.ex - 1 * 100)}% = ${r.tax.toLocaleString()}円 (${roundStr})\n`;
         if (AppState.withholding) {
             if (AppState.whCategory === '1') {
-                formula += r.ex <= 1000000 ? `源泉徴収額：${r.ex.toLocaleString()} × 10.21% = ${r.wh.toLocaleString()}円\n` : `源泉徴収額：102,100 + (${(r.ex - 1000000).toLocaleString()} × 20.42%) = ${r.wh.toLocaleString()}円\n`;
+                formula000000).toLocaleString()} × 20.42%) = ${r.wh.toLocaleString()}円\n`;
             } else {
-                formula += `源泉徴収額：(${r.ex.toLocaleString()} − 控除額${r.deduction.toLocaleString()}) × 10.21% = ${r.wh.toLocaleString()}円\n`;
+                formula += `源泉徴収額：(${r.ex.toLocaleString()} − 控除額${r.deduction.toLocaleString()}) × 10.2 += r.ex <= 1000000 ? `源泉徴収額：${r.ex.toLocaleString()} × 10.21% = ${r.wh.toLocaleString()}円\n1% = ${r.wh.toLocaleString()}円\n`;
             }
         } else { formula += `源泉徴収額：なし\n`; }
-        formula += `支払額：${r.ex.toLocaleString()} + ${r.tax.toLocaleString()} − ${r.wh.toLocaleString()} = ${r.net.toLocaleString()}円`;
+        formula += `支払額：${r.ex` : `源泉徴収額：102,100 + (${(r.ex - 1000000).toLocaleString()} × 20.42%) = ${r.wh.toLocaleString()}円\n`;
+            } else {
+                formula += `源泉徴収額：(${r.ex.toLocaleString()} − 控除額${r.deduction.toLocaleString()}) × 10.2.toLocaleString()} + ${r.tax.toLocaleString()} − ${r.wh.toLocaleString()} = ${r.net.toLocaleString()}円`;
+        this.els.formula.innerText = formula;
+        this.validateInvoiceForm();
+    },
+    validateInvoiceForm() {
+        const tNum = document.getElementById('pdf-invoice-id').value.trim();
+        const client = document.getElementById('pdf-client').value.trim();
+        const btn = document.getElementById('btn-pdf');
+        const isValid = /^T\d{13}$/.1% = ${r.wh.toLocaleString()}円\n`;
+            }
+        } else { formula += `源泉徴収額：なし\n`; }
+        formula += `支払額：${r.extest(tNum) && client !== '';
+        btn.disabled = !isValid;
+        btn.innerText = isValid ? "📥 適格請求書PDFを出力" : "⚠️ 顧客名と登録番号を入力してください";.toLocaleString()} + ${r.tax.toLocaleString()} − ${r.wh.toLocaleString()} = ${r.net
+    },
+    sanitize(str) { return window.DOMPurify ? DOMPurify.sanitize(str) : String(str).replace(/[<>"']/g, ""); },
+    showToast(msg) {
+        const t = document.createElement("div"); t.innerText = msg; t.style = "position:fixed.toLocaleString()}円`;
         this.els.formula.innerText = formula;
         this.validateInvoiceForm();
     },
@@ -624,23 +1262,49 @@ const UI = {
         const btn = document.getElementById('btn-pdf');
         const isValid = /^T\d{13}$/.test(tNum) && client !== '';
         btn.disabled = !isValid;
-        btn.innerText = isValid ? "📥 適格請求書PDFを出力" : "⚠️ 顧客名と登録番号を入力してください";
+        btn.innerText = isValid ? "📥 適格請求書PDFを出力" : "⚠️ 顧客名と登録番号を入力してください";;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.8);color:white;padding:12px 20px;border
     },
     sanitize(str) { return window.DOMPurify ? DOMPurify.sanitize(str) : String(str).replace(/[<>"']/g, ""); },
     showToast(msg) {
-        const t = document.createElement("div"); t.innerText = msg; t.style = "position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.8);color:white;padding:12px 20px;border-radius:6px;z-index:10000;";
+        const t = document.createElement("div"); t.innerText = msg; t.style = "position:fixed-radius:6px;z-index:10000;";
         document.body.appendChild(t); setTimeout(() => t.remove(), 2500);
     },
     copy(type) {
         const r = AppState.results;
-        const txt = type === 'formula' ? this.els.formula.innerText : `税抜: ¥${r.ex.toLocaleString()}\n消費税: ¥${r.tax.toLocaleString()}\n合計: ¥${r.total.toLocaleString()}\n源泉徴収: ¥${r.wh.toLocaleString()}\n支払額: ¥${r.net.toLocaleString()}`;
+        const txt = type === 'formula' ? this.els.formula;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.8);color:white;padding:12px 20px;border.innerText : `税抜: ¥${r.ex.toLocaleString()}\n消費税: ¥${r.tax.toLocaleString()}\n合計: ¥${r.total.toLocaleString()}\n源泉徴収: ¥${r.-radius:6px;z-index:10000;";
+        document.body.appendChild(t); setTimeout(() => t.remove(), 2500);
+    },
+    copy(type) {
+        wh.toLocaleString()}\n支払額: ¥${r.net.toLocaleString()}`;
         navigator.clipboard.writeText(txt).then(() => this.showToast("✅ コピーしました"));
     },
     shareSNS(p) {
         const r = AppState.results;
-        const text = encodeURIComponent(`報酬計算結果💰\n税抜: ¥${r.ex.toLocaleString()}\n消費税: ¥${r.tax.toLocaleString()}\n支払額: ¥${r.net.toLocaleString()}\n#フリカル で計算！`);
+        const text = encodeURIComponent(`報酬計算const r = AppState.results;
+        const txt = type === 'formula' ? this.els.formula.innerText : `税抜: ¥${r.ex.toLocaleString()}\n消費税: ¥${r.tax.toLocaleString()}\n合計: ¥${r.total.toLocaleString()}\n源泉徴収: ¥${r.結果💰\n税抜: ¥${r.ex.toLocaleString()}\n消費税: ¥${r.tax.toLocaleString()}\n支払額: ¥${r.net.toLocaleString()}\n#フリカル で計算！`);wh.toLocaleString()}\n支払額: ¥${r.net.toLocaleString()}`;
+        navigator.clipboard.writeText(txt).then(() => this.showToast("✅ コピーしました"));
+    },
+    shareSNS(p) {
+        const r = AppState.results;
+        const text = encodeURIComponent(`報酬計算
         const url = encodeURIComponent(window.location.href);
         const link = p === 'x' ? `https://x.com/intent/tweet?text=${text}&url=${url}` : `https://social-plugins.line.me/lineit/share?url=${url}&text=${text}`;
+        window.open(link, '_blank', 'width=600,height=400');
+    },
+    toggleAccordion(btn) { btn.setAttribute('aria-expanded', btn.getAttribute('aria-expanded') === 'false'); },
+    openModal(id) { document.getElementById(id).classList.add('active結果💰\n税抜: ¥${r.ex.toLocaleString()}\n消費税: ¥${r.tax.toLocaleString()}\n支払額: ¥${r.net.toLocaleString()}\n#フリカル で計算！`);'); },
+    closeModal(id) { document.getElementById(id).classList.remove('active'); }
+};
+
+const Tracker = {
+    async addSale() {
+        const r = AppState.results;
+
+        const url = encodeURIComponent(window.location.href);
+        const link = p === 'x' ? `https://x.com/intent/tweet?text=${text}&url=${url}` : `https://        if (!r.total) return;
+        await DB.addHistory({
+            id: Date.now().toString(), timestamp: Date.now(), date: new Date().toLocaleDateString('ja-JP'),
+            social-plugins.line.me/lineit/share?url=${url}&text=${text}`;
         window.open(link, '_blank', 'width=600,height=400');
     },
     toggleAccordion(btn) { btn.setAttribute('aria-expanded', btn.getAttribute('aria-expanded') === 'false'); },
@@ -651,10 +1315,7 @@ const UI = {
 const Tracker = {
     async addSale() {
         const r = AppState.results;
-        if (!r.total) return;
-        await DB.addHistory({
-            id: Date.now().toString(), timestamp: Date.now(), date: new Date().toLocaleDateString('ja-JP'),
-            client: document.getElementById('pdf-client').value || '未入力', amount: r.ex, tax_amount: r.tax, withholding: r.wh, total: r.net
+client: document.getElementById('pdf-client').value || '未入力', amount: r.ex, tax_amount: r.tax, withholding: r.wh, total: r.net
         });
         UI.showToast("✅ 保存しました");
         this.render();
@@ -662,23 +1323,59 @@ const Tracker = {
     async render() {
         const all = await DB.getAllHistory();
         const currentYear = new Date().getFullYear();
-        const currentMonth = new Date().getMonth();
+        const current        if (!r.total) return;
+        await DB.addHistory({
+            id: Date.now().toString(), timestamp: Date.now(), date: new Date().toLocaleDateString('ja-JP'),
+            Month = new Date().getMonth();
         
-        const yearly = all.filter(r => new Date(r.timestamp).getFullYear() === currentYear).reduce((s, r) => s + r.amount, 0);
+        const yearly = all.filter(r => new Date(r.timestamp).getFullYear() === currentYear).reduce((s, r) => s + r.amount, 0client: document.getElementById('pdf-client').value || '未入力', amount: r.ex, tax_amount: r.tax, withholding: r.wh, total: r.net
+        });
+        UI.);
         const monthly = all.filter(r => {
             const d = new Date(r.timestamp);
             return d.getFullYear() === currentYear && d.getMonth() === currentMonth;
-        }).reduce((s, r) => s + r.amount, 0);
+        }).reduceshowToast("✅ 保存しました");
+        this.render();
+    },
+    async render() {
+        const all = await DB.getAllHistory();
+        const currentYear = new Date().getFullYear();
+        const currentMonth = new Date().getMonth();
+        
+        const yearly = all.filter(r => new Date(r((s, r) => s + r.amount, 0);
 
         document.getElementById('yearly-total').innerText = "¥" + yearly.toLocaleString();
-        document.getElementById('monthly-total').innerText = "¥" + monthly.toLocaleString();
+        document.getElementById('monthly-total').innerText = ".timestamp).getFullYear() === currentYear).reduce((s, r) => s + r.amount, 0);
+        const monthly = all.filter(r => {
+            const d = new Date(r.timestamp¥" + monthly.toLocaleString();
         document.getElementById('month-badge').innerText = `今月: ¥${monthly.toLocaleString()}`;
         
         const list = document.getElementById('history-list');
         list.innerHTML = all.length ? all.map(r => `
-            <div class="history-item">
+            <div class="history-item">);
+            return d.getFullYear() === currentYear && d.getMonth() === currentMonth;
+        }).reduce((s, r) => s + r.amount, 0);
+
+        document.getElementById('yearly-total').innerText = "¥" + yearly.toLocaleString();
+        document.getElementById('monthly-total').innerText = "
                 <div><strong>${UI.sanitize(r.client)}</strong><br><small>${r.date}</small></div>
                 <div>¥${r.total.toLocaleString()} <button class="history-delete" onclick="Tracker.del('${r.id}')">削除</button></div>
+            </div>
+        `).join('') : '<div style="text-align:center;color:var(--text-muted);">履歴なし</div>';
+    },
+    async del(id) { await DB.deleteHistory(id); this.render(); },
+    async clearAll() { await DB.clearHistory(); UI.closeModal('delete-modal'); this.render(); UI.¥" + monthly.toLocaleString();
+        document.getElementById('month-badge').innerText = `今月: ¥${monthly.toLocaleString()}`;
+        
+        const list = document.getElementById('history-list');
+        list.innerHTML = all.length ? all.map(r => `
+            <div class="history-item">showToast("🗑️ クリアしました"); },
+    async exportCSV() {
+        const all = await DB.
+                <div><strong>${UI.sanitize(r.client)}</strong><br><small>${r.date}</small></div>
+                <div>¥${r.total.toLocaleString()} <button class="history-delete" onclick="TrackergetAllHistory();
+        const head = "\uFEFF日付,顧客名,金額,消費税,源泉徴収,合計\n";
+        const rows = all.map(r => `${r.date},"${r.client}",${r.amount},${r.tax_amount},${r.withholding},${r.del('${r.id}')">削除</button></div>
             </div>
         `).join('') : '<div style="text-align:center;color:var(--text-muted);">履歴なし</div>';
     },
@@ -686,14 +1383,14 @@ const Tracker = {
     async clearAll() { await DB.clearHistory(); UI.closeModal('delete-modal'); this.render(); UI.showToast("🗑️ クリアしました"); },
     async exportCSV() {
         const all = await DB.getAllHistory();
-        const head = "\uFEFF日付,顧客名,金額,消費税,源泉徴収,合計\n";
-        const rows = all.map(r => `${r.date},"${r.client}",${r.amount},${r.tax_amount},${r.withholding},${r.total}`).join("\n");
+        const head = "\uFEFF日付,顧客名,金額,消費税,源泉.total}`).join("\n");
         const blob = new Blob([head + rows], { type: "text/csv" });
         const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "furical-history.csv"; a.click();
     }
 };
 
-const PDF = {
+徴収,合計\n";
+        const rows = all.map(r => `${r.date},"${r.client}",${r.amount},${r.tax_amount},${r.withholding},${rconst PDF = {
     async generate() {
         const r = AppState.results;
         const btn = document.getElementById('btn-pdf');
@@ -702,20 +1399,61 @@ const PDF = {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             
+            doc.total}`).join("\n");
+        const blob = new Blob([head + rows], { type: "text/csv" });
+        const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "furical-history.csv"; a.click();
+    }
+};
+
+.setFontSize(20);
+            doc.text("INVOICE", 105, 20, { align: 'center' });
+            
+            doc.setFontSize(10);
+            docconst PDF = {
+    async generate() {
+        const r = AppState.results;
+        const btn = document.getElementById('btn-pdf');
+        btn.disabled = true;
+        try {
+            const.text(`To: ${document.getElementById('pdf-client').value}`, 20, 40);
+            doc.text(`Date: ${document.getElementById('pdf-date').value || new Date().toLocaleDate { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
             doc.setFontSize(20);
             doc.text("INVOICE", 105, 20, { align: 'center' });
             
             doc.setFontSize(10);
-            doc.text(`To: ${document.getElementById('pdf-client').value}`, 20, 40);
-            doc.text(`Date: ${document.getElementById('pdf-date').value || new Date().toLocaleDateString()}`, 140, 40);
+            docString()}`, 140, 40);
             doc.text(`Invoice No: ${document.getElementById('pdf-no').value || '-'}`, 140, 45);
-            doc.text(`Registration No: ${document.getElementById('pdf-invoice-id').value}`, 140, 50);
+            doc.text(`Registration No: ${document.getElementById('pdf-invoice-id').value}`, 140, .text(`To: ${document.getElementById('pdf-client').value}`, 20, 40);
+            doc.text(`Date: ${document.getElementById('pdf-date').value || new Date().toLocaleDateString()}`, 140, 40);
+            doc.text(`Invoice No: ${document.50);
             
             doc.text(`From: ${document.getElementById('pdf-my-name').value}`, 20, 60);
             doc.text(`${document.getElementById('pdf-address').value}`, 20, 65);
 
             doc.autoTable({
                 startY: 80,
+                head: [['Description', 'Amount']],
+                body: [
+                    [document.getElementById('pdf-item-name').value || 'Service Fee', `JPY ${r.ex.toLocaleString()}`],
+                    ['Consumption Tax', `JPY ${r.tax.toLocaleString()}`],
+                    ['Withholding Tax', `JPYgetElementById('pdf-no').value || '-'}`, 140, 45);
+            doc.text(`Registration No: ${document.getElementById('pdf-invoice-id').value}`, 140,  -${r.wh.toLocaleString()}`],
+                    ['Total Amount', `JPY ${r.net.toLocaleString()}`]
+                ],
+                theme: 'grid',
+                headStyles: { fillColor: [3750);
+            
+            doc.text(`From: ${document.getElementById('pdf-my-name').value}`, 20, 60);
+            doc.text(`${document.getElementById('pdf-address').value}`, 20, 65);
+
+            doc.autoTable({
+                startY: 80, 99, 235] }
+            });
+
+            const finalY = doc.lastAutoTable.finalY || 120;
+            doc.text("Bank Details:", 20, final,
                 head: [['Description', 'Amount']],
                 body: [
                     [document.getElementById('pdf-item-name').value || 'Service Fee', `JPY ${r.ex.toLocaleString()}`],
@@ -727,14 +1465,15 @@ const PDF = {
                 headStyles: { fillColor: [37, 99, 235] }
             });
 
-            const finalY = doc.lastAutoTable.finalY || 120;
-            doc.text("Bank Details:", 20, finalY + 20);
+            const finalY = doc.lastAutoY + 20);
             doc.text(document.getElementById('pdf-bank').value, 20, finalY + 30);
 
             doc.save(`invoice_${Date.now()}.pdf`);
             UI.showToast("✅ PDFをダウンロードしました");
         } catch (e) {
-            console.error(e);
+            console.Table.finalY || 120;
+            doc.text("Bank Details:", 20, finalY + 20);
+            doc.text(document.getElementById('pdf-bank').value, 2error(e);
             UI.showToast("❌ PDF作成に失敗しました");
         } finally {
             btn.disabled = false;
